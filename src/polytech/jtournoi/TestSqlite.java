@@ -25,6 +25,9 @@ public class TestSqlite
 		
 		// Truc super utile
 		System.out.println(declaration.executeQuery("select 42;").getInt(1));
+		
+		// De la politesse !
+		connexion.close();
 	}
 
 }
