@@ -13,35 +13,43 @@ public class Personne
      *Le nom de la personne.
      */
 
-    private String nom;
+    protected String nom;
 
     /**
      *Le prenom de la personne.
      */
 
-    private String prenom;
+    protected String prenom;
 
+    
+    /**
+     *Le mot de passe de la personne.
+     */
+    
+    protected String password;
+    
      /**
      *Constructeur d'une personne.
      *@param nom Le nom de la personne.
      *@param prenom Le prenom de la personne.
+     *@param password Le mot de passe de la personne.
      */
 
-    public Personne (String nom, String prenom)
+    public Personne (String nom, String prenom, String password)
     {
 	this.nom = nom;
 	this.prenom = prenom;
+	this.password = password;
     }
 
     /**
      *Constructeur par defaut.
-     *Le nom du joueur est "nom inconnu" et son prenom "prenom inconnu".
-     *La liste de sports de ce joueur est egalement vide.
+     *Le nom de la personne est "nom inconnu", son prenom "prenom inconnu" et son mot de passe "mot de passe inconnu".
      */
 
     public Personne()
     {
-	this("nom inconnu","prenom inconnu");
+	this("nom inconnu","prenom inconnu","mot de passe inconnu");
     }
 
     /**
@@ -63,6 +71,16 @@ public class Personne
     {
 	return prenom;
     }
+    
+    /**
+     *Accesseur en lecture.
+     *@return Le mot de passe de la personne.
+     */
+
+    public String getPassword()
+    {
+	return password;
+    }
 
     /**Mutateur
      *Modifie le nom de la personne par le nom donne.
@@ -82,6 +100,16 @@ public class Personne
     public void setPrenom(String prenom)
     {
 	this.prenom = prenom;
+    }
+    
+    /**Mutateur
+     *Modifie le prenom de la personne par le nom donne.
+     *@param prenom Nouveau prenom de la personne.
+     */
+
+    public void setPassword(String password)
+    {
+	this.password = password;
     }
 
     /**
