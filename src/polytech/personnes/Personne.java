@@ -6,7 +6,7 @@ package polytech.personnes;
  *@version 1.0
  */
 
-public class Personne
+public abstract class Personne
 {
 
     /**

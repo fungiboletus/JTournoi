@@ -2,6 +2,8 @@ package polytech.stock;
 
 import java.util.List;
 
+import org.jdom.Element;
+
 import polytech.personnes.Joueur;
 
 public class JoueurXML extends GestionXML
@@ -18,15 +20,13 @@ public class JoueurXML extends GestionXML
 	@Override
 	public void sauvegarderStock()
 	{
-		// TODO Auto-generated method stub
-
+		GestionXML.sauvegarderFichierXml(joueurs, "joueurs", this);
 	}
 
 	@Override
 	public void ajouterReference(Object reference)
 	{
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -39,14 +39,28 @@ public class JoueurXML extends GestionXML
 	@Override
 	public Object construireDepuisStock(Object element)
 	{
-		// TODO
-		return null;
+		Element noeud = (Element) element;
+
+		Joueur j = new Joueur(
+				noeud.getChildText("nom"),
+				noeud.getChildText("prenom"),
+				noeud.getChildText("motdepasse")
+			);
+
+		return j;
 	}
 
 	@Override
 	public Object construirePourStock(Object element)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Joueur j = (Joueur) element;
+
+		Element noeud = new Element("joueur");
+
+		noeud.addContent(new Element("nom").setText(j.getNom()));
+		noeud.addContent(new Element("prenom").setText(j.getPrenom()));
+		noeud.addContent(new Element("motdepasse").setText(j.getPassword()));
+
+		return noeud;
 	}
 }
