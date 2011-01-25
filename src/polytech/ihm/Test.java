@@ -1,4 +1,4 @@
-package polytech.main;
+package polytech.ihm;
 import java.util.ArrayList;
 
 import polytech.tools.Tools;
