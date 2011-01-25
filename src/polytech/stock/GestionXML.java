@@ -1,7 +1,9 @@
 package polytech.stock;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +13,16 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+
 /**
  * @author Antoine Pultier
  *
  */
 public abstract class GestionXML implements GestionnaireDeStock
 {
-	
+
 	/** Demande polimentà jdom d'écrire le xml sous forme de texte lisible.*/
-	public static void ecrireXML(OutputStream flux, Document document) throws Exception
+	protected static void ecrireXML(OutputStream flux, Document document) throws Exception
 	{
 		// On affiche de façon à ce que ça soit lisible
 		XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
@@ -33,10 +36,10 @@ public abstract class GestionXML implements GestionnaireDeStock
 	}
 	
 	/** Création d'un document jdom pour écrire dedans.*/
-	protected static Document creerDocument() throws Exception
+	protected static Document creerDocument(String nom) 
 	{
 		Document doc = new Document();
-		doc.setRootElement(new Element("data"));
+		doc.setRootElement(new Element(nom));
 		return doc;
 	}
 	
@@ -52,7 +55,7 @@ public abstract class GestionXML implements GestionnaireDeStock
 
 		return e;
 	}
-	
+
 	/** Fonction polymorphique à la C++.
 	 * 
 	 * Le langage java est compliqué par rapport au C++ pour ce genre d'utilisation.
@@ -61,7 +64,7 @@ public abstract class GestionXML implements GestionnaireDeStock
 	 * Cela reste pénible, mais ce n'est pas l'homme qui doit se plier à la machine.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" }) // je fais ce que je veux, avec mon IDE
-	public static <CLASS_TYPE> List<CLASS_TYPE> tokamakGenerique(Element noeud, Class hackJava) throws Exception
+	protected static <CLASS_TYPE> List<CLASS_TYPE> tokamakGenerique(Element noeud, Class hackJava) throws Exception
 	{
 		List<Element> liste = noeud.getChildren();
 
@@ -75,5 +78,48 @@ public abstract class GestionXML implements GestionnaireDeStock
 		
 		return noeuds;
 	}
+
+	/** Charge un fichier xml à la mode de chez nous.*/
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected static <CLASS_TYPE> List<CLASS_TYPE> chargerFichierXml(Class classeClasse)
+	{
+		String nomClasse = classeClasse.getSimpleName().toLowerCase()+'s';
+		
+		List<CLASS_TYPE> liste;
+		
+		File fichier = new File(nomClasse + ".xml");
+
+		Document base = null;
+		boolean nouvelle_base = !fichier.exists();
+
+		if (!nouvelle_base)
+		{
+			try
+			{
+				base = GestionXML.creerDocument(new FileInputStream(fichier));
+			} catch (Exception e)
+			{
+				nouvelle_base = true;
+			}
+		}
+		
+		if (nouvelle_base)
+		{
+			base = GestionXML.creerDocument(nomClasse);
+		}
+
+		try
+		{
+			liste = GestionXML.tokamakGenerique(
+					GestionXML.chargerElementFlux(base, nomClasse),
+					classeClasse);
+		} catch (Exception e)
+		{
+			liste = new ArrayList();
+		}
+
+		return liste;
+	}
+
 
 }

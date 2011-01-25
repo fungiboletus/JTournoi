@@ -1,13 +1,18 @@
 package polytech.stock;
 
+import java.util.List;
+
+import polytech.personnes.Joueur;
+
 public class JoueurXML extends GestionXML
 {
+
+	protected List<Joueur> joueurs;
 
 	@Override
 	public void chargerStock()
 	{
-		// TODO Auto-generated method stub
-
+		joueurs = GestionXML.chargerFichierXml(Joueur.class);
 	}
 
 	@Override
