@@ -2,10 +2,9 @@ package polytech.jtournoi;
 
 import java.util.ArrayList;
 
-import polytech.personnes.Arbitre;
 import polytech.tools.Tools;
 
-
+import polytech.personnes.*;
 /**
  * 
  * @author Pinku
