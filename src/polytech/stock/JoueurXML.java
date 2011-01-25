@@ -47,6 +47,16 @@ public class JoueurXML extends GestionXML
 				noeud.getChildText("motdepasse")
 			);
 
+		Element competences = noeud.getChild("competences");
+
+		if (competences != null)
+		{
+			for (Object e : competences.getChildren())
+			{
+				j.add(((Element) e).getText());
+			}
+		}
+
 		return j;
 	}
 
@@ -60,6 +70,15 @@ public class JoueurXML extends GestionXML
 		noeud.addContent(new Element("nom").setText(j.getNom()));
 		noeud.addContent(new Element("prenom").setText(j.getPrenom()));
 		noeud.addContent(new Element("motdepasse").setText(j.getPassword()));
+
+		Element competences = new Element("competences");
+
+		for (String competence : j.getCompetences())
+		{
+			competences.addContent(new Element("competence").setText(competence));
+		}
+
+		noeud.addContent(competences);
 
 		return noeud;
 	}

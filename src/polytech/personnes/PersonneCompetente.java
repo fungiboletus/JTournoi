@@ -121,4 +121,14 @@ public class PersonneCompetente extends Personne
     {
 	competences.remove(comp);
     }
+
+	public ArrayList<String> getCompetences()
+	{
+		return competences;
+	}
+
+	public void setCompetences(ArrayList<String> competences)
+	{
+		this.competences = competences;
+	}
 }
