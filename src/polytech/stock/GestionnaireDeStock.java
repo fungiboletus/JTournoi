@@ -27,4 +27,14 @@ public interface GestionnaireDeStock
 	 * @param reference Référence à supprimer
 	 */
 	public void supprimerReference(Object reference);
+
+	/**
+	 * Construit un objet à partir d'un élément du stock.
+	 */
+	public Object construireDepuisStock(Object element);
+
+	/**
+	 * Produit un objet à destination du stock.
+	 */
+	public Object construirePourStock(Object element);
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,82 +45,63 @@ public abstract class GestionXML implements GestionnaireDeStock
 	}
 	
 	/** Récupère un noeud direct présent dans le document.*/
-	protected static Element chargerElementFlux(Document flux, String nom) throws Exception
+	protected static Element chargerElementFlux(Document flux) throws Exception
 	{
-		Element e = flux.getRootElement().getChild(nom);
+		Element e = flux.getRootElement();
 
 		if (e == null)
 		{
-			throw new Exception("Il n'y a pas d'éléments "+nom);
+			throw new Exception("Il n'y a pas d'éléments");
 		}
 
 		return e;
 	}
 
-	/** Fonction polymorphique à la C++.
-	 * 
-	 * Le langage java est compliqué par rapport au C++ pour ce genre d'utilisation.
-	 * Cela s'explique par le fait que le type générique utilisé n'est connu qu'à l'exécution.
-	 * 
-	 * Cela reste pénible, mais ce n'est pas l'homme qui doit se plier à la machine.
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" }) // je fais ce que je veux, avec mon IDE
-	protected static <CLASS_TYPE> List<CLASS_TYPE> tokamakGenerique(Element noeud, Class hackJava) throws Exception
-	{
-		List<Element> liste = noeud.getChildren();
-
-		List<CLASS_TYPE> noeuds = new ArrayList<CLASS_TYPE>(liste.size());
-		
-		for (Element e : liste)
-		{
-			//noeuds.add(new CANARD(e)); // C++ is better
-			noeuds.add((CLASS_TYPE) hackJava.getDeclaredConstructor(Element.class).newInstance(e));
-		}
-		
-		return noeuds;
-	}
-
 	/** Charge un fichier xml à la mode de chez nous.*/
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected static <CLASS_TYPE> List<CLASS_TYPE> chargerFichierXml(Class classeClasse)
+	@SuppressWarnings("unchecked")
+	protected static <CLASS_TYPE> List<CLASS_TYPE> chargerFichierXml(String nomClasse, GestionnaireDeStock gestionnaire)
 	{
-		String nomClasse = classeClasse.getSimpleName().toLowerCase()+'s';
-		
-		List<CLASS_TYPE> liste;
+		List<CLASS_TYPE> liste = new ArrayList<CLASS_TYPE>();
 		
 		File fichier = new File(nomClasse + ".xml");
 
-		Document base = null;
-		boolean nouvelle_base = !fichier.exists();
-
-		if (!nouvelle_base)
+		if (fichier.exists())
 		{
 			try
 			{
-				base = GestionXML.creerDocument(new FileInputStream(fichier));
+				FileInputStream lecteurFichier = new FileInputStream(fichier);
+
+				for (Object e : GestionXML.chargerElementFlux(GestionXML.creerDocument(lecteurFichier)).getChildren())
+				{
+					liste.add((CLASS_TYPE) gestionnaire.construireDepuisStock(e));
+				}
+
 			} catch (Exception e)
 			{
-				nouvelle_base = true;
+				System.out.println("Une erreur horrible est arrivée pendant le chargement du fichier : "+e.getMessage());
 			}
-		}
-		
-		if (nouvelle_base)
-		{
-			base = GestionXML.creerDocument(nomClasse);
-		}
-
-		try
-		{
-			liste = GestionXML.tokamakGenerique(
-					GestionXML.chargerElementFlux(base, nomClasse),
-					classeClasse);
-		} catch (Exception e)
-		{
-			liste = new ArrayList();
 		}
 
 		return liste;
 	}
 
+	/** Enregistre un fichier xml.*/
+	protected static <CLASS_TYPE> void sauvegarderFichierXml(List<CLASS_TYPE> liste, String nomClasse, GestionnaireDeStock gestionnaire)
+	{
+		Document doc = creerDocument(nomClasse);
+		Element root = doc.getRootElement();
 
+		for (CLASS_TYPE e : liste)
+		{
+			root.addContent((Element) gestionnaire.construirePourStock(e));
+		}
+
+		try
+		{
+			ecrireXML(new FileOutputStream(nomClasse + ".xml"), doc);
+		} catch (Exception e)
+		{
+			System.out.println("Impossible de sauvegarder la base de données : "+e.getMessage());
+		}
+	}
 }

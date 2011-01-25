@@ -12,7 +12,7 @@ public class JoueurXML extends GestionXML
 	@Override
 	public void chargerStock()
 	{
-		joueurs = GestionXML.chargerFichierXml(Joueur.class);
+		joueurs = GestionXML.chargerFichierXml("joueurs", this);
 	}
 
 	@Override
@@ -36,4 +36,17 @@ public class JoueurXML extends GestionXML
 
 	}
 
+	@Override
+	public Object construireDepuisStock(Object element)
+	{
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Object construirePourStock(Object element)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
