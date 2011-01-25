@@ -1,4 +1,4 @@
-package polytech.jtournoi;
+package polytech.stock;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
