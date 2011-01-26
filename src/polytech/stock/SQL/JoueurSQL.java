@@ -40,5 +40,12 @@ protected List<Joueur> joueurs;
 
 		return declarationPreparee;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		return (List<CLASS_TYPE>) joueurs;
+	}
 
 }

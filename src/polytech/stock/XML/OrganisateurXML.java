@@ -63,4 +63,12 @@ public class OrganisateurXML extends GestionXML
 
 		return noeud;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		return (List<CLASS_TYPE>) organisateurs;
+	}
+
 }

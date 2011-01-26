@@ -67,5 +67,13 @@ public class ArbitreXML extends PersonneCompetenteXML
 
 		return noeud;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		return (List<CLASS_TYPE>) arbitres;
+	}
+
 
 }

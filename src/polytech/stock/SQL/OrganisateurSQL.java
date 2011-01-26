@@ -39,4 +39,12 @@ public class OrganisateurSQL extends PersonneSQL
 
 		return declarationPreparee;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		return (List<CLASS_TYPE>) organisateurs;
+	}
+
 }
