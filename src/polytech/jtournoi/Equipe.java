@@ -1,10 +1,12 @@
 package polytech.jtournoi;
+
 import java.util.ArrayList;
 import polytech.personnes.*;
 
 /**
  *Gestion d'une equipe dans un tournoi sportif.
- *@author Sylvestre Genevier
+ * 
+ * @author Sylvestre Genevier
  *@version 1.0
  */
 

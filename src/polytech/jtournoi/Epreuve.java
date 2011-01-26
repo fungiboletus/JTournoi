@@ -13,6 +13,7 @@ import polytech.personnes.*;
  */
 public class Epreuve {
 	
+	 
 	private Equipe vainqueur;
 	private ArrayList<ArrayList<Equipe>> tableau;
 	private ArrayList<Match> currentMatch;
