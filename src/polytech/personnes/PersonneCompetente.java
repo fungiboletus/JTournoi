@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *@version 1.0
  */
 
-public class PersonneCompetente extends Personne
+public abstract class PersonneCompetente extends Personne
 
 {
 	protected ArrayList<String> competences;	
