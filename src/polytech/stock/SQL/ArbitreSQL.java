@@ -1,48 +1,42 @@
 package polytech.stock.SQL;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import polytech.personnes.Arbitre;
+
 public class ArbitreSQL extends PersonneCompetenteSQL
 {
-
-	@Override
-	public void chargerStock()
+	protected List<Arbitre> arbitres;
+	
+	protected String nomTable()
 	{
-		// TODO Auto-generated method stub
-
+		return "arbitres";
 	}
 
 	@Override
 	public void sauvegarderStock()
 	{
-		// TODO Auto-generated method stub
-
+		GestionSQL.seConnecterSiNecessaire();
+		sauvegarderDansBase(arbitres);
 	}
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Object construireDepuisStock(Object element)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Object construirePourStock(Object element)
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Arbitre a = (Arbitre) element;
 
+		try
+		{
+			declarationPreparee.setString(1, a.getNom()); 
+			declarationPreparee.setString(2, a.getPrenom()); 
+			declarationPreparee.setString(3, a.getPassword()); 
+		} catch (SQLException e)
+		{
+			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
+			return null;
+		}
+
+		return declarationPreparee;
+	}
 }

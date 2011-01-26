@@ -1,50 +1,44 @@
 package polytech.stock.SQL;
 
-import polytech.stock.XML.PersonneCompetenteXML;
+import java.sql.SQLException;
+import java.util.List;
 
-public class JoueurSQL extends PersonneCompetenteXML
+import polytech.personnes.Joueur;
+
+public class JoueurSQL extends PersonneCompetenteSQL
 {
 
-	@Override
-	public void chargerStock()
+protected List<Joueur> joueurs;
+	
+	protected String nomTable()
 	{
-		// TODO Auto-generated method stub
-
+		return "joueurs";
 	}
 
 	@Override
 	public void sauvegarderStock()
 	{
-		// TODO Auto-generated method stub
-
+		GestionSQL.seConnecterSiNecessaire();
+		sauvegarderDansBase(joueurs);
 	}
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Object construireDepuisStock(Object element)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Object construirePourStock(Object element)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Joueur a = (Joueur) element;
+
+		try
+		{
+			declarationPreparee.setString(1, a.getNom()); 
+			declarationPreparee.setString(2, a.getPrenom()); 
+			declarationPreparee.setString(3, a.getPassword()); 
+		} catch (SQLException e)
+		{
+			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
+			return null;
+		}
+
+		return declarationPreparee;
 	}
 
 }

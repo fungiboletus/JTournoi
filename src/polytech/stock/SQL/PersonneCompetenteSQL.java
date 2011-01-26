@@ -1,6 +1,6 @@
 package polytech.stock.SQL;
 
-public abstract class PersonneCompetenteSQL extends GestionSQL
+public abstract class PersonneCompetenteSQL extends PersonneSQL
 {
 
 }
