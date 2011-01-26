@@ -1,26 +1,26 @@
-package polytech.stock;
+package polytech.stock.XML;
 
 import java.util.List;
 
 import org.jdom.Element;
 
-import polytech.personnes.Arbitre;
+import polytech.personnes.Organisateur;
 
-public class ArbitreXML extends PersonneCompetenteXML
+public class OrganisateurXML extends GestionXML
 {
 
-	protected List<Arbitre> arbitres;
+	protected List<Organisateur> organisateurs;
 
 	@Override
 	public void chargerStock()
 	{
-		arbitres = GestionXML.chargerFichierXml("arbitres", this);
+		organisateurs = GestionXML.chargerFichierXml("organisateurs", this);
 	}
 
 	@Override
 	public void sauvegarderStock()
 	{
-		GestionXML.sauvegarderFichierXml(arbitres, "arbitres", this);
+		GestionXML.sauvegarderFichierXml(organisateurs, "organisateurs", this);
 	}
 
 	@Override
@@ -41,13 +41,11 @@ public class ArbitreXML extends PersonneCompetenteXML
 	{
 		Element noeud = (Element) element;
 
-		Arbitre a = new Arbitre(
+		Organisateur a = new Organisateur(
 				noeud.getChildText("nom"),
 				noeud.getChildText("prenom"),
 				noeud.getChildText("motdepasse")
 			);
-
-		recupererCompetences(a, noeud);
 
 		return a;
 	}
@@ -55,17 +53,14 @@ public class ArbitreXML extends PersonneCompetenteXML
 	@Override
 	public Object construirePourStock(Object element)
 	{
-		Arbitre a = (Arbitre) element;
+		Organisateur a = (Organisateur) element;
 
-		Element noeud = new Element("arbitre");
+		Element noeud = new Element("organisateur");
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));
 		noeud.addContent(new Element("motdepasse").setText(a.getPassword()));
 
-		noeud.addContent(genererCompetences(a));
-
 		return noeud;
 	}
-
 }

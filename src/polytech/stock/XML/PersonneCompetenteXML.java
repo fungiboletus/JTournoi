@@ -1,4 +1,4 @@
-package polytech.stock;
+package polytech.stock.XML;
 
 import org.jdom.Element;
 
