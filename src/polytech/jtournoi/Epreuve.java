@@ -17,9 +17,11 @@ public class Epreuve {
 	private ArrayList<ArrayList<Equipe>> tableau;
 	private ArrayList<Match> currentMatch;
 	private ArrayList<Equipe> vainqueurEquipe;
-	Arbitre a = new Arbitre();
+	Arbitre a = new Arbitre("logre","ivan","passwd");
+	private int tour=1;
 	
 	public Epreuve(ArrayList<Equipe> equipe){
+		tableau = new ArrayList<ArrayList<Equipe>>();
 		vainqueur =null;
 		tableau.add(equipe);
 		vainqueurEquipe = new ArrayList<Equipe>();
@@ -39,15 +41,17 @@ public class Epreuve {
 		int indiceStandBy = indice-(indice-indicePuissance)*2;
 		//boucle uniquement pour le premier tour pour ramener le nombre d'équipe a une puissance de 2
 		for(int i=0;i<indiceStandBy;i++){
+			System.out.println("ça boucle ? ");
 			vainqueurEquipe.add(current.get(i));
 		}
 		int j = indiceStandBy;
-		for(int i = indiceStandBy;i<indiceStandBy+indicePuissance;i=i+2){
-			Match m = new Match(current.get(i),current.get(i+1),a,j);
-			j++;
+		for(int i = indiceStandBy;i<indiceStandBy+(indice-indicePuissance);i++){
+			Match m = new Match(current.get(j),current.get(j+1),a,i,tour);
+			j=j+2;
 			currentMatch.add(m);
 			vainqueurEquipe.add(null);
 		}
+		tour ++;
 	}
 	
 	public ArrayList<Match> getCurentMatch(){
@@ -64,22 +68,34 @@ public class Epreuve {
 	}
 	
 	private boolean isMatch(Match m){
+		int i=-1;
 		for(Match ma : currentMatch){
-			return ma==m;
+			if(m.compareTo(ma)==0){
+				i=0;
+			}
 		}
-		return false;
+		return i==0;
 	}
 	
 	private void remove(Match m){
 		currentMatch.remove(m);
 		if(currentMatch.size()==0){
-			tableau.add(vainqueurEquipe);
+			ArrayList<Equipe> tmp = new ArrayList<Equipe>();
+			tmp.addAll(vainqueurEquipe);
+			System.out.println("on ajoute une putain de liste d'équipe");
+			tableau.add(tmp);
 			if(vainqueurEquipe.size()==1){
 				vainqueur=vainqueurEquipe.get(0);
 			}
 			else{
 				tour();
 			}
+		}
+	}
+	
+	private void afficherVainqueur(){
+		for(Equipe e : vainqueurEquipe){
+			System.out.println(e);
 		}
 	}
 	
@@ -94,10 +110,11 @@ public class Epreuve {
 	public String toString(){
 		String s="";
 		for (ArrayList<Equipe> list : tableau){
+			System.out.println(list.size());
 			for(Equipe e : list){
-				s=e.getNom()+"  ";
+				s+=e.getNom()+"  ";
 			}
-			s+="/n";
+			s+="\n";
 		}
 		return s;
 	}

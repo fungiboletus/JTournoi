@@ -119,7 +119,7 @@ public class PersonneCompetente extends Personne
 
     public void erase(String comp)
     {
-	competences.remove(comp);
+    	competences.remove(comp);
     }
 
 	public ArrayList<String> getCompetences()
