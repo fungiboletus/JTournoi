@@ -1,5 +1,6 @@
 package polytech.stock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import polytech.personnes.Arbitre;
@@ -36,5 +37,19 @@ public abstract class Stock
 	{
 		Stock.organisateurs = organisateurs;
 	}
+	
+	public static List<Arbitre> getArbitresLibres()
+	{
+		List<Arbitre> arbitresLibres = new ArrayList<Arbitre>();
 		
+		for (Arbitre a : arbitres)
+		{
+			if (a.getBusy())
+			{
+				arbitresLibres.add(a);
+			}
+		}
+		
+		return arbitresLibres;
+	}
 }
