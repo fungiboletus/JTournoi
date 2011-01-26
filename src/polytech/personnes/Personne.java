@@ -28,6 +28,13 @@ public abstract class Personne
     
     protected String password;
     
+    /**
+     *L'ID de la personne.
+     */
+    
+    protected int id;
+    protected static int nbInstances=0;
+    
      /**
      *Constructeur d'une personne.
      *@param nom Le nom de la personne.
@@ -40,6 +47,7 @@ public abstract class Personne
 	this.nom = nom;
 	this.prenom = prenom;
 	this.password = password;
+	this.id = nbInstances++;
     }
 
     /**
@@ -82,6 +90,16 @@ public abstract class Personne
 	return password;
     }
 
+    /**
+     *Accesseur en lecture.
+     *@return L'ID de la personne.
+     */
+
+    public int getId()
+    {
+	return id;
+    }
+    
     /**Mutateur
      *Modifie le nom de la personne par le nom donne.
      *@param nom Nouveau nom de la personne.
@@ -110,6 +128,16 @@ public abstract class Personne
     public void setPassword(String password)
     {
 	this.password = password;
+    }
+    
+    /**Mutateur
+     *Modifie l'ID de la personne par l'ID donne.
+     *@param id Nouvel ID de la personne.
+     */
+
+    public void setId(int id)
+    {
+	this.id = id;
     }
 
     /**
