@@ -21,17 +21,32 @@ public class Equipe
      */
 
     private ArrayList<Joueur> membres;
+    
+    /**
+     *La liste des types d'epreuve de l'equipe.
+     */
+
+    private ArrayList<TypeEpreuve> epreuves;
 
      /**
      *Constructeur d'une equipe. 
      *@param nom Le nom de l'equipe.
      *@param membres La liste de membres de l'equipe.
+     *@param epreuves La liste des cinq epreuves de l'équipe.
      */
 
-    public Equipe(String nom, ArrayList<Joueur> membres)
+    public Equipe(String nom, ArrayList<Joueur> membres, ArrayList<TypeEpreuve> epreuves)
     {
     	this.nom = nom;
     	this.membres = membres;
+    	this.epreuves = epreuves;
+    	if (epreuves.size() == 5){
+    		this.epreuves = epreuves;
+    	}
+    	else {
+    		this.epreuves = new ArrayList<TypeEpreuve>();
+    		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    	}
     }
 
     /**Constructeur d'une equipe. 
@@ -40,13 +55,11 @@ public class Equipe
 
    public Equipe(String nom)
    {
-	    this(nom, new ArrayList<Joueur>());
+	    this(nom, new ArrayList<Joueur>(), new ArrayList<TypeEpreuve>());
    }
     
     /**
      *Constructeur par défaut.
-     *@param nom Le nom de l'equipe.
-     *@param membres Une liste de joueurs pour l'equipe.
      */
 
     public Equipe()
@@ -63,7 +76,7 @@ public class Equipe
     {
     	return nom;
     }
-
+    
     /**
      *Mutateur.
      *Change le nom de l'equipe.
@@ -75,6 +88,33 @@ public class Equipe
     	nom = nouveauNom;
     }
 
+    /**
+     *Accesseur en lecture.
+     *@return La liste d'epreuves de l'equipe.
+     */
+
+    public ArrayList<TypeEpreuve> getEpreuves()
+    {
+    	return epreuves;
+    }
+    
+    /**
+     *Mutateur.
+     *Change le nom de l'equipe.
+     *@param nouveauNom Le nouveau nom a donner a l'equipe.
+     */
+
+    public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
+    {
+    	if (epreuves.size() == 5){
+    		this.epreuves = epreuves;
+    	}
+    	else {
+    		this.epreuves = new ArrayList<TypeEpreuve>();
+    		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    	}
+    }
+    
     /**
      *Accesseur en lecture.
      *@return Le nombre de participants dans l'equipe.
