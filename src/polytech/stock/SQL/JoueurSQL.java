@@ -37,9 +37,10 @@ protected List<Joueur> joueurs;
 
 		try
 		{
-			declarationPreparee.setString(1, a.getNom()); 
-			declarationPreparee.setString(2, a.getPrenom()); 
-			declarationPreparee.setString(3, a.getPassword()); 
+			declarationPreparee.setInt(1, a.getId());
+			declarationPreparee.setString(2, a.getNom()); 
+			declarationPreparee.setString(3, a.getPrenom()); 
+			declarationPreparee.setString(4, a.getPassword()); 
 		} catch (SQLException e)
 		{
 			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
