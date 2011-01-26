@@ -9,6 +9,13 @@ package polytech.personnes;
 public class Arbitre extends PersonneCompetente
 
 {
+	
+	/**
+	 * L'état de l'arbitre. Sera vrai si l'arbitre est occupé et faux sinon.	
+	 */
+	
+	private boolean busy;
+	
 	/**
     *Constructeur d'un arbitre.
     *@param nom Le nom de l'arbitre.
@@ -20,6 +27,7 @@ public class Arbitre extends PersonneCompetente
 	public Arbitre (String nom, String prenom, String password)
 	{
 		super(nom, prenom, password);
+		busy = false;
 	}
 	
 	 /**
@@ -31,5 +39,26 @@ public class Arbitre extends PersonneCompetente
    public Arbitre ()
    {
    		super();
+   		busy = false;
+   }
+   
+   /**
+    *Accesseur en lecture.
+    *@return L'état d'occupation de l'arbitre.
+    */
+
+   public boolean getBusy()
+   {
+	return busy;
+   }
+   
+   /**Mutateur
+    *Modifie l'etat de la personne par l'etat donne.
+    *@param busy Nouvel etat de la personne.
+    */
+
+   public void setBusy(boolean busy)
+   {
+	this.busy = busy;
    }
 }
