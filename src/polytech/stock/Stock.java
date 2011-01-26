@@ -52,5 +52,4 @@ public abstract class Stock
 		
 		return arbitresLibres;
 	}
-	
 }
