@@ -8,6 +8,7 @@ package polytech.jtournoi;
 
 public class TypeEpreuve 
 {
+	private int id;
 	private String nom;
 	private String type;
 	private int duree;
@@ -21,7 +22,8 @@ public class TypeEpreuve
     *@param points Le nombre de points de l'epreuve.
     */
 	
-	public TypeEpreuve(String nom, String type, int duree, int points) {
+	public TypeEpreuve(int id, String nom, String type, int duree, int points) {
+		this.id = id;
 		this.nom = nom;
 		this.type = type;
 		this.duree = duree;
@@ -33,7 +35,7 @@ public class TypeEpreuve
      */
 	
 	public TypeEpreuve() {
-		this("Pas de nom","Pas de type",0,0);
+		this(0, "Pas de nom","Pas de type",0,0);
 	}
 
 	public String getNom() {
@@ -66,6 +68,43 @@ public class TypeEpreuve
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public int getId()
+	{
+		return id;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("TypeEpreuve [id=");
+		builder.append(id);
+		builder.append(", ");
+		if (nom != null)
+		{
+			builder.append("nom=");
+			builder.append(nom);
+			builder.append(", ");
+		}
+		if (type != null)
+		{
+			builder.append("type=");
+			builder.append(type);
+			builder.append(", ");
+		}
+		builder.append("duree=");
+		builder.append(duree);
+		builder.append(", points=");
+		builder.append(points);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	
