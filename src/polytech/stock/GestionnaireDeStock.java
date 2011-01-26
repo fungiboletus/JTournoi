@@ -1,5 +1,7 @@
 package polytech.stock;
 
+import java.util.List;
+
 /**
  * @author Antoine Pultier
  * 
@@ -37,4 +39,6 @@ public interface GestionnaireDeStock
 	 * Produit un objet à destination du stock.
 	 */
 	public Object construirePourStock(Object element);
+
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock();
 }
