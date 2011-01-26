@@ -47,6 +47,8 @@ public class ArbitreXML extends PersonneCompetenteXML
 				noeud.getChildText("motdepasse")
 			);
 
+		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
+		
 		recupererCompetences(a, noeud);
 
 		return a;
@@ -58,6 +60,8 @@ public class ArbitreXML extends PersonneCompetenteXML
 		Arbitre a = (Arbitre) element;
 
 		Element noeud = new Element("arbitre");
+		
+		noeud.setAttribute("id", ""+a.getId());
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));

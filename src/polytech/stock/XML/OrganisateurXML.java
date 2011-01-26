@@ -47,6 +47,8 @@ public class OrganisateurXML extends GestionXML
 				noeud.getChildText("motdepasse")
 			);
 
+		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
+		
 		return a;
 	}
 
@@ -56,7 +58,9 @@ public class OrganisateurXML extends GestionXML
 		Organisateur a = (Organisateur) element;
 
 		Element noeud = new Element("organisateur");
-
+		
+		noeud.setAttribute("id", ""+a.getId());
+		
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));
 		noeud.addContent(new Element("motdepasse").setText(a.getPassword()));

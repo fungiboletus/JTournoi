@@ -50,6 +50,17 @@ public abstract class Stock
 		organisateurs = gestionOrganisateurs.recupererStock();
 	}
 
+	public static void enregistrerStock()
+	{
+		new ArbitreSQL().sauvegarderStock();
+		new JoueurSQL().sauvegarderStock();
+		new OrganisateurSQL().sauvegarderStock();
+		
+		new ArbitreXML().sauvegarderStock();
+		new JoueurXML().sauvegarderStock();
+		new OrganisateurXML().sauvegarderStock();
+	}
+
 	public static List<Arbitre> getArbitres()
 	{
 		return arbitres;
@@ -88,5 +99,15 @@ public abstract class Stock
 		}
 		
 		return arbitresLibres;
+	}
+
+	public static List<TypeEpreuve> getTypesEpreuves()
+	{
+		return typesEpreuves;
+	}
+
+	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
+	{
+		Stock.typesEpreuves = typesEpreuves;
 	}
 }

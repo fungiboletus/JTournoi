@@ -45,6 +45,8 @@ public class JoueurXML extends PersonneCompetenteXML
 				noeud.getChildText("prenom"),
 				noeud.getChildText("motdepasse")
 			);
+		
+		j.setId(Integer.parseInt(noeud.getAttributeValue("id")));
 
 		recupererCompetences(j, noeud);
 
@@ -57,6 +59,8 @@ public class JoueurXML extends PersonneCompetenteXML
 		Joueur j = (Joueur) element;
 
 		Element noeud = new Element("joueur");
+		
+		noeud.setAttribute("id", ""+j.getId());
 
 		noeud.addContent(new Element("nom").setText(j.getNom()));
 		noeud.addContent(new Element("prenom").setText(j.getPrenom()));
