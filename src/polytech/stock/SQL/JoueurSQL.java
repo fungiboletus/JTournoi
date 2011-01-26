@@ -1,5 +1,6 @@
 package polytech.stock.SQL;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +15,14 @@ protected List<Joueur> joueurs;
 	{
 		return "joueurs";
 	}
-
+	
+	@Override
+	public void chargerStock()
+	{
+		GestionSQL.seConnecterSiNecessaire();
+		joueurs = chargerDepuisBase();
+	}
+	
 	@Override
 	public void sauvegarderStock()
 	{
@@ -46,6 +54,28 @@ protected List<Joueur> joueurs;
 	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
 	{
 		return (List<CLASS_TYPE>) joueurs;
+	}
+	
+	@Override
+	public Object construireDepuisStock(Object element)
+	{
+		ResultSet rs = (ResultSet) element;
+
+		Joueur a = new Joueur();
+	
+		try
+		{
+			a.setId(rs.getInt(1));
+			a.setNom(rs.getString(2));
+			a.setPrenom(rs.getString(3));
+			a.setPassword(rs.getString(4));
+
+		} catch (SQLException e)
+		{
+			System.out.println("Impossible de charger un élément : " + e.getMessage());
+		}
+		
+		return a;
 	}
 
 }

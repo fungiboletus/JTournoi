@@ -3,12 +3,14 @@ package polytech.stock.SQL;
 import polytech.stock.GestionnaireDeStock;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 public abstract class GestionSQL implements GestionnaireDeStock
 {
@@ -56,18 +58,48 @@ public abstract class GestionSQL implements GestionnaireDeStock
 
 	// Informations sur la table
 	protected abstract String structureTable();
+	protected abstract String structureTableTypee();
 	protected abstract String nomTable();
 	protected abstract int nbInfosTable();
+
+	@SuppressWarnings("unchecked")
+	protected <CLASS_TYPE> List<CLASS_TYPE> chargerDepuisBase()
+	{
+		List<CLASS_TYPE> liste = new ArrayList<CLASS_TYPE>();
+
+		String nom = nomTable();
+		String structure = structureTable();
+
+		try{
+			declarationPreparee = connexion.prepareStatement(" SELECT "+structure+" FROM "+nom+";");
+			ResultSet rs = declarationPreparee.executeQuery();
+
+			while (rs.next())
+			{
+				liste.add((CLASS_TYPE) construireDepuisStock(rs));
+			}
+
+			rs.close();
+
+		} catch (SQLException e)
+		{
+			System.out.println("Impossible de récupérer les données : "+e.getMessage());
+		}
+
+		return liste;
+	}
+
 
 	protected <CLASS_TYPE> void sauvegarderDansBase(List<CLASS_TYPE> liste)
 	{
 		try{
 			String nom = nomTable();
 			String structure = structureTable();
+			String structureTypee = structureTableTypee();
 
 			declaration = connexion.createStatement();
 			declaration.executeUpdate("DROP TABLE IF EXISTS "+nom+";");
-			declaration.executeUpdate("CREATE TABLE "+nom+" ("+structure+");");
+			declaration.executeUpdate("CREATE TABLE "+nom+" ("+structureTypee+");");
 
 			StringBuilder sb = new StringBuilder("INSERT INTO ");
 			sb.append(nom);
