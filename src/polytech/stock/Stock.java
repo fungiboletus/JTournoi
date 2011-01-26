@@ -45,6 +45,10 @@ public abstract class Stock
 				break;
 		}
 
+		gestionArbitres.chargerStock();
+		gestionJoueurs.chargerStock();
+		gestionOrganisateurs.chargerStock();
+		
 		arbitres = gestionArbitres.recupererStock();
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
@@ -52,13 +56,27 @@ public abstract class Stock
 
 	public static void enregistrerStock()
 	{
-		new ArbitreSQL().sauvegarderStock();
-		new JoueurSQL().sauvegarderStock();
-		new OrganisateurSQL().sauvegarderStock();
+		GestionnaireDeStock gestionArbitresXML = new ArbitreXML();
+		GestionnaireDeStock gestionJoueursXML = new JoueurXML();
+		GestionnaireDeStock gestionOrganisateursXML = new OrganisateurXML();
+
+		gestionArbitresXML.enregistrerStock(arbitres);
+		gestionArbitresXML.sauvegarderStock();
+		gestionJoueursXML.enregistrerStock(joueurs);
+		gestionJoueursXML.sauvegarderStock();
+		gestionOrganisateursXML.enregistrerStock(organisateurs);
+		gestionOrganisateursXML.sauvegarderStock();
 		
-		new ArbitreXML().sauvegarderStock();
-		new JoueurXML().sauvegarderStock();
-		new OrganisateurXML().sauvegarderStock();
+		GestionnaireDeStock gestionArbitresSQL = new ArbitreSQL();
+		GestionnaireDeStock gestionJoueursSQL = new JoueurSQL();
+		GestionnaireDeStock gestionOrganisateursSQL = new OrganisateurSQL();
+
+		gestionArbitresSQL.enregistrerStock(arbitres);
+		gestionArbitresSQL.sauvegarderStock();
+		gestionJoueursSQL.enregistrerStock(joueurs);
+		gestionJoueursSQL.sauvegarderStock();
+		gestionOrganisateursSQL.enregistrerStock(organisateurs);
+		gestionOrganisateursSQL.sauvegarderStock();
 	}
 
 	public static List<Arbitre> getArbitres()

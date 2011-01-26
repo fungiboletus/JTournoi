@@ -79,7 +79,7 @@ public abstract class PersonneCompetente extends Personne
 			c =  c+ " " +competences.get(i);
 		    }
 	    }
-	return nom+ " " +prenom+ ": Compétence(s) :"+c;
+	return super.toString() + ": Compétence(s) :"+c;
     }
 
 

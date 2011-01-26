@@ -55,6 +55,12 @@ public class OrganisateurSQL extends PersonneSQL
 		return (List<CLASS_TYPE>) organisateurs;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		organisateurs = (List<Organisateur>) liste;
+	}
+	
 	@Override
 	public Object construireDepuisStock(Object element)
 	{

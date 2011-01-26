@@ -147,6 +147,13 @@ public abstract class Personne
 
     public String toString()
     {
-	return nom+ " " +prenom;
+		StringBuilder sb = new StringBuilder("[");
+		sb.append(id);
+		sb.append("] ");
+		sb.append(nom);
+		sb.append(' ');
+		sb.append(prenom);
+
+		return sb.toString();
     }
 }

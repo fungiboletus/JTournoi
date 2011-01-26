@@ -56,6 +56,12 @@ protected List<Joueur> joueurs;
 		return (List<CLASS_TYPE>) joueurs;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		joueurs = (List<Joueur>) liste;
+	}
+	
 	@Override
 	public Object construireDepuisStock(Object element)
 	{

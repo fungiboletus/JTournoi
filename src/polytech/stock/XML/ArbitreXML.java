@@ -79,5 +79,9 @@ public class ArbitreXML extends PersonneCompetenteXML
 		return (List<CLASS_TYPE>) arbitres;
 	}
 
-
+	@SuppressWarnings("unchecked")
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		arbitres = (List<Arbitre>) liste;
+	}
 }

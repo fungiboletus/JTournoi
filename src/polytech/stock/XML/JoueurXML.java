@@ -78,4 +78,9 @@ public class JoueurXML extends PersonneCompetenteXML
 		return (List<CLASS_TYPE>) joueurs;
 	}
 
+	@SuppressWarnings("unchecked")
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		joueurs = (List<Joueur>) liste;
+	}
 }

@@ -113,7 +113,7 @@ public abstract class GestionSQL implements GestionnaireDeStock
 				sb.append("?,");
 			}
 
-			sb.deleteCharAt(sb.length());
+			sb.deleteCharAt(sb.length()-1);
 
 			sb.append(");");
 

@@ -41,4 +41,5 @@ public interface GestionnaireDeStock
 	public Object construirePourStock(Object element);
 
 	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock();
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste);
 }

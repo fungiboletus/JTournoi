@@ -56,6 +56,13 @@ public class ArbitreSQL extends PersonneCompetenteSQL
 	{
 		return (List<CLASS_TYPE>) arbitres;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		arbitres = (List<Arbitre>) liste;
+	}
+
 
 	@Override
 	public Object construireDepuisStock(Object element)
