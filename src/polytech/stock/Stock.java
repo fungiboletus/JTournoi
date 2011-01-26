@@ -36,6 +36,5 @@ public abstract class Stock
 	{
 		Stock.organisateurs = organisateurs;
 	}
-	
-	
+		
 }
