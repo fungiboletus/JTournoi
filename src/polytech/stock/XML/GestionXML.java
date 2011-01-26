@@ -1,4 +1,4 @@
-package polytech.stock;
+package polytech.stock.XML;
 
 import java.io.File;
 import java.io.InputStream;
@@ -13,6 +13,8 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+
+import polytech.stock.GestionnaireDeStock;
 
 
 /**
