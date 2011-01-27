@@ -52,7 +52,10 @@ public class Equipe extends TupleAvecID
 
    public Equipe(String nom)
    {
-	    this(nom, new ArrayList<Joueur>(), new ArrayList<TypeEpreuve>());
+	    super();
+	    this.nom = nom;
+	    this.membres = new ArrayList<Joueur>();
+	    this.epreuves = new ArrayList<TypeEpreuve>();
    }
     
     /**
