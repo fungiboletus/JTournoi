@@ -77,10 +77,10 @@ public abstract class PersonneCompetente extends Personne
 	    {
 		for (int i = 0; i< competences.size(); i++)
 		    {
-			c =  c+ " " +competences.get(i);
+			c =  c+ "\n\t" +competences.get(i);
 		    }
 	    }
-	return super.toString() + ": Compétence(s) :"+c;
+	return super.toString() + "\nCompétence(s) :"+c;
     }
 
 
@@ -107,7 +107,7 @@ public abstract class PersonneCompetente extends Personne
      *@param comp Competence a ajouter.
      */
 
-    public void add(TypeEpreuve comp)
+    public void addCompetence(TypeEpreuve comp)
     {
 	competences.add(comp);
     }
@@ -118,7 +118,7 @@ public abstract class PersonneCompetente extends Personne
      *@param comp Competence a supprimer.
      */
 
-    public void erase(TypeEpreuve comp)
+    public void removeCompetence(TypeEpreuve comp)
     {
     	competences.remove(comp);
     }

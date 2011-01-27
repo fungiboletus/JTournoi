@@ -2,7 +2,9 @@ package polytech.stock.XML;
 
 import org.jdom.Element;
 
+import polytech.jtournoi.TypeEpreuve;
 import polytech.personnes.PersonneCompetente;
+import polytech.stock.Stock;
 
 public abstract class PersonneCompetenteXML extends GestionXML
 {
@@ -11,9 +13,9 @@ public abstract class PersonneCompetenteXML extends GestionXML
 	{
 		Element competences = new Element("competences");
 
-		for (String competence : p.getCompetences())
+		for (TypeEpreuve competence : p.getCompetences())
 		{
-			competences.addContent(new Element("competence").setText(competence));
+			competences.addContent(new Element("competence").setAttribute("id", ""+competence.getId()));
 		}
 
 		return competences;
@@ -27,7 +29,12 @@ public abstract class PersonneCompetenteXML extends GestionXML
 		{
 			for (Object e : competences.getChildren())
 			{
-				p.add(((Element) e).getText());
+				TypeEpreuve t = Stock.getTypeEpreuveParId(Integer.parseInt(((Element) e).getAttributeValue("id")));
+
+				if (t != null)
+				{
+					p.addCompetence(t);
+				}
 			}
 		}
 	}
