@@ -140,7 +140,17 @@ public class Equipe extends TupleAvecID
     	}
     }
     
-    /**
+    public ArrayList<Joueur> getMembres()
+	{
+		return membres;
+	}
+
+	public void setMembres(ArrayList<Joueur> membres)
+	{
+		this.membres = membres;
+	}
+
+	/**
      *Accesseur en lecture.
      *@return Le nombre de participants dans l'equipe.
      */

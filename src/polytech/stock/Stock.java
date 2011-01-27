@@ -146,6 +146,24 @@ public abstract class Stock
 		Stock.typesEpreuves = typesEpreuves;
 	}
 
+	public static List<Equipe> getEquipes()
+	{
+		return equipes;
+	}
+
+	public static void setEquipes(List<Equipe> equipes)
+	{
+		Stock.equipes = equipes;
+	}
+	
+	public static void addEquipe(Equipe e)
+	{
+		if (!equipes.contains(e))
+		{
+			equipes.add(e);
+		}
+	}
+
 	protected static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste, int id)
 	{
 		if (liste != null)
@@ -164,5 +182,10 @@ public abstract class Stock
 	public static TypeEpreuve getTypeEpreuveParId(int id)
 	{
 		return getById(typesEpreuves, id);
+	}
+	
+	public static Joueur getJoueurParId(int id)
+	{
+		return getById(joueurs, id);
 	}
 }

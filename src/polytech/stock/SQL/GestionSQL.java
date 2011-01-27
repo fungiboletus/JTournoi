@@ -49,6 +49,10 @@ public abstract class GestionSQL implements GestionnaireDeStock
 		
 			// Connexion
 			connexion = DriverManager.getConnection("jdbc:sqlite:canard.db");
+		
+			// Amélioration astronomique des performances
+			Statement s = connexion.createStatement();
+			s.execute("PRAGMA synchronous = OFF");
 
 		} catch (Exception e)
 		{
@@ -179,7 +183,6 @@ public abstract class GestionSQL implements GestionnaireDeStock
 			sb.append(");");
 
 		try{
-			connexion.setAutoCommit(false);
 			declarationPreparee = connexion.prepareStatement(sb.toString());
 
 			for (CLASS_TYPE e : liste)
@@ -189,8 +192,10 @@ public abstract class GestionSQL implements GestionnaireDeStock
 					declarationPreparee.addBatch();
 				}
 			}
+		
+			connexion.setAutoCommit(false);
 			declarationPreparee.executeBatch();
-			connexion.setAutoCommit(true);
+			connexion.commit();
 
 		} catch (SQLException e)
 		{
