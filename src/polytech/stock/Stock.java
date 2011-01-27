@@ -27,6 +27,16 @@ public abstract class Stock
 	protected static List<TypeEpreuve> typesEpreuves;
 	protected static List<Equipe> equipes;
 
+	public static void initialiserStockVide()
+	{
+		arbitres = new ArrayList<Arbitre>();
+		joueurs = new ArrayList<Joueur>();
+		organisateurs = new ArrayList<Organisateur>();
+		equipes = new ArrayList<Equipe>();
+		
+		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
+	}
+
 	public static void chargerStock(TypeChargement mode)
 	{
 		GestionnaireDeStock gestionArbitres = null;
@@ -50,12 +60,12 @@ public abstract class Stock
 				break;
 		}
 
+		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
+		
 		arbitres = gestionArbitres.recupererStock();
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
 		equipes = gestionEquipes.recupererStock();
-		
-		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
 
 	public static void enregistrerStock()
@@ -87,6 +97,15 @@ public abstract class Stock
 	{
 		Stock.joueurs = joueurs;
 	}
+
+	public static void addJoueur(Joueur j)
+	{
+		if (!joueurs.contains(j))
+		{
+			joueurs.add(j);
+		}
+	}
+
 	public static List<Organisateur> getOrganisateurs()
 	{
 		return organisateurs;
@@ -125,5 +144,25 @@ public abstract class Stock
 	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
 	{
 		Stock.typesEpreuves = typesEpreuves;
+	}
+
+	protected static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste, int id)
+	{
+		if (liste != null)
+		{
+			for (CLASS_TYPE t : liste)
+			{
+				if (((TupleAvecID) t).getId() == id)
+				{
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+
+	public static TypeEpreuve getTypeEpreuveParId(int id)
+	{
+		return getById(typesEpreuves, id);
 	}
 }

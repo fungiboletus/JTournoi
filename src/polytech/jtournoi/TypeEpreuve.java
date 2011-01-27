@@ -1,14 +1,15 @@
 package polytech.jtournoi;
 
+import polytech.stock.TupleAvecID;
+
 /**
  *Gestion du type d'épreuve dans le cadre d'un tournoi sportif.
  *@author Sylvestre Genevier
  *@version 1.0
  */
 
-public class TypeEpreuve 
+public class TypeEpreuve extends TupleAvecID
 {
-	private int id;
 	private String nom;
 	private String type;
 	private int duree;
@@ -68,16 +69,6 @@ public class TypeEpreuve
 
 	public void setPoints(int points) {
 		this.points = points;
-	}
-
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
 	}
 
 	@Override

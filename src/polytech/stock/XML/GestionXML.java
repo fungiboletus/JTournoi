@@ -94,7 +94,8 @@ public abstract class GestionXML implements GestionnaireDeStock
 
 			} catch (Exception e)
 			{
-				System.out.println("Une erreur horrible est arrivée pendant le chargement du fichier : "+e.getMessage());
+				System.out.println("Une erreur horrible est arrivée pendant le chargement du fichier : ");
+				e.printStackTrace();
 			}
 		}
 

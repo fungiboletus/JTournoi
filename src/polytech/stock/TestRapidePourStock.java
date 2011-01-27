@@ -12,12 +12,12 @@ public class TestRapidePourStock
 	 */
 	public static void main(String[] args)
 	{
-		//Stock.chargerStock(TypeChargement.XML);
-		Stock.chargerStock(TypeChargement.SQL);
+		Stock.chargerStock(TypeChargement.XML);
+		//Stock.chargerStock(TypeChargement.SQL);
 		
 		List<Joueur> joueurs = Stock.getJoueurs();
 
-		joueurs.add(new Joueur());
+		//joueurs.add(new Joueur());
 
 		if (joueurs != null)
 		{
