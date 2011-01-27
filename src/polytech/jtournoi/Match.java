@@ -15,7 +15,13 @@ public class Match implements Comparable{
 		this.id=id;
 		this.e1=e1;
 		this.e2=e2;
-		this.a=a;
+		if(a.getBusy()==true){
+			throw new RuntimeException();
+		}
+		else{
+			this.a=a;
+			a.setBusy(true);
+		}
 		this.tour=tour;
 	}
 	

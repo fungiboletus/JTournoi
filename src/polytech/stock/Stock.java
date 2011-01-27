@@ -110,6 +110,11 @@ public abstract class Stock
 		
 		return arbitresLibres;
 	}
+	
+	public static Arbitre getRandomArbitreLibre(){
+		int i = (int)Math.random()*(getArbitresLibres().size()-1);
+		return getArbitresLibres().get(i);
+	}
 
 	public static List<TypeEpreuve> getTypesEpreuves()
 	{
