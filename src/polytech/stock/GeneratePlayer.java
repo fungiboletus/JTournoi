@@ -81,6 +81,26 @@ public class GeneratePlayer {
 	Equipe e2 = new Equipe("TBBT");
 	Equipe e3 = new Equipe("TAAHM");
 	Equipe e4 = new Equipe("Mess");
+	e1.ajouterParticipant(j1);
+	e1.ajouterParticipant(j2);
+	e1.ajouterParticipant(j3);
+	e1.ajouterParticipant(j4);
+	e1.ajouterParticipant(j5);
+	e2.ajouterParticipant(j9);
+	e2.ajouterParticipant(j10);
+	e2.ajouterParticipant(j11);
+	e2.ajouterParticipant(j12);
+	e2.ajouterParticipant(j13);
+	e3.ajouterParticipant(j17);
+	e3.ajouterParticipant(j18);
+	e3.ajouterParticipant(j19);
+	e3.ajouterParticipant(j20);
+	e3.ajouterParticipant(j6);
+	e4.ajouterParticipant(j7);
+	e4.ajouterParticipant(j8);
+	e4.ajouterParticipant(j14);
+	e4.ajouterParticipant(j15);
+	e4.ajouterParticipant(j16);
 	}
 	
 }
