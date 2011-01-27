@@ -29,8 +29,6 @@ public abstract class Stock
 
 	public static void chargerStock(TypeChargement mode)
 	{
-		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
-
 		GestionnaireDeStock gestionArbitres = null;
 		GestionnaireDeStock gestionJoueurs = null;
 		GestionnaireDeStock gestionOrganisateurs = null;
@@ -56,6 +54,8 @@ public abstract class Stock
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
 		equipes = gestionEquipes.recupererStock();
+		
+		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
 
 	public static void enregistrerStock()
