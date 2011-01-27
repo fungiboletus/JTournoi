@@ -97,7 +97,6 @@ public class GeneratePlayer {
 	j20.addCompetence(epreuves.get(3));
 	j20.addCompetence(epreuves.get(4));
 	j20.addCompetence(epreuves.get(5));
->>>>>>> b9d8b267ff66bd6cab9ff982b8fbe2069514993e
 	
 	  // Création de 4 équipes de 5 joueurs.
 	Equipe e1 = new Equipe("HIMYM");
