@@ -1,6 +1,7 @@
 package polytech.personnes;
 
 import java.util.ArrayList;
+import polytech.jtournoi.TypeEpreuve;
 
 /**
  *Gestion d'une personne compétente dans le cadre d'un tournoi sportif.
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public abstract class PersonneCompetente extends Personne
 
 {
-	protected ArrayList<String> competences;	
+	protected ArrayList<TypeEpreuve> competences;	
 	
 	/**
      *Constructeur d'une personne compétente.
@@ -24,7 +25,7 @@ public abstract class PersonneCompetente extends Personne
 	public PersonneCompetente (String nom, String prenom, String password)
 	{
 		super(nom, prenom, password);
-		this.competences = new ArrayList<String>();
+		this.competences = new ArrayList<TypeEpreuve>();
 	}
 	
 	 /**
@@ -36,7 +37,7 @@ public abstract class PersonneCompetente extends Personne
     public PersonneCompetente ()
     {
     	super();
-    	this.competences = new ArrayList<String>();
+    	this.competences = new ArrayList<TypeEpreuve>();
     }
 	
 	/**Accesseur en lecture.  
@@ -44,9 +45,9 @@ public abstract class PersonneCompetente extends Personne
      *@return Le i-ieme sport de la personne dans la liste des competences, s'il existe. Dans le cas ou il n'existe pas, la methode renvoie une chaine vide de caracteres.      
      */
 	
-	public String getCompetence(int i)
+	public TypeEpreuve getCompetence(int i)
     {
-	if((i<0)||(i>=competences.size())) return "";
+	if((i<0)||(i>=competences.size())) return null;
 	else return competences.get(i);
     }
 
@@ -106,7 +107,7 @@ public abstract class PersonneCompetente extends Personne
      *@param comp Competence a ajouter.
      */
 
-    public void add(String comp)
+    public void add(TypeEpreuve comp)
     {
 	competences.add(comp);
     }
@@ -117,17 +118,17 @@ public abstract class PersonneCompetente extends Personne
      *@param comp Competence a supprimer.
      */
 
-    public void erase(String comp)
+    public void erase(TypeEpreuve comp)
     {
     	competences.remove(comp);
     }
 
-	public ArrayList<String> getCompetences()
+	public ArrayList<TypeEpreuve> getCompetences()
 	{
 		return competences;
 	}
 
-	public void setCompetences(ArrayList<String> competences)
+	public void setCompetences(ArrayList<TypeEpreuve> competences)
 	{
 		this.competences = competences;
 	}
