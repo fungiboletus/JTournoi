@@ -16,7 +16,7 @@ import polytech.stock.SQL.JoueurSQL;
 import polytech.stock.XML.JoueurXML;
 import polytech.stock.SQL.OrganisateurSQL;
 import polytech.stock.XML.OrganisateurXML;
-//import polytech.stock.SQL.EquipeSQL;
+import polytech.stock.SQL.EquipeSQL;
 import polytech.stock.XML.EquipeXML;
 
 public abstract class Stock
@@ -42,7 +42,7 @@ public abstract class Stock
 				gestionArbitres = new ArbitreSQL(); 
 				gestionJoueurs = new JoueurSQL(); 
 				gestionOrganisateurs = new OrganisateurSQL(); 
-				//gestionEquipes = new EquipeSQL();
+				gestionEquipes = new EquipeSQL();
 				break;
 			case XML:
 				gestionArbitres = new ArbitreXML(); 
@@ -68,7 +68,7 @@ public abstract class Stock
 		new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
-		//new EquipeSQL().enregistrerStock(equipes);
+		new EquipeSQL().enregistrerStock(equipes);
 	}
 
 	public static List<Arbitre> getArbitres()
