@@ -2,7 +2,6 @@ package polytech.stock.SQL;
 
 public abstract class PersonneSQL extends GestionSQL
 {
-
 	protected String structureTable()
 	{
 		return "ID, NOM, PRENOM, MOTDEPASSE";
@@ -17,21 +16,4 @@ public abstract class PersonneSQL extends GestionSQL
 	{
 		return 4;
 	}
-
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-
 }

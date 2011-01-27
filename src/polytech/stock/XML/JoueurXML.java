@@ -1,38 +1,14 @@
 package polytech.stock.XML;
 
-import java.util.List;
-
 import org.jdom.Element;
 
 import polytech.personnes.Joueur;
 
 public class JoueurXML extends PersonneCompetenteXML
 {
-	protected List<Joueur> joueurs;
-
-	@Override
-	public void chargerStock()
+	protected String nomRelation()
 	{
-		joueurs = GestionXML.chargerFichierXml("joueurs", this);
-	}
-
-	@Override
-	public void sauvegarderStock()
-	{
-		GestionXML.sauvegarderFichierXml(joueurs, "joueurs", this);
-	}
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
+		return "joueurs";
 	}
 
 	@Override
@@ -69,18 +45,5 @@ public class JoueurXML extends PersonneCompetenteXML
 		noeud.addContent(genererCompetences(j));
 
 		return noeud;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
-	{
-		return (List<CLASS_TYPE>) joueurs;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
-	{
-		joueurs = (List<Joueur>) liste;
 	}
 }

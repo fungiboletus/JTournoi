@@ -9,27 +9,15 @@ import java.util.List;
 public interface GestionnaireDeStock
 {
 	/**
-	 * Charge un stock
+	 * Récupère le stock qui a été préalablement chargé.
 	 */
-	public void chargerStock();
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock();
 
 	/**
-	 * Sauvegarde un stock
+	 * Enregistre le stock pour ensuite le sauvegarder.
 	 */
-	public void sauvegarderStock();
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste);
 	
-	/**
-	 * Ajoute une référence dans le stock
-	 * @param reference Référence à ajouter
-	 */
-	public void ajouterReference(Object reference);
-
-	/**
-	 * Supprime une référence du stock
-	 * @param reference Référence à supprimer
-	 */
-	public void supprimerReference(Object reference);
-
 	/**
 	 * Construit un objet à partir d'un élément du stock.
 	 */
@@ -39,7 +27,4 @@ public interface GestionnaireDeStock
 	 * Produit un objet à destination du stock.
 	 */
 	public Object construirePourStock(Object element);
-
-	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock();
-	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste);
 }
