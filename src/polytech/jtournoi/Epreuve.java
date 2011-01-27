@@ -15,15 +15,18 @@ public class Epreuve {
 	
 	 
 	private Equipe vainqueur;
+	public TypeEpreuve type;
 	private ArrayList<ArrayList<Equipe>> tableau;
 	private ArrayList<Match> currentMatch;
 	private ArrayList<Equipe> vainqueurEquipe;
 	Arbitre a = new Arbitre("logre","ivan","passwd");
 	private int tour=1;
 	
-	public Epreuve(ArrayList<Equipe> equipe){
+	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te){
+		type=te;
 		tableau = new ArrayList<ArrayList<Equipe>>();
-		tableau.add(equipe);
+		
+		tableau.add(Tools.melangerEquipe(equipe));
 		if(equipe.size()==1){
 			vainqueur=equipe.get(0);
 		}
@@ -121,5 +124,9 @@ public class Epreuve {
 			s+="\n";
 		}
 		return s;
+	}
+
+	public TypeEpreuve getTypeEpreuve() {
+		return type;
 	}
 }

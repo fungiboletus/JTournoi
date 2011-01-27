@@ -1,45 +1,40 @@
 package polytech.jtournoi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import polytech.tools.Tools;
 
 public abstract class Moteur {
 
+	static Tournoi t;
+	
 	public static void creerTournoi(ArrayList<Equipe> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
-		if(epreuveSansEquipe(epreuves,equipes)){
+		if(Tools.epreuveSansEquipe(epreuves,equipes)){
 			throw new EpreuveSansEquipeException();
 		}
-	}
-	
-	private static ArrayList<TypeEpreuve> getTypeEpreuve(ArrayList<Equipe> equipes){
-		ArrayList<TypeEpreuve> epreuve = new ArrayList<TypeEpreuve>();
-		for(Equipe e : equipes){
-			for(TypeEpreuve te : e.getEpreuves()){
-				if(!containsTypeEpreuve(epreuve,te)){
-					epreuve.add(te);
-				}
-			}
+		else{
+			t = new Tournoi(equipes,epreuves);
 		}
-		return epreuve;
 	}
 	
-
-	private static boolean containsTypeEpreuve(ArrayList<TypeEpreuve> epreuves, TypeEpreuve te){
-		for(TypeEpreuve e : epreuves){
-			if (e.getId()==te.getId()){
-				return true;
-			}
+	public void startTournoi(Tournoi t){
+		t.startTournoi();
+	}
+	
+	public HashMap<TypeEpreuve,ArrayList<Match>> getCurrentsMatch(Tournoi t){
+		ArrayList<Epreuve> epreuves = t.getEpreuves();
+		HashMap<TypeEpreuve,ArrayList<Match>> map = new HashMap<TypeEpreuve,ArrayList<Match>>();
+		for(Epreuve e : epreuves){
+			map.put(e.getTypeEpreuve(), e.getCurentMatch());
 		}
-		return false;
+		return map;
 	}
 	
-	private static boolean epreuveSansEquipe(ArrayList<TypeEpreuve> epreuves, ArrayList<Equipe> equipes){
-		ArrayList<TypeEpreuve> tmp = getTypeEpreuve(equipes);
-		for(TypeEpreuve e : epreuves){
-			if(!containsTypeEpreuve(tmp,e)){
-				return true;
-			}
+	public void getMatch (){
+		HashMap<TypeEpreuve,ArrayList<Match>> map = getCurrentsMatch(t);
+		for(TypeEpreuve te : map.keySet()){
+			System.out.println(map.get(te+"\n"));
 		}
-		return false;
 	}
-	
 }
