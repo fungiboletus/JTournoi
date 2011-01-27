@@ -9,6 +9,8 @@ public class GeneratePlayer {
 	
 	public static void main(String[] args){
 
+		Stock.initialiserStockVide();
+		
 		//Création de 20 joueurs.
 	Joueur j1 = new Joueur("Stinson","Barney","awesome");
 	Joueur j2 = new Joueur("Mosby","Ted","12345");
