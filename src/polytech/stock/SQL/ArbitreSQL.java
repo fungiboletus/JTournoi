@@ -31,6 +31,8 @@ public class ArbitreSQL extends PersonneCompetenteSQL
 			System.out.println("Impossible de charger un élément : " + e.getMessage());
 		}
 		
+		recupererCompetences(a);
+		
 		return a;
 	}
 
@@ -51,6 +53,8 @@ public class ArbitreSQL extends PersonneCompetenteSQL
 			return null;
 		}
 
+		genererCompetences(a);
+		
 		return declarationPreparee;
 	}
 }
