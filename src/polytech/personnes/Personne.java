@@ -1,12 +1,14 @@
 package polytech.personnes;
 
+import polytech.stock.TupleAvecID;
+
 /**
  *Gestion d'une personne dans le cadre d'un tournoi sportif.
  *@author Sylvestre Genevier
  *@version 1.0
  */
 
-public abstract class Personne
+public abstract class Personne extends TupleAvecID
 {
 
     /**
@@ -28,13 +30,6 @@ public abstract class Personne
     
     protected String password;
     
-    /**
-     *L'ID de la personne.
-     */
-    
-    protected int id;
-    protected static int nbInstances=0;
-    
      /**
      *Constructeur d'une personne.
      *@param nom Le nom de la personne.
@@ -44,10 +39,10 @@ public abstract class Personne
 
     public Personne (String nom, String prenom, String password)
     {
-	this.nom = nom;
-	this.prenom = prenom;
-	this.password = password;
-	this.id = nbInstances++;
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
     }
 
     /**
@@ -90,16 +85,6 @@ public abstract class Personne
 	return password;
     }
 
-    /**
-     *Accesseur en lecture.
-     *@return L'ID de la personne.
-     */
-
-    public int getId()
-    {
-	return id;
-    }
-    
     /**Mutateur
      *Modifie le nom de la personne par le nom donne.
      *@param nom Nouveau nom de la personne.
@@ -130,16 +115,6 @@ public abstract class Personne
 	this.password = password;
     }
     
-    /**Mutateur
-     *Modifie l'ID de la personne par l'ID donne.
-     *@param id Nouvel ID de la personne.
-     */
-
-    public void setId(int id)
-    {
-	this.id = id;
-    }
-
     /**
      *Methode toString.
      *@return Nom, prenom.

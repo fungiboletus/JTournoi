@@ -2,6 +2,7 @@ package polytech.jtournoi;
 
 import java.util.ArrayList;
 import polytech.personnes.*;
+import polytech.stock.TupleAvecID;
 
 /**
  *Gestion d'une equipe dans un tournoi sportif.
@@ -10,7 +11,7 @@ import polytech.personnes.*;
  *@version 1.0
  */
 
-public class Equipe
+public class Equipe extends TupleAvecID
 {
     /**
      *Le nom de l'equipe.
@@ -39,6 +40,7 @@ public class Equipe
 
     public Equipe(String nom, ArrayList<Joueur> membres, ArrayList<TypeEpreuve> epreuves)
     {
+		super();
     	this.nom = nom;
     	this.membres = membres;
     	this.epreuves = epreuves;
@@ -164,25 +166,18 @@ public class Equipe
 
     public void ajouterParticipant(Joueur nouveauMembre)
     {
-    	if(membres.size() < 5)
-    	{
-    		try
-    			{
-    			for(Joueur joueur : membres)
-    			{	
-    				if(joueur.equals(nouveauMembre)) throw new Exception();
-    			}	
-    			membres.add(nouveauMembre);
-    			}
-    		catch(Exception e)
-    		{
-    			System.out.println("Ce joueur avait deja ete rentre.");
-    		}
-    	}
-    	else
+    	if(membres.size() >= 5)
     	{
     		System.out.println("L'équipe est déjà complète");
-    	}
+		}
+		else if (membres.contains(nouveauMembre))
+		{
+			System.out.println("Ce joueur avait deja ete rentre.");
+		}
+		else
+		{
+    		membres.add(nouveauMembre);
+		}
     }
 
     /**
