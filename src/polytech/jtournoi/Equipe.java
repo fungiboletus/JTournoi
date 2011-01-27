@@ -43,14 +43,7 @@ public class Equipe extends TupleAvecID
 		super();
     	this.nom = nom;
     	this.membres = membres;
-    	this.epreuves = epreuves;
-    	if (epreuves.size() == 5){
-    		this.epreuves = epreuves;
-    	}
-    	else {
-    		this.epreuves = new ArrayList<TypeEpreuve>();
-    		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
-    	}
+    	this.setEpreuves(epreuves);
     }
 
     /**Constructeur d'une equipe. 
@@ -104,14 +97,42 @@ public class Equipe extends TupleAvecID
     
     /**
      *Mutateur.
-     *Change le nom de l'equipe.
-     *@param nouveauNom Le nouveau nom a donner a l'equipe.
+     *Change la liste d'epreuve de l'equipe.
+     *@param epreuves La nouvelle liste d'epreuve de l'equipe.
      */
 
     public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
     {
-    	if (epreuves.size() == 5){
+    	if (epreuves.size() == 5 || epreuves.size() == 0){
+    		int needFive = 0;
+    		// On donne la liste d'épreuve donnée à l'équipe et on vérifie si elle est valide. Si elle ne l'est pas, on la remplace par une liste vide.
     		this.epreuves = epreuves;
+    		if (membres.size() == 0){
+    			System.out.println("L'équipe doit comporter au moins un joueur pour ajouter des épreuves");
+    			this.epreuves = new ArrayList<TypeEpreuve>();
+    		}
+    		else{
+    			for (int i = 0 ; i<5 ; i++)
+        		{
+    				for (int j = 0 ; j<membres.size() ; j++)
+    				{
+    					if (membres.get(j).getCompetences().contains(epreuves.get(i)))
+    					{
+    						needFive++;
+    						break;
+    					}
+    				}
+    				if (needFive == i)
+    				{
+    					System.out.println("Au moins un joueur de l'équipe doit pratiquer l'épreuve suivante pour que cette liste d'épreuve soit valide :");
+    					System.out.println(epreuves.get(i).getNom());
+    					System.out.println("L'équipe a donc été créée sans compétences.");
+    					this.epreuves = new ArrayList<TypeEpreuve>();
+    					break;
+    				}
+        		}
+    			
+    		}
     	}
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();

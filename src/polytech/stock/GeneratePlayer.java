@@ -8,7 +8,7 @@ import polytech.personnes.*;
 public class GeneratePlayer {
 	
 	public static void main(String[] args){
-		
+	
 		//Création de 20 joueurs.
 	Joueur j1 = new Joueur("Stinson","Barney","awesome");
 	Joueur j2 = new Joueur("Mosby","Ted","12345");
@@ -30,10 +30,11 @@ public class GeneratePlayer {
 	Joueur j18 = new Joueur("Harper","Alan","o");
 	Joueur j19 = new Joueur("Harper","Jack","p");
 	Joueur j20 = new Joueur("Housekeeper","Berta","q");
-	
+		
 		//Ajout de compétences (sports) aux joueurs.
 	List<TypeEpreuve> epreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	j1.add(epreuves.get(1));
+	
 	j2.add(epreuves.get(2));
 	j2.add(epreuves.get(3));
 	j2.add(epreuves.get(4));
@@ -42,7 +43,7 @@ public class GeneratePlayer {
 	j3.add(epreuves.get(7));
 	j4.add(epreuves.get(8));
 	j5.add(epreuves.get(9));
-	j6.add(epreuves.get(10));
+	j6.add(epreuves.get(9));
 	j6.add(epreuves.get(1));
 	j7.add(epreuves.get(1));
 	j7.add(epreuves.get(2));
@@ -62,7 +63,7 @@ public class GeneratePlayer {
 	j14.add(epreuves.get(7));
 	j15.add(epreuves.get(8));
 	j16.add(epreuves.get(9));
-	j17.add(epreuves.get(10));
+	j17.add(epreuves.get(9));
 	j18.add(epreuves.get(1));
 	j18.add(epreuves.get(2));
 	j18.add(epreuves.get(3));
@@ -102,5 +103,4 @@ public class GeneratePlayer {
 	e4.ajouterParticipant(j15);
 	e4.ajouterParticipant(j16);
 	}
-	
 }
