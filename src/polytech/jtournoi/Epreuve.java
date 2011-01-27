@@ -23,11 +23,16 @@ public class Epreuve {
 	
 	public Epreuve(ArrayList<Equipe> equipe){
 		tableau = new ArrayList<ArrayList<Equipe>>();
-		vainqueur =null;
 		tableau.add(equipe);
-		vainqueurEquipe = new ArrayList<Equipe>();
-		currentMatch = new ArrayList<Match>();
-		tour();
+		if(equipe.size()==1){
+			vainqueur=equipe.get(0);
+		}
+		else{
+			vainqueur =null;
+			vainqueurEquipe = new ArrayList<Equipe>();
+			currentMatch = new ArrayList<Match>();
+			tour();
+		}
 	}
 	
 	public void tour(){
@@ -94,10 +99,8 @@ public class Epreuve {
 		}
 	}
 	
-	private void afficherVainqueur(){
-		for(Equipe e : vainqueurEquipe){
-			System.out.println(e);
-		}
+	public Equipe getVainqueur(){
+		return vainqueur;
 	}
 	
 	public void setScore(Match m, int se1, int se2){
