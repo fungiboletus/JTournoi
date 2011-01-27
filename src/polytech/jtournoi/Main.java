@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import polytech.personnes.Arbitre;
+import polytech.stock.Stock;
+import polytech.stock.TypeChargement;
 
 public class Main {
 
@@ -11,18 +13,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		HashMap<String, Integer> map = new HashMap<String,Integer>();
-		for(int i =0;i<10;i++){
-			if(i%2==0){
-				map.put("a", i);
-			}
-			else{
-				map.put("b", i);
-			}
-		}
-		for(String s : map.keySet()){
-			System.out.println(map.get(s));
-		}
+		Stock.chargerStock(TypeChargement.XML);
+		System.out.println(Stock.getJoueurs().size());
 //		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 //		ArrayList<Match> listMatch = new ArrayList<Match>();
 //		Arbitre a;
