@@ -46,7 +46,7 @@ public class Match implements Comparable{
 		return tour;
 	}
 	
-	public Arbitre getARbitre(){
+	public Arbitre getArbitre(){
 		return a;
 	}
 	

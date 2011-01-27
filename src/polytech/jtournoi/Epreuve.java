@@ -2,6 +2,7 @@ package polytech.jtournoi;
 
 import java.util.ArrayList;
 
+import polytech.stock.Stock;
 import polytech.tools.Tools;
 
 import polytech.personnes.*;
@@ -19,7 +20,6 @@ public class Epreuve {
 	private ArrayList<ArrayList<Equipe>> tableau;
 	private ArrayList<Match> currentMatch;
 	private ArrayList<Equipe> vainqueurEquipe;
-	Arbitre a = new Arbitre("logre","ivan","passwd");
 	private int tour=1;
 	
 	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te){
@@ -55,6 +55,7 @@ public class Epreuve {
 		}
 		int j = indiceStandBy;
 		for(int i = indiceStandBy;i<indiceStandBy+(indice-indicePuissance);i++){
+			Arbitre a = Stock.getRandomArbitreLibre();
 			Match m = new Match(current.get(j),current.get(j+1),a,i,tour);
 			j=j+2;
 			currentMatch.add(m);
@@ -69,7 +70,7 @@ public class Epreuve {
 	
 	public Match getMatch(Arbitre ar){
 		for (Match m : currentMatch){
-			if(ar==m.getARbitre()){
+			if(ar==m.getArbitre()){
 				return m;
 			}
 		}
