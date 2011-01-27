@@ -1,39 +1,14 @@
 package polytech.stock.XML;
 
-import java.util.List;
-
 import org.jdom.Element;
 
 import polytech.personnes.Arbitre;
 
 public class ArbitreXML extends PersonneCompetenteXML
 {
-
-	protected List<Arbitre> arbitres;
-
-	@Override
-	public void chargerStock()
+	protected String nomRelation()
 	{
-		arbitres = GestionXML.chargerFichierXml("arbitres", this);
-	}
-
-	@Override
-	public void sauvegarderStock()
-	{
-		GestionXML.sauvegarderFichierXml(arbitres, "arbitres", this);
-	}
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
+		return "arbitres";
 	}
 
 	@Override
@@ -72,16 +47,4 @@ public class ArbitreXML extends PersonneCompetenteXML
 		return noeud;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
-	{
-		return (List<CLASS_TYPE>) arbitres;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
-	{
-		arbitres = (List<Arbitre>) liste;
-	}
 }

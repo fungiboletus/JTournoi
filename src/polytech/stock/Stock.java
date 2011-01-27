@@ -7,6 +7,7 @@ import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.personnes.Organisateur;
 
+import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
 
 import polytech.stock.SQL.ArbitreSQL;
@@ -15,6 +16,8 @@ import polytech.stock.SQL.JoueurSQL;
 import polytech.stock.XML.JoueurXML;
 import polytech.stock.SQL.OrganisateurSQL;
 import polytech.stock.XML.OrganisateurXML;
+//import polytech.stock.SQL.EquipeSQL;
+import polytech.stock.XML.EquipeXML;
 
 public abstract class Stock
 {
@@ -22,6 +25,7 @@ public abstract class Stock
 	protected static List<Joueur> joueurs;
 	protected static List<Organisateur> organisateurs;
 	protected static List<TypeEpreuve> typesEpreuves;
+	protected static List<Equipe> equipes;
 
 	public static void chargerStock(TypeChargement mode)
 	{
@@ -30,6 +34,7 @@ public abstract class Stock
 		GestionnaireDeStock gestionArbitres = null;
 		GestionnaireDeStock gestionJoueurs = null;
 		GestionnaireDeStock gestionOrganisateurs = null;
+		GestionnaireDeStock gestionEquipes = null;
 
 		switch (mode)
 		{
@@ -37,46 +42,33 @@ public abstract class Stock
 				gestionArbitres = new ArbitreSQL(); 
 				gestionJoueurs = new JoueurSQL(); 
 				gestionOrganisateurs = new OrganisateurSQL(); 
+				//gestionEquipes = new EquipeSQL();
 				break;
 			case XML:
 				gestionArbitres = new ArbitreXML(); 
 				gestionJoueurs = new JoueurXML(); 
 				gestionOrganisateurs = new OrganisateurXML(); 
+				gestionEquipes = new EquipeXML();
 				break;
 		}
 
-		gestionArbitres.chargerStock();
-		gestionJoueurs.chargerStock();
-		gestionOrganisateurs.chargerStock();
-		
 		arbitres = gestionArbitres.recupererStock();
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
+		equipes = gestionEquipes.recupererStock();
 	}
 
 	public static void enregistrerStock()
 	{
-		GestionnaireDeStock gestionArbitresXML = new ArbitreXML();
-		GestionnaireDeStock gestionJoueursXML = new JoueurXML();
-		GestionnaireDeStock gestionOrganisateursXML = new OrganisateurXML();
-
-		gestionArbitresXML.enregistrerStock(arbitres);
-		gestionArbitresXML.sauvegarderStock();
-		gestionJoueursXML.enregistrerStock(joueurs);
-		gestionJoueursXML.sauvegarderStock();
-		gestionOrganisateursXML.enregistrerStock(organisateurs);
-		gestionOrganisateursXML.sauvegarderStock();
+		new ArbitreXML().enregistrerStock(arbitres);
+		new JoueurXML().enregistrerStock(joueurs);
+		new OrganisateurXML().enregistrerStock(organisateurs);
+		new EquipeXML().enregistrerStock(equipes);
 		
-		GestionnaireDeStock gestionArbitresSQL = new ArbitreSQL();
-		GestionnaireDeStock gestionJoueursSQL = new JoueurSQL();
-		GestionnaireDeStock gestionOrganisateursSQL = new OrganisateurSQL();
-
-		gestionArbitresSQL.enregistrerStock(arbitres);
-		gestionArbitresSQL.sauvegarderStock();
-		gestionJoueursSQL.enregistrerStock(joueurs);
-		gestionJoueursSQL.sauvegarderStock();
-		gestionOrganisateursSQL.enregistrerStock(organisateurs);
-		gestionOrganisateursSQL.sauvegarderStock();
+		new ArbitreSQL().enregistrerStock(arbitres);
+		new JoueurSQL().enregistrerStock(joueurs);
+		new OrganisateurSQL().enregistrerStock(organisateurs);
+		//new EquipeSQL().enregistrerStock(equipes);
 	}
 
 	public static List<Arbitre> getArbitres()

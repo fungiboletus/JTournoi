@@ -24,6 +24,20 @@ import polytech.stock.GestionnaireDeStock;
 public abstract class GestionXML implements GestionnaireDeStock
 {
 
+	protected abstract String nomRelation();
+
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		return GestionXML.chargerFichierXml(nomRelation(), this);
+	}
+
+	@Override
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		GestionXML.sauvegarderFichierXml(liste, nomRelation(), this);
+	}
+
 	/** Demande polimentà jdom d'écrire le xml sous forme de texte lisible.*/
 	protected static void ecrireXML(OutputStream flux, Document document) throws Exception
 	{

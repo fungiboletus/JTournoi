@@ -8,32 +8,9 @@ import polytech.personnes.Organisateur;
 
 public class OrganisateurXML extends GestionXML
 {
-
-	protected List<Organisateur> organisateurs;
-
-	@Override
-	public void chargerStock()
+	protected String nomRelation()
 	{
-		organisateurs = GestionXML.chargerFichierXml("organisateurs", this);
-	}
-
-	@Override
-	public void sauvegarderStock()
-	{
-		GestionXML.sauvegarderFichierXml(organisateurs, "organisateurs", this);
-	}
-
-	@Override
-	public void ajouterReference(Object reference)
-	{
-		
-	}
-
-	@Override
-	public void supprimerReference(Object reference)
-	{
-		// TODO Auto-generated method stub
-
+		return "organisateurs";
 	}
 
 	@Override
@@ -67,18 +44,4 @@ public class OrganisateurXML extends GestionXML
 
 		return noeud;
 	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
-	{
-		return (List<CLASS_TYPE>) organisateurs;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
-	{
-		organisateurs = (List<Organisateur>) liste;
-	}
-
 }
