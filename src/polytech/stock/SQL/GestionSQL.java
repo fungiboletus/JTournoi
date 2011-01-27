@@ -14,6 +14,19 @@ import java.sql.ResultSet;
 
 public abstract class GestionSQL implements GestionnaireDeStock
 {
+	@Override
+	public <CLASS_TYPE> List<CLASS_TYPE> recupererStock()
+	{
+		GestionSQL.seConnecterSiNecessaire();
+		return chargerDepuisBase();
+	}
+
+	@Override
+	public <CLASS_TYPE> void enregistrerStock(List<CLASS_TYPE> liste)
+	{
+		GestionSQL.seConnecterSiNecessaire();
+		sauvegarderDansBase(liste);
+	}
 
 	protected static Connection connexion = null;
 	protected Statement declaration = null;

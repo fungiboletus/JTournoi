@@ -1,7 +1,5 @@
 package polytech.stock.XML;
 
-import java.util.List;
-
 import org.jdom.Element;
 
 import polytech.personnes.Organisateur;
