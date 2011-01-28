@@ -127,9 +127,9 @@ public class Equipe extends TupleAvecID
     				}
     				if (needFive == i)
     				{
-    					System.out.println("Au moins un joueur de l'équipe doit pratiquer l'épreuve suivante pour que cette liste d'épreuve soit valide :");
+    					System.out.println("Au moins un joueur de l'équipe "+nom+" doit pratiquer l'épreuve suivante pour que cette liste d'épreuve soit valide :");
     					System.out.println(epreuves.get(i).getNom());
-    					System.out.println("L'équipe a donc été créée sans compétences.");
+    					System.out.println("L'équipe a maintenant une liste de compétences vide.");
     					this.epreuves = new ArrayList<TypeEpreuve>();
     					break;
     				}
@@ -140,6 +140,7 @@ public class Equipe extends TupleAvecID
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();
     		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
     }
     

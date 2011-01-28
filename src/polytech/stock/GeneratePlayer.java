@@ -1,4 +1,5 @@
 package polytech.stock;
+import java.util.ArrayList;
 import java.util.List;
 
 import polytech.jtournoi.Equipe;
@@ -131,7 +132,31 @@ public class GeneratePlayer {
 	e4.ajouterParticipant(j14);
 	e4.ajouterParticipant(j15);
 	e4.ajouterParticipant(j16);
-
+	
+	// Création d'une ArrayList de 5 types d'épreuves :
+	ArrayList<TypeEpreuve> parcours = new ArrayList<TypeEpreuve>();
+	parcours.add(epreuves.get(1));
+	parcours.add(epreuves.get(2));
+	parcours.add(epreuves.get(3));
+	parcours.add(epreuves.get(4));
+	parcours.add(epreuves.get(5));
+	
+	// Ajout de cette liste à chaque équipe ;
+	
+	e1.setEpreuves(parcours);
+	e2.setEpreuves(parcours);
+	e3.setEpreuves(parcours);
+	// Cas où aucun membre de l'équipe n'a pas un des sports de la liste :
+	e4.setEpreuves(parcours);
+	
+	// Cas où la liste de compétence n'est pas de taille 5 :
+	ArrayList<TypeEpreuve> parcours2 = new ArrayList<TypeEpreuve>();
+	parcours2.add(epreuves.get(1));
+	parcours2.add(epreuves.get(2));
+	parcours2.add(epreuves.get(3));
+	parcours2.add(epreuves.get(4));
+	e2.setEpreuves(parcours2);
+	
 	Stock.enregistrerStock();
 	}
 }
