@@ -157,6 +157,20 @@ public class GeneratePlayer {
 	parcours2.add(epreuves.get(4));
 	e2.setEpreuves(parcours2);
 	
+	// Création de 4 arbitres 
+	Arbitre a1 = new Arbitre("House","Gregory","everybody lies");
+	Arbitre a2 = new Arbitre("Morgan","Dexter","dark passenger");
+	Arbitre a3 = new Arbitre("Bauer","Jack","24");
+	Arbitre a4 = new Arbitre("Shepard","Jack","4 8 15 16 23 42");
+	a1.addCompetence(epreuves.get(1));
+	a2.addCompetence(epreuves.get(2));
+	a3.addCompetence(epreuves.get(3));
+	a4.addCompetence(epreuves.get(4));
+	
+	// Création d'un organisateur
+	
+	Organisateur o1 = new Organisateur("Gold","Ari","f*ck");
+	
 	Stock.enregistrerStock();
 	}
 }
