@@ -79,9 +79,23 @@ public abstract class GestionSQL implements GestionnaireDeStock
 	protected abstract String nomTable();
 	protected abstract int nbInfosTable();
 
+	protected static List<String> semaphoresSuppressions = null;
+	
 	protected boolean suppressionAutomatique()
 	{
-		return true;
+		if (semaphoresSuppressions == null)
+		{
+			semaphoresSuppressions = new ArrayList<String>();
+		}
+		
+		String nomClasse = getClass().getSimpleName();
+		
+		if (!semaphoresSuppressions.contains(nomClasse))
+		{
+			semaphoresSuppressions.add(nomClasse);
+			return true;
+		}
+		return false;
 	}
 
 	protected String clauseWhere()

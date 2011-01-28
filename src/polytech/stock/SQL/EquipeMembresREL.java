@@ -2,7 +2,7 @@ package polytech.stock.SQL;
 
 public class EquipeMembresREL extends GestionREL
 {
-
+	
 	@Override
 	protected String structureTable()
 	{
