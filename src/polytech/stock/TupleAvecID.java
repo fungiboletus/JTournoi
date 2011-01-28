@@ -7,7 +7,7 @@ public abstract class TupleAvecID
      */
     
     protected int id;
-    protected static int nbInstances=0;
+    protected static int nbInstances=1;
    
 	public TupleAvecID()
 	{
