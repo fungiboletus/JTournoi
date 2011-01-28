@@ -52,7 +52,10 @@ public class Equipe extends TupleAvecID
 
    public Equipe(String nom)
    {
-	    this(nom, new ArrayList<Joueur>(), new ArrayList<TypeEpreuve>());
+	    super();
+	    this.nom = nom;
+	    this.membres = new ArrayList<Joueur>();
+	    this.epreuves = new ArrayList<TypeEpreuve>();
    }
     
     /**
@@ -103,11 +106,11 @@ public class Equipe extends TupleAvecID
 
     public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
     {
-    	if (epreuves.size() == 5 || epreuves.size() == 0){
+    	if (epreuves.size() == 5 || epreuves.isEmpty()){
     		int needFive = 0;
     		// On donne la liste d'épreuve donnée à l'équipe et on vérifie si elle est valide. Si elle ne l'est pas, on la remplace par une liste vide.
     		this.epreuves = epreuves;
-    		if (membres.size() == 0){
+    		if (membres.isEmpty()){
     			System.out.println("L'équipe doit comporter au moins un joueur pour ajouter des épreuves");
     			this.epreuves = new ArrayList<TypeEpreuve>();
     		}
@@ -124,9 +127,9 @@ public class Equipe extends TupleAvecID
     				}
     				if (needFive == i)
     				{
-    					System.out.println("Au moins un joueur de l'équipe doit pratiquer l'épreuve suivante pour que cette liste d'épreuve soit valide :");
+    					System.out.println("Au moins un joueur de l'équipe "+nom+" doit pratiquer l'épreuve suivante pour que cette liste d'épreuve soit valide :");
     					System.out.println(epreuves.get(i).getNom());
-    					System.out.println("L'équipe a donc été créée sans compétences.");
+    					System.out.println("L'équipe a maintenant une liste de compétences vide.");
     					this.epreuves = new ArrayList<TypeEpreuve>();
     					break;
     				}
@@ -137,10 +140,21 @@ public class Equipe extends TupleAvecID
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();
     		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
     }
     
-    /**
+    public ArrayList<Joueur> getMembres()
+	{
+		return membres;
+	}
+
+	public void setMembres(ArrayList<Joueur> membres)
+	{
+		this.membres = membres;
+	}
+
+	/**
      *Accesseur en lecture.
      *@return Le nombre de participants dans l'equipe.
      */

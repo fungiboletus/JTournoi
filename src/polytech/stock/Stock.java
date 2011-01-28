@@ -141,19 +141,28 @@ public abstract class Stock
 		return typesEpreuves;
 	}
 	
-	public static List<Equipe> getEquipes(){
+	public static List<Equipe> getEquipe(){
 		return equipes;
 	}
 	
-	public static void addEquipe(Equipe e){
-		if(!equipes.contains(e)){
-			equipes.add(e);
-		}
-	}
 
 	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
 	{
 		Stock.typesEpreuves = typesEpreuves;
+	}
+
+
+	public static void setEquipes(List<Equipe> equipes)
+	{
+		Stock.equipes = equipes;
+	}
+	
+	public static void addEquipe(Equipe e)
+	{
+		if (!equipes.contains(e))
+		{
+			equipes.add(e);
+		}
 	}
 
 	protected static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste, int id)
@@ -174,5 +183,10 @@ public abstract class Stock
 	public static TypeEpreuve getTypeEpreuveParId(int id)
 	{
 		return getById(typesEpreuves, id);
+	}
+	
+	public static Joueur getJoueurParId(int id)
+	{
+		return getById(joueurs, id);
 	}
 }

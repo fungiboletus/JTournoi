@@ -15,18 +15,16 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Stock.chargerStock(TypeChargement.XML);
-		ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();
-		for(int i=0;i<5;i++){
-			arbitres.add(new Arbitre(""+i,""+i,""+i));
-		}
-		Stock.setArbitres(arbitres);
-		System.out.println(Stock.getEquipes().size());
-		for(TypeEpreuve te : Tools.getTypeEpreuve((ArrayList<Equipe>)Stock.getEquipes())){
-			
-			System.out.println(te.getNom());
+		System.out.println(Stock.getEquipe().size());
+		System.out.println(Stock.getArbitres().size());
+		for(Equipe e : Stock.getEquipe()){
+			System.out.println(e.getEpreuves().size());
+			for(TypeEpreuve te : e.getEpreuves()){
+				System.out.println(te.getNom());
+			}
 		}
 		try {
-			Moteur.creerTournoi((ArrayList<Equipe>) Stock.getEquipes(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
+			Moteur.creerTournoi((ArrayList<Equipe>) Stock.getEquipe(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
 		} catch (Exception e) {
 			System.out.println("fail la création du tournoi");
 		}

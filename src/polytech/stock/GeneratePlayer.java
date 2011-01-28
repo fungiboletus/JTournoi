@@ -1,4 +1,5 @@
 package polytech.stock;
+import java.util.ArrayList;
 import java.util.List;
 
 import polytech.jtournoi.Equipe;
@@ -8,7 +9,6 @@ import polytech.personnes.*;
 public class GeneratePlayer {
 	
 	public static void main(String[] args){
-
 		Stock.initialiserStockVide();
 		
 		//Création de 20 joueurs.
@@ -33,6 +33,7 @@ public class GeneratePlayer {
 	Joueur j19 = new Joueur("Harper","Jack","p");
 	Joueur j20 = new Joueur("Housekeeper","Berta","q");
 		
+		//Ajout de compétences (sports) aux joueurs.
 	Stock.addJoueur(j1);
 	Stock.addJoueur(j2);
 	Stock.addJoueur(j3);
@@ -105,6 +106,8 @@ public class GeneratePlayer {
 	Equipe e2 = new Equipe("TBBT");
 	Equipe e3 = new Equipe("TAAHM");
 	Equipe e4 = new Equipe("Mess");
+
+
 	e1.ajouterParticipant(j1);
 	e1.ajouterParticipant(j2);
 	e1.ajouterParticipant(j3);
@@ -126,6 +129,52 @@ public class GeneratePlayer {
 	e4.ajouterParticipant(j15);
 	e4.ajouterParticipant(j16);
 	
+
+
+	// Création d'une ArrayList de 5 types d'épreuves :
+	ArrayList<TypeEpreuve> parcours = new ArrayList<TypeEpreuve>();
+	parcours.add(epreuves.get(1));
+	parcours.add(epreuves.get(2));
+	parcours.add(epreuves.get(3));
+	parcours.add(epreuves.get(4));
+	parcours.add(epreuves.get(5));
+	
+	// Ajout de cette liste à chaque équipe ;
+	
+	e1.setEpreuves(parcours);
+	e2.setEpreuves(parcours);
+	e3.setEpreuves(parcours);
+	// Cas où aucun membre de l'équipe n'a pas un des sports de la liste :
+	e4.setEpreuves(parcours);
+	
+	// Cas où la liste de compétence n'est pas de taille 5 :
+	ArrayList<TypeEpreuve> parcours2 = new ArrayList<TypeEpreuve>();
+	parcours2.add(epreuves.get(1));
+	parcours2.add(epreuves.get(2));
+	parcours2.add(epreuves.get(3));
+	parcours2.add(epreuves.get(4));
+	e2.setEpreuves(parcours2);
+	
+	// Création de 4 arbitres 
+	ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();
+	Arbitre a1 = new Arbitre("House","Gregory","everybody lies");
+	Arbitre a2 = new Arbitre("Morgan","Dexter","dark passenger");
+	Arbitre a3 = new Arbitre("Bauer","Jack","24");
+	Arbitre a4 = new Arbitre("Shepard","Jack","4 8 15 16 23 42");
+	arbitres.add(a1);
+	arbitres.add(a2);
+	arbitres.add(a3);
+	arbitres.add(a4);
+	Stock.setArbitres(arbitres);
+	a1.addCompetence(epreuves.get(1));
+	a2.addCompetence(epreuves.get(2));
+	a3.addCompetence(epreuves.get(3));
+	a4.addCompetence(epreuves.get(4));
+	
+	// Création d'un organisateur
+	
+	Organisateur o1 = new Organisateur("Gold","Ari","f*ck");
+
 	Stock.addEquipe(e1);
 	Stock.addEquipe(e2);
 	Stock.addEquipe(e3);

@@ -30,7 +30,9 @@ public class JoueurSQL extends PersonneCompetenteSQL
 		{
 			System.out.println("Impossible de charger un élément : " + e.getMessage());
 		}
-		
+	
+		recupererCompetences(a);
+
 		return a;
 	}
 
@@ -50,6 +52,8 @@ public class JoueurSQL extends PersonneCompetenteSQL
 			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
 			return null;
 		}
+
+		genererCompetences(a);
 
 		return declarationPreparee;
 	}

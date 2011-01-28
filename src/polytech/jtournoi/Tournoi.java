@@ -19,15 +19,19 @@ public class Tournoi {
 		typeEpreuves = epreuves;
 	}
 	
-	public void startTournoi(){
-		for(TypeEpreuve te : Tools.getTypeEpreuve(equipes)){
-			Epreuve e = new Epreuve(Tools.equipeParEpreuve(te,equipes),te);
-			epreuves.add(e);
-		}
-	}
+	
+
 	
 	public ArrayList<Epreuve> getEpreuves(){
 		return epreuves;
+	}
+
+
+
+
+	public void startTournoi() {
+		System.out.println("on start o/");
+		
 	}
 	
 }
