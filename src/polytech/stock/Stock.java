@@ -165,15 +165,15 @@ public abstract class Stock
 	{
 		return typesEpreuves;
 	}
+	
+	public static List<Equipe> getEquipe(){
+		return equipes;
+	}
+	
 
 	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
 	{
 		Stock.typesEpreuves = typesEpreuves;
-	}
-	
-	public static List<Equipe> getEquipes()
-	{
-		return equipes;
 	}
 
 	public static void setEquipes(List<Equipe> equipes)

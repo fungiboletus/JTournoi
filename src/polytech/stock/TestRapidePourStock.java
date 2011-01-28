@@ -30,7 +30,7 @@ public class TestRapidePourStock
 		
 		System.out.println("===============================");
 		
-		List<Equipe> equipes = Stock.getEquipes();
+		List<Equipe> equipes = Stock.getEquipe();
 
 		//joueurs.add(new Joueur());
 
