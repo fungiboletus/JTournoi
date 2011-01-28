@@ -6,6 +6,7 @@ import java.util.HashMap;
 import polytech.personnes.Arbitre;
 import polytech.stock.Stock;
 import polytech.stock.TypeChargement;
+import polytech.tools.Tools;
 
 public class Main {
 
@@ -14,24 +15,21 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Stock.chargerStock(TypeChargement.XML);
-		System.out.println(Stock.getJoueurs().size());
-//		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
-//		ArrayList<Match> listMatch = new ArrayList<Match>();
-//		Arbitre a;
-//		Match ma = null;
-//		for (int i = 0; i < 15; i++) {
-//			equipes.add(new Equipe("equipe " + (i + 1)));
-//		}
-//		Epreuve e = new Epreuve(equipes,new TypeEpreuve());
-//
-//		while (e.getVainqueur() == null) {
-//			listMatch.clear();
-//			listMatch.addAll(e.getCurentMatch());
-//			for (Match m : listMatch) {
-//				e.setScore(m, 10, 20);
-//			}
-//		}
-//		System.out.println(e);
+		ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();
+		for(int i=0;i<5;i++){
+			arbitres.add(new Arbitre(""+i,""+i,""+i));
+		}
+		Stock.setArbitres(arbitres);
+		System.out.println(Stock.getEquipes().size());
+		for(TypeEpreuve te : Tools.getTypeEpreuve((ArrayList<Equipe>)Stock.getEquipes())){
+			
+			System.out.println(te.getNom());
+		}
+		try {
+			Moteur.creerTournoi((ArrayList<Equipe>) Stock.getEquipes(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
+		} catch (Exception e) {
+			System.out.println("fail la création du tournoi");
+		}
 	}
 
 }

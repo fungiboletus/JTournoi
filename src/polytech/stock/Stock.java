@@ -140,6 +140,16 @@ public abstract class Stock
 	{
 		return typesEpreuves;
 	}
+	
+	public static List<Equipe> getEquipes(){
+		return equipes;
+	}
+	
+	public static void addEquipe(Equipe e){
+		if(!equipes.contains(e)){
+			equipes.add(e);
+		}
+	}
 
 	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
 	{

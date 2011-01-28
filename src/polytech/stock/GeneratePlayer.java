@@ -125,7 +125,11 @@ public class GeneratePlayer {
 	e4.ajouterParticipant(j14);
 	e4.ajouterParticipant(j15);
 	e4.ajouterParticipant(j16);
-
+	
+	Stock.addEquipe(e1);
+	Stock.addEquipe(e2);
+	Stock.addEquipe(e3);
+	Stock.addEquipe(e4);
 	Stock.enregistrerStock();
 	}
 }

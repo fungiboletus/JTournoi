@@ -38,7 +38,9 @@ public abstract class Tools {
 	public static ArrayList<TypeEpreuve> getTypeEpreuve(ArrayList<Equipe> equipes){
 		ArrayList<TypeEpreuve> epreuve = new ArrayList<TypeEpreuve>();
 		for(Equipe e : equipes){
+			System.out.println("equipe");
 			for(TypeEpreuve te : e.getEpreuves()){
+				System.out.println("equipes epruve");
 				if(!containsTypeEpreuve(epreuve,te)){
 					epreuve.add(te);
 				}
