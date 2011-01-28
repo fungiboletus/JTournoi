@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<equipes>
+  <equipe id="30">
+    <nom>HIMYM</nom>
+    <membres>
+      <membre id="10" />
+      <membre id="11" />
+      <membre id="12" />
+      <membre id="13" />
+      <membre id="14" />
+    </membres>
+    <epreuves>
+      <epreuve id="2" />
+      <epreuve id="3" />
+      <epreuve id="4" />
+      <epreuve id="5" />
+      <epreuve id="6" />
+    </epreuves>
+  </equipe>
+  <equipe id="31">
+    <nom>TBBT</nom>
+    <membres>
+      <membre id="18" />
+      <membre id="19" />
+      <membre id="20" />
+      <membre id="21" />
+      <membre id="22" />
+    </membres>
+    <epreuves />
+  </equipe>
+  <equipe id="32">
+    <nom>TAAHM</nom>
+    <membres>
+      <membre id="26" />
+      <membre id="27" />
+      <membre id="28" />
+      <membre id="29" />
+      <membre id="15" />
+    </membres>
+    <epreuves>
+      <epreuve id="2" />
+      <epreuve id="3" />
+      <epreuve id="4" />
+      <epreuve id="5" />
+      <epreuve id="6" />
+    </epreuves>
+  </equipe>
+  <equipe id="33">
+    <nom>Mess</nom>
+    <membres>
+      <membre id="16" />
+      <membre id="17" />
+      <membre id="23" />
+      <membre id="24" />
+      <membre id="25" />
+    </membres>
+    <epreuves />
+  </equipe>
+</equipes>
+

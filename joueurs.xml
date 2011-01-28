@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<joueurs>
+  <joueur id="10">
+    <nom>Stinson</nom>
+    <prenom>Barney</prenom>
+    <motdepasse>awesome</motdepasse>
+    <competences>
+      <competence id="2" />
+    </competences>
+  </joueur>
+  <joueur id="11">
+    <nom>Mosby</nom>
+    <prenom>Ted</prenom>
+    <motdepasse>12345</motdepasse>
+    <competences>
+      <competence id="3" />
+      <competence id="4" />
+      <competence id="5" />
+    </competences>
+  </joueur>
+  <joueur id="12">
+    <nom>Eriksen</nom>
+    <prenom>Marshall</prenom>
+    <motdepasse>azerty</motdepasse>
+    <competences>
+      <competence id="6" />
+      <competence id="7" />
+      <competence id="8" />
+    </competences>
+  </joueur>
+  <joueur id="13">
+    <nom>Scherbatsky</nom>
+    <prenom>Robin</prenom>
+    <motdepasse>a</motdepasse>
+    <competences>
+      <competence id="9" />
+    </competences>
+  </joueur>
+  <joueur id="14">
+    <nom>Aldrin</nom>
+    <prenom>Lily</prenom>
+    <motdepasse>b</motdepasse>
+    <competences>
+      <competence id="10" />
+    </competences>
+  </joueur>
+  <joueur id="15">
+    <nom>Mosby</nom>
+    <prenom>The daughter</prenom>
+    <motdepasse>c</motdepasse>
+    <competences>
+      <competence id="1" />
+      <competence id="2" />
+    </competences>
+  </joueur>
+  <joueur id="16">
+    <nom>Mosby</nom>
+    <prenom>The son</prenom>
+    <motdepasse>d</motdepasse>
+    <competences>
+      <competence id="2" />
+      <competence id="3" />
+      <competence id="8" />
+      <competence id="9" />
+      <competence id="4" />
+    </competences>
+  </joueur>
+  <joueur id="17">
+    <nom>Driver</nom>
+    <prenom>Ranjit</prenom>
+    <motdepasse>e</motdepasse>
+    <competences>
+      <competence id="2" />
+      <competence id="4" />
+    </competences>
+  </joueur>
+  <joueur id="18">
+    <nom>Hofstadter</nom>
+    <prenom>Leonard</prenom>
+    <motdepasse>f</motdepasse>
+    <competences>
+      <competence id="2" />
+      <competence id="3" />
+      <competence id="4" />
+      <competence id="5" />
+    </competences>
+  </joueur>
+  <joueur id="19">
+    <nom>Cooper</nom>
+    <prenom>Sheldon</prenom>
+    <motdepasse>g</motdepasse>
+    <competences>
+      <competence id="4" />
+    </competences>
+  </joueur>
+  <joueur id="20">
+    <nom>Penny</nom>
+    <prenom>Penny</prenom>
+    <motdepasse>h</motdepasse>
+    <competences>
+      <competence id="5" />
+    </competences>
+  </joueur>
+  <joueur id="21">
+    <nom>Wolowitz</nom>
+    <prenom>Howard</prenom>
+    <motdepasse>i</motdepasse>
+    <competences>
+      <competence id="6" />
+    </competences>
+  </joueur>
+  <joueur id="22">
+    <nom>Koothrappali</nom>
+    <prenom>Raj</prenom>
+    <motdepasse>j</motdepasse>
+    <competences>
+      <competence id="7" />
+    </competences>
+  </joueur>
+  <joueur id="23">
+    <nom>Wolowitz</nom>
+    <prenom>The Mother</prenom>
+    <motdepasse>k</motdepasse>
+    <competences>
+      <competence id="8" />
+    </competences>
+  </joueur>
+  <joueur id="24">
+    <nom>Wheaton</nom>
+    <prenom>Wil</prenom>
+    <motdepasse>l</motdepasse>
+    <competences>
+      <competence id="9" />
+    </competences>
+  </joueur>
+  <joueur id="25">
+    <nom>Who</nom>
+    <prenom>Bernadette</prenom>
+    <motdepasse>m</motdepasse>
+    <competences>
+      <competence id="10" />
+    </competences>
+  </joueur>
+  <joueur id="26">
+    <nom>Harper</nom>
+    <prenom>Charly</prenom>
+    <motdepasse>n</motdepasse>
+    <competences>
+      <competence id="1" />
+    </competences>
+  </joueur>
+  <joueur id="27">
+    <nom>Harper</nom>
+    <prenom>Alan</prenom>
+    <motdepasse>o</motdepasse>
+    <competences>
+      <competence id="2" />
+      <competence id="3" />
+      <competence id="4" />
+      <competence id="5" />
+    </competences>
+  </joueur>
+  <joueur id="28">
+    <nom>Harper</nom>
+    <prenom>Jack</prenom>
+    <motdepasse>p</motdepasse>
+    <competences>
+      <competence id="6" />
+      <competence id="7" />
+      <competence id="8" />
+      <competence id="9" />
+    </competences>
+  </joueur>
+  <joueur id="29">
+    <nom>Housekeeper</nom>
+    <prenom>Berta</prenom>
+    <motdepasse>q</motdepasse>
+    <competences>
+      <competence id="3" />
+      <competence id="4" />
+      <competence id="5" />
+      <competence id="6" />
+    </competences>
+  </joueur>
+</joueurs>
+
