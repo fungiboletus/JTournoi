@@ -110,7 +110,7 @@ public class Epreuve {
 	public void setScore(Match m, int se1, int se2){
 		if(isMatch(m)){
 			m.setScore(se1,se2);
-			vainqueurEquipe.set(m.getId(),m.getVainqueur());
+			vainqueurEquipe.set(m.getNumero(),m.getVainqueur());
 			remove(m);
 		}
 	}
