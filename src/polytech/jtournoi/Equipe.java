@@ -14,22 +14,34 @@ import polytech.stock.TupleAvecID;
 public class Equipe extends TupleAvecID
 {
     /**
-     *Le nom de l'equipe.
+     * Le nom de l'equipe.
      */
 
     private String nom;
 
     /**
-     *La liste des participants dans l'equipe.
+     * La liste des participants dans l'equipe.
      */
 
     private ArrayList<Joueur> membres;
     
     /**
-     *La liste des types d'epreuve de l'equipe.
+     * La liste des types d'epreuve de l'equipe.
      */
 
     private ArrayList<TypeEpreuve> epreuves;
+    
+    /**
+     * Le nombre de joueur maximum d'une équipe.
+     */
+    
+    private static final int MAX = 5;
+     
+    /**
+     * Le nombre nécessaire de compétence
+     */
+    
+    private static final int NBCOMP = 5;
 
      /**
      *Constructeur d'une equipe. 
@@ -42,7 +54,15 @@ public class Equipe extends TupleAvecID
     {
 		super();
     	this.nom = nom;
-    	this.membres = membres;
+    	if (membres.size() <= MAX)
+    	{   		
+    		this.membres = membres;
+    	}
+    	else
+    	{
+    		this.membres = new ArrayList<Joueur>();
+    		System.out.println("La liste de joueur est trop grande, l'équipe a été créée sans joueur.");
+    	}
     	this.setEpreuves(epreuves);
     }
 
@@ -106,7 +126,7 @@ public class Equipe extends TupleAvecID
 
     public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
     {
-    	if (epreuves.size() == 5 || epreuves.isEmpty()){
+    	if (epreuves.size() == NBCOMP || epreuves.isEmpty()){
     		int needFive = 0;
     		// On donne la liste d'épreuve donnée à l'équipe et on vérifie si elle est valide. Si elle ne l'est pas, on la remplace par une liste vide.
     		this.epreuves = epreuves;
@@ -115,7 +135,7 @@ public class Equipe extends TupleAvecID
     			this.epreuves = new ArrayList<TypeEpreuve>();
     		}
     		else{
-    			for (int i = 0 ; i<5 ; i++)
+    			for (int i = 0 ; i < NBCOMP ; i++)
         		{
     				for (int j = 0 ; j<membres.size() ; j++)
     				{
@@ -139,7 +159,7 @@ public class Equipe extends TupleAvecID
     	}
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();
-    		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    		System.out.println("Veuillez donner une liste de "+NBCOMP+" epreuves exactement.");
     		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
     }
@@ -201,7 +221,7 @@ public class Equipe extends TupleAvecID
 
     public void ajouterParticipant(Joueur nouveauMembre)
     {
-    	if(membres.size() > 5)
+    	if(membres.size() > MAX)
     	{
     		System.out.println("L'équipe est déjà complète");
 		}
