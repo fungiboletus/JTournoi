@@ -75,10 +75,10 @@ public abstract class Stock
 		new OrganisateurXML().enregistrerStock(organisateurs);
 		new EquipeXML().enregistrerStock(equipes);
 		
-		new ArbitreSQL().enregistrerStock(arbitres);
+		/*new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
-		new EquipeSQL().enregistrerStock(equipes);
+		new EquipeSQL().enregistrerStock(equipes);*/
 	}
 
 	public static List<Arbitre> getArbitres()
