@@ -9,6 +9,7 @@ import polytech.personnes.Organisateur;
 
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
+import polytech.jtournoi.Match;
 
 import polytech.stock.SQL.ArbitreSQL;
 import polytech.stock.XML.ArbitreXML;
@@ -18,6 +19,8 @@ import polytech.stock.SQL.OrganisateurSQL;
 import polytech.stock.XML.OrganisateurXML;
 import polytech.stock.SQL.EquipeSQL;
 import polytech.stock.XML.EquipeXML;
+import polytech.stock.SQL.MatchSQL;
+import polytech.stock.XML.MatchXML;
 
 public abstract class Stock
 {
@@ -26,6 +29,7 @@ public abstract class Stock
 	protected static List<Organisateur> organisateurs;
 	protected static List<TypeEpreuve> typesEpreuves;
 	protected static List<Equipe> equipes;
+	protected static List<Match> matchs;
 
 	public static void initialiserStockVide()
 	{
@@ -33,6 +37,7 @@ public abstract class Stock
 		joueurs = new ArrayList<Joueur>();
 		organisateurs = new ArrayList<Organisateur>();
 		equipes = new ArrayList<Equipe>();
+		matchs = new ArrayList<Match>();
 		
 		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
@@ -43,6 +48,7 @@ public abstract class Stock
 		GestionnaireDeStock gestionJoueurs = null;
 		GestionnaireDeStock gestionOrganisateurs = null;
 		GestionnaireDeStock gestionEquipes = null;
+		GestionnaireDeStock gestionMatchs = null;
 
 		switch (mode)
 		{
@@ -51,12 +57,14 @@ public abstract class Stock
 				gestionJoueurs = new JoueurSQL(); 
 				gestionOrganisateurs = new OrganisateurSQL(); 
 				gestionEquipes = new EquipeSQL();
+				gestionMatchs = new MatchSQL();
 				break;
 			case XML:
 				gestionArbitres = new ArbitreXML(); 
 				gestionJoueurs = new JoueurXML(); 
 				gestionOrganisateurs = new OrganisateurXML(); 
 				gestionEquipes = new EquipeXML();
+				gestionMatchs = new MatchXML();
 				break;
 		}
 
@@ -65,7 +73,10 @@ public abstract class Stock
 		arbitres = gestionArbitres.recupererStock();
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
+		
 		equipes = gestionEquipes.recupererStock();
+
+		matchs = gestionMatchs.recupererStock();
 	}
 
 	public static void enregistrerStock()
@@ -145,7 +156,7 @@ public abstract class Stock
 	{
 		Stock.typesEpreuves = typesEpreuves;
 	}
-
+	
 	public static List<Equipe> getEquipes()
 	{
 		return equipes;
@@ -156,6 +167,16 @@ public abstract class Stock
 		Stock.equipes = equipes;
 	}
 	
+	public static List<Match> getMatchs()
+	{
+		return matchs;
+	}
+
+	public static void setMatchs(List<Match> matchs)
+	{
+		Stock.matchs = matchs;
+	}
+
 	public static void addEquipe(Equipe e)
 	{
 		if (!equipes.contains(e))
@@ -187,5 +208,15 @@ public abstract class Stock
 	public static Joueur getJoueurParId(int id)
 	{
 		return getById(joueurs, id);
+	}
+	
+	public static Equipe getEquipeParId(int id)
+	{
+		return getById(equipes, id);
+	}
+	
+	public static Arbitre getArbitreParId(int id)
+	{
+		return getById(arbitres, id);
 	}
 }
