@@ -2,9 +2,10 @@ package polytech.jtournoi;
 
 import java.util.ArrayList;
 
+import polytech.stock.TupleAvecID;
 import polytech.tools.Tools;
 
-public class Tournoi {
+public class Tournoi extends TupleAvecID {
 
 	ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	ArrayList<TypeEpreuve> typeEpreuves = new ArrayList<TypeEpreuve>();
@@ -15,6 +16,7 @@ public class Tournoi {
 	 * @param equipe
 	 */
 	public Tournoi(ArrayList<Equipe> equipe, ArrayList<TypeEpreuve> epreuves){
+		super();
 		equipes = equipe;
 		typeEpreuves = epreuves;
 	}

@@ -7,17 +7,23 @@ import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.personnes.Organisateur;
 
+import polytech.jtournoi.Epreuve;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
+import polytech.jtournoi.Match;
 
 import polytech.stock.SQL.ArbitreSQL;
+import polytech.stock.SQL.EpreuveSQL;
 import polytech.stock.XML.ArbitreXML;
+import polytech.stock.XML.EpreuveXML;
 import polytech.stock.SQL.JoueurSQL;
 import polytech.stock.XML.JoueurXML;
 import polytech.stock.SQL.OrganisateurSQL;
 import polytech.stock.XML.OrganisateurXML;
 import polytech.stock.SQL.EquipeSQL;
 import polytech.stock.XML.EquipeXML;
+import polytech.stock.SQL.MatchSQL;
+import polytech.stock.XML.MatchXML;
 
 public abstract class Stock
 {
@@ -26,6 +32,8 @@ public abstract class Stock
 	protected static List<Organisateur> organisateurs;
 	protected static List<TypeEpreuve> typesEpreuves;
 	protected static List<Equipe> equipes;
+	protected static List<Match> matchs;
+	protected static List<Epreuve> epreuves;
 
 	public static void initialiserStockVide()
 	{
@@ -33,6 +41,8 @@ public abstract class Stock
 		joueurs = new ArrayList<Joueur>();
 		organisateurs = new ArrayList<Organisateur>();
 		equipes = new ArrayList<Equipe>();
+		matchs = new ArrayList<Match>();
+		epreuves = new ArrayList<Epreuve>();
 		
 		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
@@ -43,6 +53,8 @@ public abstract class Stock
 		GestionnaireDeStock gestionJoueurs = null;
 		GestionnaireDeStock gestionOrganisateurs = null;
 		GestionnaireDeStock gestionEquipes = null;
+		GestionnaireDeStock gestionMatchs = null;
+		GestionnaireDeStock gestionEpreuves = null;
 
 		switch (mode)
 		{
@@ -51,12 +63,16 @@ public abstract class Stock
 				gestionJoueurs = new JoueurSQL(); 
 				gestionOrganisateurs = new OrganisateurSQL(); 
 				gestionEquipes = new EquipeSQL();
+				gestionMatchs = new MatchSQL();
+				gestionEpreuves = new EpreuveSQL();
 				break;
 			case XML:
 				gestionArbitres = new ArbitreXML(); 
 				gestionJoueurs = new JoueurXML(); 
 				gestionOrganisateurs = new OrganisateurXML(); 
 				gestionEquipes = new EquipeXML();
+				gestionMatchs = new MatchXML();
+				gestionEpreuves = new EpreuveXML();
 				break;
 		}
 
@@ -65,7 +81,12 @@ public abstract class Stock
 		arbitres = gestionArbitres.recupererStock();
 		joueurs = gestionJoueurs.recupererStock();
 		organisateurs = gestionOrganisateurs.recupererStock();
+		
 		equipes = gestionEquipes.recupererStock();
+		
+		matchs = gestionMatchs.recupererStock();
+		
+		epreuves = gestionEpreuves.recupererStock();
 	}
 
 	public static void enregistrerStock()
@@ -74,11 +95,15 @@ public abstract class Stock
 		new JoueurXML().enregistrerStock(joueurs);
 		new OrganisateurXML().enregistrerStock(organisateurs);
 		new EquipeXML().enregistrerStock(equipes);
+		new MatchXML().enregistrerStock(matchs);
+		new EpreuveXML().enregistrerStock(epreuves);
 		
 		new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
 		new EquipeSQL().enregistrerStock(equipes);
+		new MatchSQL().enregistrerStock(matchs);
+		new EpreuveSQL().enregistrerStock(epreuves);
 	}
 
 	public static List<Arbitre> getArbitres()
@@ -151,12 +176,31 @@ public abstract class Stock
 		Stock.typesEpreuves = typesEpreuves;
 	}
 
-
 	public static void setEquipes(List<Equipe> equipes)
 	{
 		Stock.equipes = equipes;
 	}
 	
+	public static List<Match> getMatchs()
+	{
+		return matchs;
+	}
+
+	public static void setMatchs(List<Match> matchs)
+	{
+		Stock.matchs = matchs;
+	}
+
+	public static List<Epreuve> getEpreuves()
+	{
+		return epreuves;
+	}
+
+	public static void setEpreuves(List<Epreuve> epreuves)
+	{
+		Stock.epreuves = epreuves;
+	}
+
 	public static void addEquipe(Equipe e)
 	{
 		if (!equipes.contains(e))
@@ -188,5 +232,20 @@ public abstract class Stock
 	public static Joueur getJoueurParId(int id)
 	{
 		return getById(joueurs, id);
+	}
+	
+	public static Equipe getEquipeParId(int id)
+	{
+		return getById(equipes, id);
+	}
+	
+	public static Arbitre getArbitreParId(int id)
+	{
+		return getById(arbitres, id);
+	}
+	
+	public static Match getMatchParId(int id)
+	{
+		return getById(matchs, id);
 	}
 }

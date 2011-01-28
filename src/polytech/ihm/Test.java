@@ -1,5 +1,6 @@
 package polytech.ihm;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import polytech.personnes.*;
@@ -10,45 +11,43 @@ import polytech.jtournoi.*;
 
 public class Test {
 
+    private static Ihm ihm;
+    
 	/**
 	 * Test function
 	 * 
 	 * @param args
 	 */
     public static void main(String[] args) {
-        Main main = new Main();
+        ihm = new Ihm();
+        //Stock.chargerStock(TypeChargement.SQL);
+        GeneratePlayer.main();
         // On log la personne qui veut se logger
-        while (main.loggedName.equals("")) {
-            System.out.println("Entrez votre nom :");
-            Scanner s = new Scanner(System.in);
-            String lue = s.nextLine();
-            main.log(lue);
+        while(true){
+            while (ihm.loggedName.equals("")) {
+                System.out.println("Entrez votre nom :");
+                Scanner s = new Scanner(System.in);
+                String lue = s.nextLine();
+                ihm.log(lue);
+            }
+            System.out.println("Bonjour, "+ihm.loggedName+", vous êtes correctement loggé.");
+            
+            // On lance l'interface selon l'utilisateur
+            if(ihm.loggedType.equals("organisateur")){
+                organisateur();
+            }
+            else if(ihm.loggedType.equals("arbitre")){
+                arbitre();
+            }
+            else if(ihm.loggedType.equals("joueur")){
+                joueur();
+            }
         }
-        System.out.println("Merci "+main.loggedName+", vous êtes correctement loggé.");
     }
-
-}
-
-
-class Main {
-
-    // Le nom de la personne loggée
-    protected String loggedName;
-    //Le type de la personne loggée
-    protected String loggedType;
-
-    public Main(){
-        loggedName = "";
-        loggedType = "";
-    }
-
+    
     // L'écran de l'organisateur
-    public void organisateur() {
-        /*
-         * // On charge equipes.xml dans l'arraylist equipes locale equipes =
-         * xml.getEquipes(); sports = xml.getSports(); arbitres =
-         * xml.getArbitres(); tournois = xml.getTournois();
-         */
+    public static void organisateur() {
+        boolean out = false;
         while (true) {
             System.out.println("****************************************");
             System.out.println("*              TOURNOI                 *");
@@ -62,7 +61,7 @@ class Main {
             System.out.println("*  7. Créer un arbitre                 *");
             System.out.println("*  8. Supprimer un arbitre             *");
             System.out.println("*                                      *");
-            System.out.println("*  9. Sauvegarder                      *");
+            System.out.println("*  9. Se déconnecter                   *");
             System.out.println("*  0. Quitter en sauvegardant          *");
             System.out.println("****************************************");
             System.out.print("Votre choix: ");
@@ -95,10 +94,10 @@ class Main {
                     System.out.println("lol");
                     break;
                 case 9:
-                    System.out.println("lol");
+                    ihm.unlog();
                     break;
                 case 0:
-                    System.out.println("lol");
+                    Stock.enregistrerStock();
                     System.exit(0);
                     break;
                 }
@@ -106,90 +105,126 @@ class Main {
                 System.out.println("Ce que vous avez rentré n'est pas valide.");
                 e.printStackTrace();
             }
+            //Si out est vrai, on revient à la fenêtre de connexion
+            if(out) break;
+        }
+    }
+    
+    public static void arbitre() {
+        boolean out = false;
+        while (true) {
+            System.out.println("****************************************");
+            System.out.println("*              TOURNOI                 *");
+            System.out.println("****************************************");
+            System.out.println("*  1. Entrer le résultat du match      *");
+            System.out.println("*                                      *");
+            System.out.println("*  9. Se déconnecter                   *");
+            System.out.println("*  0. Quitter en sauvegardant          *");
+            System.out.println("****************************************");
+            System.out.print("Votre choix: ");
+            try {
+                Scanner s = new Scanner(System.in);
+                int lue = s.nextInt();
+                switch (lue) {
+                case 1:
+                    System.out.println("lol");
+                    break;
+                case 2:
+                    System.out.println("lol");
+                    break;
+                case 3:
+                    System.out.println("lol");
+                    break;
+                case 4:
+                    System.out.println("lol");
+                    break;
+                case 5:
+                    System.out.println("lol");
+                    break;
+                case 6:
+                    System.out.println("lol");
+                    break;
+                case 7:
+                    System.out.println("lol");
+                    break;
+                case 8:
+                    System.out.println("lol");
+                    break;
+                case 9:
+                    ihm.unlog();
+                    break;
+                case 0:
+                    Stock.enregistrerStock();
+                    System.exit(0);
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Ce que vous avez rentré n'est pas valide.");
+                e.printStackTrace();
+            }
+          //Si out est vrai, on revient à la fenêtre de connexion
+            if(out) break;
         }
     }
     
     
-    /**
-     * Permet de logger une personne, quelle qu'elle soit
-     * 
-     * @param nom
-     *           Nom de log
-     * @return true of false
-     *           Le succès ou l'échec du log
-     */
-    public boolean log(String nom){
-        Personne personne;
-        // On vérifie si c'est un organisateur
-        for (int i = 0; i < Stock.getOrganisateurs().size(); i++) {
-            if (nom.equals(Stock.getOrganisateurs().get(i).getNom())) {
-                // On demande le mot de passe
-                System.out.println("Entrez votre mot de passe :");
+    public static void joueur() {
+        boolean out = false;
+        while (true) {
+            System.out.println("****************************************");
+            System.out.println("*              TOURNOI                 *");
+            System.out.println("****************************************");
+            System.out.println("*  1. Prochain match                   *");
+            System.out.println("*  2. Tournois en cours                *");
+            System.out.println("*                                      *");
+            System.out.println("*  9. Se déconnecter                   *");
+            System.out.println("*  0. Quitter en sauvegardant          *");
+            System.out.println("****************************************");
+            System.out.print("Votre choix: ");
+            try {
                 Scanner s = new Scanner(System.in);
-                String lue = s.nextLine();
-                // Si tout est bon, l'utilisateur est loggé
-                if (lue.equals(Stock.getOrganisateurs().get(i).getPassword())) {
-                    loggedName = Stock.getOrganisateurs().get(i).getNom();
-                    loggedType = "organisateur";
-                }
-                break;
-            }
-        }
-        // On vérifie si c'est un arbitre
-        if(loggedName.equals("")){
-            for (int i = 0; i < Stock.getArbitres().size(); i++) {
-                if (nom.equals(Stock.getArbitres().get(i).getNom())) {
-                    // On demande le mot de passe
-                    System.out.println("Entrez votre mot de passe :");
-                    Scanner s = new Scanner(System.in);
-                    String lue = s.nextLine();
-                    // Si tout est bon, l'utilisateur est loggé
-                    if (lue.equals(Stock.getArbitres().get(i).getPassword())) {
-                        loggedName = Stock.getArbitres().get(i).getNom();
-                        loggedType = "arbitre";
-                    }
+                int lue = s.nextInt();
+                switch (lue) {
+                case 1:
+                    System.out.println("lol");
+                    break;
+                case 2:
+                    System.out.println("lol");
+                    break;
+                case 3:
+                    System.out.println("lol");
+                    break;
+                case 4:
+                    System.out.println("lol");
+                    break;
+                case 5:
+                    System.out.println("lol");
+                    break;
+                case 6:
+                    System.out.println("lol");
+                    break;
+                case 7:
+                    System.out.println("lol");
+                    break;
+                case 8:
+                    System.out.println("lol");
+                    break;
+                case 9:
+                    ihm.unlog();
+                    out = true;
+                    break;
+                case 0:
+                    Stock.enregistrerStock();
+                    System.exit(0);
                     break;
                 }
+            } catch (Exception e) {
+                System.out.println("Ce que vous avez rentré n'est pas valide.");
+                e.printStackTrace();
             }
-        }
-        // On vérifie si c'est un joueur
-        if(loggedName.equals("")){
-            for (int i = 0; i < Stock.getJoueurs().size(); i++) {
-                if (nom.equals(Stock.getJoueurs().get(i).getNom())) {
-                    // On demande le mot de passe
-                    System.out.println("Entrez votre mot de passe :");
-                    Scanner s = new Scanner(System.in);
-                    String lue = s.nextLine();
-                    // Si tout est bon, l'utilisateur est loggé
-                    if (lue.equals(Stock.getJoueurs().get(i).getPassword())) {
-                        loggedName = Stock.getJoueurs().get(i).getNom();
-                        loggedType = "joueur";
-                    }
-                    break;
-                }
-            }
-        }
-        //Si le log n'a pas marché
-        if(loggedName.equals("")) return false;
-        // Sinon ca a marché
-        return true;
-    }
-    /*
-    private void loggpart(ArrayList<Personne> p, String type){
-        for (int i = 0; i < p.size(); i++) {
-            if (nom.equals(p.get(i).getNom())) {
-                // On demande le mot de passe
-                System.out.println("Entrez votre mot de passe :");
-                Scanner s = new Scanner(System.in);
-                String lue = s.nextLine();
-                // Si tout est bon, l'utilisateur est loggé
-                if (lue.equals(p.get(i).getPassword())) {
-                    loggedName = p.get(i).getNom();
-                    loggedType = type;
-                }
-                break;
-            }
+            //Si out est vrai, on revient à la fenêtre de connexion
+            if(out) break;
         }
     }
-    */
+
 }

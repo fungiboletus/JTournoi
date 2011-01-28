@@ -6,6 +6,7 @@ import polytech.personnes.Organisateur;
 
 public class OrganisateurXML extends GestionXML
 {
+	@Override
 	protected String nomRelation()
 	{
 		return "organisateurs";

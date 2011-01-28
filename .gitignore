@@ -1,3 +1,5 @@
 .*
 !.gitignore
 bin
+*.xml
+canard.db

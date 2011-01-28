@@ -201,13 +201,13 @@ public class Equipe extends TupleAvecID
 
     public void ajouterParticipant(Joueur nouveauMembre)
     {
-    	if(membres.size() >= 5)
+    	if(membres.size() > 5)
     	{
     		System.out.println("L'équipe est déjà complète");
 		}
 		else if (membres.contains(nouveauMembre))
 		{
-			System.out.println("Ce joueur avait deja ete rentre.");
+			System.out.println("Ce joueur avait deja ete rentre :"+nouveauMembre.getId());
 		}
 		else
 		{

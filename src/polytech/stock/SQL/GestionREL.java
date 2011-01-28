@@ -6,20 +6,6 @@ import java.sql.SQLException;
 
 public abstract class GestionREL extends GestionSQL
 {
-
-	protected static boolean semaphoreSupressionAutomatique = true;
-
-	protected boolean suppressionAutomatique()
-	{
-		if (semaphoreSupressionAutomatique)
-		{
-			semaphoreSupressionAutomatique = false;
-			return true;
-		}
-		return false;
-	}
-	
-
 	protected int idRelation;
 
 	public void setIdRelation(int id)
