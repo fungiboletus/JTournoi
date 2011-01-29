@@ -10,10 +10,29 @@ import polytech.stock.TupleAvecID;
 
 public class TypeEpreuve extends TupleAvecID
 {
+	/**
+	 * Nom de l'épreuve.
+	 */
 	private String nom;
+	
+	/**
+	 * Type de l'épreuve. 
+	 */
 	private String type;
+	
+	/**
+	 * Durée de l'épreuve.
+	 */
 	private int duree;
+	
+	/**
+	 * Nombre de points gagnés par le vainqueur de l'épreuve.
+	 */
 	private int points;
+	
+	/**
+	 * Est-ce que l'épreuve est individuelle ?
+	 */
 	private boolean individuel;
 	
 	/**
