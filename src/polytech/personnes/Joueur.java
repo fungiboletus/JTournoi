@@ -24,6 +24,19 @@ public class Joueur extends PersonneCompetente
 		super(nom, prenom, password);
 	}
 
+	int score;
+	
+	/**
+	 * @param score the score to add
+	 */
+	public void incScore(int inc) {
+		score+=inc;
+	}
+
+	public int getScore(){
+		return score;
+	}
+	
 	/**
 	 * Constructeur par defaut. Le nom du joueur est "nom inconnu", son prenom
 	 * "prenom inconnu" et son mot de passe "mot de passe inconnu". De plus, sa

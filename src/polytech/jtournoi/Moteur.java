@@ -16,7 +16,7 @@ public abstract class Moteur {
 			throw new EpreuveSansEquipeException();
 		}
 		else{
-			t = new Tournoi(nom,equipes,epreuves);
+			t = new Tournoi(nom);
 		}
 		return t;
 	}
