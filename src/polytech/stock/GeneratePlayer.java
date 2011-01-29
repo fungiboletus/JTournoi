@@ -139,6 +139,7 @@ public class GeneratePlayer {
 	parcours.add(epreuves.get(3));
 	parcours.add(epreuves.get(4));
 	parcours.add(epreuves.get(5));
+	System.out.println(e1.checkDoublons(parcours));
 	
 	// Ajout de cette liste à chaque équipe ;
 	

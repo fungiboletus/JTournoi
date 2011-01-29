@@ -119,6 +119,36 @@ public class Equipe extends TupleAvecID
     }
     
     /**
+     * Méthode qui vérifie si la liste d'épreuve comporte des doublons.
+     * @return true si la liste est valide, c'est-à-dire ne comporte pas de doublons.
+     */
+    
+    public boolean checkDoublons(ArrayList<TypeEpreuve> epreuves)
+    {
+    	if(epreuves.isEmpty()) 
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		TypeEpreuve first = epreuves.get(0);
+    		ArrayList<TypeEpreuve> reste = epreuves;
+    		reste.remove(0);
+    		if (epreuves.contains(first))
+    		{
+    			System.out.println("La liste d'épreuve est invalide car elle contient au moins un doublon.");
+    			System.out.println("En effet, l'épreuve "+first.getNom()+" a au moins deux occurences.");
+    			System.out.println("La liste d'épreuve est par conséquent vide.");
+    			return false;
+    		}
+    		else
+    		{
+    			return checkDoublons(reste);
+    		}
+    	}
+    }
+    
+    /**
      *Mutateur.
      *Change la liste d'epreuve de l'equipe.
      *@param epreuves La nouvelle liste d'epreuve de l'equipe.
@@ -126,7 +156,8 @@ public class Equipe extends TupleAvecID
 
     public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
     {
-    	if (epreuves.size() == NBCOMP || epreuves.isEmpty()){
+    	if (epreuves.size() == NBCOMP || epreuves.isEmpty())
+    	{
     		int needFive = 0;
     		// On donne la liste d'épreuve donnée à l'équipe et on vérifie si elle est valide. Si elle ne l'est pas, on la remplace par une liste vide.
     		this.epreuves = epreuves;
@@ -159,7 +190,7 @@ public class Equipe extends TupleAvecID
     	}
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();
-    		System.out.println("Veuillez donner une liste de "+NBCOMP+" epreuves exactement.");
+    		System.out.println("Veuillez donner une liste de "+NBCOMP+" epreuves uniques exactement.");
     		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
     }
