@@ -106,6 +106,13 @@ public class Equipe extends TupleAvecID
 	public void incScore(int inc) {
 		score+=inc;
 	}
+	
+	public void incAllScore(int inc){
+		incScore(inc);
+		for(Joueur j : membres){
+			j.incScore(inc);
+		}
+	}
 
 	public int getScore(){
 		return score;

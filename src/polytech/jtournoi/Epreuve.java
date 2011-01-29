@@ -1,6 +1,7 @@
 package polytech.jtournoi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import polytech.stock.Stock;
 import polytech.stock.TupleAvecID;
@@ -22,13 +23,19 @@ public class Epreuve extends TupleAvecID {
 	private ArrayList<Match> currentMatch;
 	private ArrayList<Equipe> vainqueurEquipe;
 	private int tour=1;
+	HashMap<Equipe,Joueur> map;
 	
 	public Epreuve()
 	{
 	}
+	public Epreuve(HashMap<Equipe,Joueur> eqj, TypeEpreuve te){
+		this((ArrayList<Equipe>) eqj.keySet(),te);
+		map=eqj;
+	}
 	
 	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te){
 		super();
+		map=null;
 		type=te;
 		tableau = new ArrayList<ArrayList<Equipe>>();
 		
@@ -96,13 +103,24 @@ public class Epreuve extends TupleAvecID {
 			tmp.addAll(vainqueurEquipe);
 			tableau.add(tmp);
 			if(vainqueurEquipe.size()==1){
-				vainqueur=vainqueurEquipe.get(0);
-				
+				setScore(vainqueurEquipe.get(0));
 			}
 			else{
 				tour();
 			}
 		}
+	}
+	
+	private void setScore(Equipe vainqueur){
+			//on est dans une épreuve individuelle
+			int inc =type.getPoints();
+			if(map!=null){
+				map.get(vainqueur).incScore(inc);
+				vainqueur.incScore(inc);
+			}
+			else{
+				vainqueur.incAllScore(inc);
+			}
 	}
 	
 	public Equipe getVainqueur(){
