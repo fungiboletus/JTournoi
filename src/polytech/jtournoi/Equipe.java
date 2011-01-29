@@ -14,22 +14,34 @@ import polytech.stock.TupleAvecID;
 public class Equipe extends TupleAvecID
 {
     /**
-     *Le nom de l'equipe.
+     * Le nom de l'equipe.
      */
 
     private String nom;
 
     /**
-     *La liste des participants dans l'equipe.
+     * La liste des participants dans l'equipe.
      */
 
     private ArrayList<Joueur> membres;
     
     /**
-     *La liste des types d'epreuve de l'equipe.
+     * La liste des types d'epreuve de l'equipe.
      */
 
     private ArrayList<TypeEpreuve> epreuves;
+    
+    /**
+     * Le nombre de joueur maximum d'une équipe.
+     */
+    
+    private static final int MAX = 5;
+     
+    /**
+     * Le nombre nécessaire de compétence
+     */
+    
+    private static final int NBCOMP = 5;
 
      /**
      *Constructeur d'une equipe. 
@@ -42,7 +54,15 @@ public class Equipe extends TupleAvecID
     {
 		super();
     	this.nom = nom;
-    	this.membres = membres;
+    	if (membres.size() <= MAX)
+    	{   		
+    		this.membres = membres;
+    	}
+    	else
+    	{
+    		this.membres = new ArrayList<Joueur>();
+    		System.out.println("La liste de joueur est trop grande, l'équipe a été créée sans joueur.");
+    	}
     	this.setEpreuves(epreuves);
     }
 
@@ -99,14 +119,46 @@ public class Equipe extends TupleAvecID
     }
     
     /**
+     * Méthode qui vérifie si la liste d'épreuve comporte des doublons.
+     * @return true si la liste est valide, c'est-à-dire ne comporte pas de doublons.
+     */
+    
+    public boolean checkDoublons(ArrayList<TypeEpreuve> epreuves)
+    {
+    	System.out.println("check doublons rofl"+epreuves.size());
+    	if(epreuves.isEmpty()) 
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		TypeEpreuve first = epreuves.get(0);
+    		ArrayList<TypeEpreuve> reste = epreuves;
+    		reste.remove(0);
+    		if (epreuves.contains(first))
+    		{
+    			System.out.println("La liste d'épreuve est invalide car elle contient au moins un doublon.");
+    			System.out.println("En effet, l'épreuve "+first.getNom()+" a au moins deux occurences.");
+    			System.out.println("La liste d'épreuve est par conséquent vide.");
+    			return false;
+    		}
+    		else
+    		{
+    			return checkDoublons(reste);
+    		}
+    	}
+    }
+    
+    /**
      *Mutateur.
      *Change la liste d'epreuve de l'equipe.
      *@param epreuves La nouvelle liste d'epreuve de l'equipe.
      */
 
-    public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
+    public void setEpreuves2(ArrayList<TypeEpreuve> epreuves)
     {
-    	if (epreuves.size() == 5 || epreuves.isEmpty()){
+    	if (epreuves.size() == NBCOMP || epreuves.isEmpty())
+    	{
     		int needFive = 0;
     		// On donne la liste d'épreuve donnée à l'équipe et on vérifie si elle est valide. Si elle ne l'est pas, on la remplace par une liste vide.
     		this.epreuves = epreuves;
@@ -115,7 +167,7 @@ public class Equipe extends TupleAvecID
     			this.epreuves = new ArrayList<TypeEpreuve>();
     		}
     		else{
-    			for (int i = 0 ; i<5 ; i++)
+    			for (int i = 0 ; i < NBCOMP ; i++)
         		{
     				for (int j = 0 ; j<membres.size() ; j++)
     				{
@@ -139,9 +191,44 @@ public class Equipe extends TupleAvecID
     	}
     	else {
     		this.epreuves = new ArrayList<TypeEpreuve>();
-    		System.out.println("Veuillez donner une liste de 5 epreuves exactement.");
+    		System.out.println("Veuillez donner une liste de "+NBCOMP+" epreuves uniques exactement.");
     		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
+    }
+    
+    public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
+    	//System.out.println("ok les gens on setEpreuve");
+    	//System.out.println(epreuves.size());
+    	if(epreuves.size()!=5){
+    		return false;
+    	}
+    	for(TypeEpreuve te : epreuves){
+    		if(!haveCompetence(te)){
+    			return false;
+    		}
+    	}
+    	this.epreuves=epreuves;
+    	return true;
+    }
+    
+    private boolean haveCompetence(TypeEpreuve te){
+    	int nbrRequis;
+    	if(te.isIndivideul()){
+    		nbrRequis =1;
+    	}
+    	else{
+    		nbrRequis =2;
+    	}
+    	int joueur =0;
+    	for(Joueur j : membres){
+    		if(j.getCompetences().contains(te)){
+    			joueur++;
+    		}
+    	}
+    	if(joueur>=nbrRequis){
+    		return true;
+    	}
+    	return false;
     }
     
     public ArrayList<Joueur> getMembres()
@@ -201,7 +288,7 @@ public class Equipe extends TupleAvecID
 
     public void ajouterParticipant(Joueur nouveauMembre)
     {
-    	if(membres.size() > 5)
+    	if(membres.size() > MAX)
     	{
     		System.out.println("L'équipe est déjà complète");
 		}
@@ -256,6 +343,6 @@ public class Equipe extends TupleAvecID
 
     public String toString()
     {
-	return "nom de l'equipe : " +nom+ "\nnombre de participants : " +membres.size();
+	return "["+id+"] " +nom+ " : " +membres.size()+" participants.";
     }
 }

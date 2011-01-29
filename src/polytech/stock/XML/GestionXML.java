@@ -16,14 +16,17 @@ import org.jdom.output.XMLOutputter;
 
 import polytech.stock.GestionnaireDeStock;
 
-
 /**
  * @author Antoine Pultier
- *
+ * Classe commune à toutes les autres pour la gestion du XML.
  */
 public abstract class GestionXML implements GestionnaireDeStock
 {
 
+	/**
+	 * Méthode renvoyant le nom de la relation XML, utilisé nottamment par le fichier.
+	 * @return Nom de la relation
+	 */
 	protected abstract String nomRelation();
 
 	@Override
@@ -38,7 +41,11 @@ public abstract class GestionXML implements GestionnaireDeStock
 		GestionXML.sauvegarderFichierXml(liste, nomRelation(), this);
 	}
 
-	/** Demande polimentà jdom d'écrire le xml sous forme de texte lisible.*/
+	/** Demande polimentà jdom d'écrire le xml sous forme de texte lisible.
+	 * @param flux Fichier dans lequel écrire le document.
+	 * @param document Document à écrire
+	 * @throws Exception Exception Problème lors de l'écriture
+	 */
 	protected static void ecrireXML(OutputStream flux, Document document) throws Exception
 	{
 		// On affiche de façon à ce que ça soit lisible
@@ -46,13 +53,20 @@ public abstract class GestionXML implements GestionnaireDeStock
 		sortie.output(document, flux);
 	}
 
-	/** Création d'un document jdom à partir d'un flux.*/
+	/** Création d'un document jdom à partir d'un flux.
+	 * @param flux. Flux dans lequel il faut lire le document xml.
+	 * @return Document xml construit à partir du flux.
+	 * @throws Exception Problème de lecture ou de construction du document.
+	 */
 	protected static Document creerDocument(InputStream flux) throws Exception
 	{
 		return new SAXBuilder().build(flux);
 	}
 	
-	/** Création d'un document jdom pour écrire dedans.*/
+	/** Création d'un document jdom pour écrire dedans.
+	 * @param nom Nom du document à créer.
+	 * @return Nouveau document créé.
+	 */
 	protected static Document creerDocument(String nom) 
 	{
 		Document doc = new Document();
@@ -60,10 +74,14 @@ public abstract class GestionXML implements GestionnaireDeStock
 		return doc;
 	}
 	
-	/** Récupère un noeud direct présent dans le document.*/
-	protected static Element chargerElementFlux(Document flux) throws Exception
+	/** Récupère le noeud parent d'un document.
+	 * @param document Document dans lequel il faut charger les noeuds xml.
+	 * @return Noeud parent.
+	 * @throws Exception Le document est vide.
+	 */
+	protected static Element chargerElementFlux(Document document) throws Exception
 	{
-		Element e = flux.getRootElement();
+		Element e = document.getRootElement();
 
 		if (e == null)
 		{
@@ -73,7 +91,12 @@ public abstract class GestionXML implements GestionnaireDeStock
 		return e;
 	}
 
-	/** Charge un fichier xml à la mode de chez nous.*/
+	/** Charge un fichier xml, et créé les objets à partir des noeuds, à l'aide du gestionnaire de stock.
+	 * @param <CLASS_TYPE>
+	 * @param nomClasse Nom du fichier xml à charger.
+	 * @param gestionnaire Gestionnaire servant à créer les éléments à partir des noeuds trouvés dans le document.
+	 * @return Liste des objets créés à partir du gestionnaire.
+	 */
 	@SuppressWarnings("unchecked")
 	protected static <CLASS_TYPE> List<CLASS_TYPE> chargerFichierXml(String nomClasse, GestionnaireDeStock gestionnaire)
 	{
@@ -87,8 +110,10 @@ public abstract class GestionXML implements GestionnaireDeStock
 			{
 				FileInputStream lecteurFichier = new FileInputStream(fichier);
 
+				// Chargement du document
 				for (Object e : GestionXML.chargerElementFlux(GestionXML.creerDocument(lecteurFichier)).getChildren())
 				{
+					// Pour chaque noeud rencontré, on appelle le gestionnaire de stock pour qu'il s'en occupe.
 					liste.add((CLASS_TYPE) gestionnaire.construireDepuisStock(e));
 				}
 
@@ -101,8 +126,14 @@ public abstract class GestionXML implements GestionnaireDeStock
 
 		return liste;
 	}
-
-	/** Enregistre un fichier xml.*/
+	
+	/**
+	 * Enregistre une liste d'objets dans un document xml à l'aide du gestionnaire de stock.
+	 * @param <CLASS_TYPE>
+	 * @param liste Liste des objets à enregistrer.
+	 * @param nomClasse Nom du document XML à enregistrer.
+	 * @param gestionnaire Gestionnaire permettant de transformer les objets en noeuds XML.
+	 */
 	protected static <CLASS_TYPE> void sauvegarderFichierXml(List<CLASS_TYPE> liste, String nomClasse, GestionnaireDeStock gestionnaire)
 	{
 		Document doc = creerDocument(nomClasse);

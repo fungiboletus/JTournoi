@@ -3,6 +3,7 @@ package polytech.jtournoi;
 import java.util.ArrayList;
 
 import polytech.stock.Stock;
+import polytech.stock.TupleAvecID;
 import polytech.tools.Tools;
 
 import polytech.personnes.*;
@@ -12,7 +13,7 @@ import polytech.personnes.*;
  * @ param : type d'epreuve, liste d'équipe, vainqueur, heure de l'épreuve
  * 
  */
-public class Epreuve {
+public class Epreuve extends TupleAvecID {
 	
 	 
 	private Equipe vainqueur;
@@ -22,7 +23,12 @@ public class Epreuve {
 	private ArrayList<Equipe> vainqueurEquipe;
 	private int tour=1;
 	
+	public Epreuve()
+	{
+	}
+	
 	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te){
+		super();
 		type=te;
 		tableau = new ArrayList<ArrayList<Equipe>>();
 		
@@ -64,10 +70,6 @@ public class Epreuve {
 		tour ++;
 	}
 	
-	public ArrayList<Match> getCurentMatch(){
-		return currentMatch;
-	}
-	
 	public Match getMatch(Arbitre ar){
 		for (Match m : currentMatch){
 			if(ar==m.getArbitre()){
@@ -107,6 +109,11 @@ public class Epreuve {
 		return vainqueur;
 	}
 	
+	public void setVainqueur(Equipe vainqueur)
+	{
+		this.vainqueur = vainqueur;
+	}
+
 	public void setScore(Match m, int se1, int se2){
 		if(isMatch(m)){
 			m.setScore(se1,se2);
@@ -129,5 +136,50 @@ public class Epreuve {
 
 	public TypeEpreuve getTypeEpreuve() {
 		return type;
+	}
+
+	public void setTypeEpreuve(TypeEpreuve type)
+	{
+		this.type = type;
+	}
+
+	public int getTour()
+	{
+		return tour;
+	}
+
+	public void setTour(int tour)
+	{
+		this.tour = tour;
+	}
+
+	public ArrayList<ArrayList<Equipe>> getTableau()
+	{
+		return tableau;
+	}
+
+	public void setTableau(ArrayList<ArrayList<Equipe>> tableau)
+	{
+		this.tableau = tableau;
+	}
+
+	public ArrayList<Match> getCurrentMatch()
+	{
+		return currentMatch;
+	}
+
+	public void setCurrentMatch(ArrayList<Match> currentMatch)
+	{
+		this.currentMatch = currentMatch;
+	}
+
+	public ArrayList<Equipe> getVainqueurEquipe()
+	{
+		return vainqueurEquipe;
+	}
+
+	public void setVainqueurEquipe(ArrayList<Equipe> vainqueurEquipe)
+	{
+		this.vainqueurEquipe = vainqueurEquipe;
 	}
 }

@@ -10,10 +10,30 @@ import polytech.stock.TupleAvecID;
 
 public class TypeEpreuve extends TupleAvecID
 {
+	/**
+	 * Nom de l'épreuve.
+	 */
 	private String nom;
+	
+	/**
+	 * Type de l'épreuve. 
+	 */
 	private String type;
+	
+	/**
+	 * Durée de l'épreuve.
+	 */
 	private int duree;
+	
+	/**
+	 * Nombre de points gagnés par le vainqueur de l'épreuve.
+	 */
 	private int points;
+	
+	/**
+	 * Est-ce que l'épreuve est individuelle ?
+	 */
+	private boolean individuel;
 	
 	/**
     *Constructeur d'un type d'epreuve.
@@ -23,7 +43,8 @@ public class TypeEpreuve extends TupleAvecID
     *@param points Le nombre de points de l'epreuve.
     */
 	
-	public TypeEpreuve(int id, String nom, String type, int duree, int points) {
+	public TypeEpreuve(int id, String nom, String type, int duree, int points, boolean indi) {
+		individuel = indi;
 		this.id = id;
 		this.nom = nom;
 		this.type = type;
@@ -36,13 +57,17 @@ public class TypeEpreuve extends TupleAvecID
      */
 	
 	public TypeEpreuve() {
-		this(0, "Pas de nom","Pas de type",0,0);
+		this(0, "Pas de nom","Pas de type",0,0,false);
 	}
 
 	public String getNom() {
 		return nom;
 	}
 
+	public boolean isIndivideul(){
+		return individuel;
+	}
+	
 	public void setNom(String nom) {
 		this.nom = nom;
 	}

@@ -5,8 +5,14 @@ import java.sql.SQLException;
 
 import polytech.personnes.Joueur;
 
+/**
+ * @author Antoine Pultier
+ *
+ * Gestion SQL d'un joueur.
+ */
 public class JoueurSQL extends PersonneCompetenteSQL
 {
+	@Override
 	protected String nomTable()
 	{
 		return "joueurs";

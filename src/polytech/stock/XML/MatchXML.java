@@ -5,6 +5,10 @@ import org.jdom.Element;
 import polytech.jtournoi.Match;
 import polytech.stock.Stock;
 
+/**
+ * @author Antoine Pultier
+ * Gestion XML d'un match.
+ */
 public class MatchXML extends GestionXML
 {
 

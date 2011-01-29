@@ -4,8 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Antoine Pultier
+ * Gestion en commun des méthodes servant aux relations.
+ * 
+ * C'est une gestion père fille. On donne l'identifiant du père, et on obtient les filles.
+ */
 public abstract class GestionREL extends GestionSQL
 {
+	/**
+	 * Identifiant du père de la relation.
+	 */
 	protected int idRelation;
 
 	public void setIdRelation(int id)
@@ -13,6 +22,7 @@ public abstract class GestionREL extends GestionSQL
 		idRelation = id;
 	}
 
+	// Surcharge de la clause where, qui permet se spécifier la condition de sélection du père
 	protected void gererClauseWhere(PreparedStatement p)
 	{
 		try
@@ -23,6 +33,7 @@ public abstract class GestionREL extends GestionSQL
 			System.out.println("Impossible de spécifier la clause where : "+e.getMessage());
 		}
 	}
+	
 	@Override
 	public Object construireDepuisStock(Object element)
 	{

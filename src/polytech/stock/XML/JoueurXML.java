@@ -4,8 +4,13 @@ import org.jdom.Element;
 
 import polytech.personnes.Joueur;
 
+/**
+ * @author Antoine Pultier
+ * Gestion XML d'un joueur.
+ */
 public class JoueurXML extends PersonneCompetenteXML
 {
+	@Override
 	protected String nomRelation()
 	{
 		return "joueurs";

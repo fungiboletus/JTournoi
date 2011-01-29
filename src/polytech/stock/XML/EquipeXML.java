@@ -8,8 +8,13 @@ import polytech.jtournoi.TypeEpreuve;
 import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 
+/**
+ * @author Antoine Pultier
+ * Gestion XML d'une équipe.
+ */
 public class EquipeXML extends GestionXML
 {
+	@Override
 	protected String nomRelation()
 	{
 		return "equipes";
@@ -24,6 +29,7 @@ public class EquipeXML extends GestionXML
 		
 		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
 
+		// Récupération de la liste des membres
 		Element membres = noeud.getChild("membres");
 		if (membres != null)
 		{
@@ -38,6 +44,7 @@ public class EquipeXML extends GestionXML
 			}
 		}
 		
+		// Récupération de la liste des épreuves
 		Element competences = noeud.getChild("epreuves");
 
 		if (competences != null)
@@ -58,7 +65,7 @@ public class EquipeXML extends GestionXML
 
 		return a;
 	}
-
+	
 	@Override
 	public Object construirePourStock(Object element)
 	{
@@ -70,6 +77,7 @@ public class EquipeXML extends GestionXML
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 
+		// Construction de la liste des membres
 		Element membres = new Element("membres");
 		for (Joueur j : a.getMembres())
 		{
@@ -77,6 +85,7 @@ public class EquipeXML extends GestionXML
 		}
 		noeud.addContent(membres);
 
+		// Construction de la liste des épreuves
 		Element epreuves = new Element("epreuves");
 		for (TypeEpreuve te : a.getEpreuves())
 		{

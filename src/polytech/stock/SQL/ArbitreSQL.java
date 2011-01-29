@@ -5,8 +5,13 @@ import java.sql.ResultSet;
 
 import polytech.personnes.Arbitre;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL des arbitres.
+ */
 public class ArbitreSQL extends PersonneCompetenteSQL
 {
+	@Override
 	protected String nomTable()
 	{
 		return "arbitres";

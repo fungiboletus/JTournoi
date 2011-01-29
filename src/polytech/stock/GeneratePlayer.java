@@ -144,9 +144,9 @@ public class GeneratePlayer {
 
         // Ajout de cette liste à chaque équipe ;
 
-        e1.setEpreuves(parcours);
-        e2.setEpreuves(parcours);
-        e3.setEpreuves(parcours);
+        e1.setEpreuves2(parcours);
+        e2.setEpreuves2(parcours);
+        e3.setEpreuves2(parcours);
         // Cas où aucun membre de l'équipe n'a pas un des sports de la liste :
         e4.setEpreuves(parcours);
 

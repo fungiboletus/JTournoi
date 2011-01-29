@@ -2,38 +2,33 @@ package polytech.stock.SQL;
 
 /**
  * @author Antoine Pultier
- * Relation entre une équipe et ses membres.
+ * Relation entre la ligne de la matrices des matchs d'une épreuve, et ses matchs.
  */
-public class EquipeMembresREL extends GestionREL
+public class EpreuveSousTableauxREL extends GestionREL
 {
-	
+
 	@Override
 	protected String structureTable()
 	{
-		return "ID_EQUIPE, ID_JOUEUR";
+		return "ID_SOUS_TABLEAU, ID_MATCH";
 	}
 
 	@Override
 	protected String structureTableTypee()
 	{
-		return "ID_EQUIPE INTEGER, ID_JOUEUR INTEGER";
+		return "ID_SOUS_TABLEAU INTEGER, ID_MATCH INTEGER";
 	}
 
 	@Override
 	protected String nomTable()
 	{
-		return "equipe_membres";
+		return "epreuve_sous_tableaux";
 	}
 
 	@Override
 	protected int nbChamps()
 	{
 		return 2;
-	}
-
-	protected String clauseWhere()
-	{
-		return "WHERE ID_EQUIPE = ?";
 	}
 
 }

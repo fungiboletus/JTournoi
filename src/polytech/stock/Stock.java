@@ -7,12 +7,15 @@ import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.personnes.Organisateur;
 
+import polytech.jtournoi.Epreuve;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
 import polytech.jtournoi.Match;
 
 import polytech.stock.SQL.ArbitreSQL;
+import polytech.stock.SQL.EpreuveSQL;
 import polytech.stock.XML.ArbitreXML;
+import polytech.stock.XML.EpreuveXML;
 import polytech.stock.SQL.JoueurSQL;
 import polytech.stock.XML.JoueurXML;
 import polytech.stock.SQL.OrganisateurSQL;
@@ -22,6 +25,15 @@ import polytech.stock.XML.EquipeXML;
 import polytech.stock.SQL.MatchSQL;
 import polytech.stock.XML.MatchXML;
 
+/**
+ * @author Antoine Pultier
+ * Le stock sert à contenir les références de tout les objets utilisés au cours de l'exécution du programme.
+ * 
+ * Il permet d'enregistrer ces objets à l'aide de différentes méthodes, pour qu'ils soient rechargés plus tard.
+ * 
+ * Il convient de déclarer au stock les objets du programmes qui doivent être sauvegardés. Sans cela, le programme risque de ne pas
+ * fonctionner lors d'un nouveau lancement.
+ */
 public abstract class Stock
 {
 	protected static List<Arbitre> arbitres;
@@ -30,7 +42,13 @@ public abstract class Stock
 	protected static List<TypeEpreuve> typesEpreuves;
 	protected static List<Equipe> equipes;
 	protected static List<Match> matchs;
+	protected static List<Epreuve> epreuves;
 
+	/**
+	 * Fonction permettant d'obtenir un nouveau stock vide, qui ne contient pas de références aux anciens objets.
+	 * 
+	 * Cette fonction est dangereuse, car si le stock est ensuite sauvegardé, les anciennes données sont perdues.
+	 */
 	public static void initialiserStockVide()
 	{
 		arbitres = new ArrayList<Arbitre>();
@@ -38,10 +56,15 @@ public abstract class Stock
 		organisateurs = new ArrayList<Organisateur>();
 		equipes = new ArrayList<Equipe>();
 		matchs = new ArrayList<Match>();
+		epreuves = new ArrayList<Epreuve>();
 		
 		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
 
+	/**
+	 * Charge dans le stock les données sauvegardées.
+	 * @param mode Mode de chargement du stock.
+	 */
 	public static void chargerStock(TypeChargement mode)
 	{
 		GestionnaireDeStock gestionArbitres = null;
@@ -49,6 +72,7 @@ public abstract class Stock
 		GestionnaireDeStock gestionOrganisateurs = null;
 		GestionnaireDeStock gestionEquipes = null;
 		GestionnaireDeStock gestionMatchs = null;
+		GestionnaireDeStock gestionEpreuves = null;
 
 		switch (mode)
 		{
@@ -58,6 +82,7 @@ public abstract class Stock
 				gestionOrganisateurs = new OrganisateurSQL(); 
 				gestionEquipes = new EquipeSQL();
 				gestionMatchs = new MatchSQL();
+				gestionEpreuves = new EpreuveSQL();
 				break;
 			case XML:
 				gestionArbitres = new ArbitreXML(); 
@@ -65,6 +90,7 @@ public abstract class Stock
 				gestionOrganisateurs = new OrganisateurXML(); 
 				gestionEquipes = new EquipeXML();
 				gestionMatchs = new MatchXML();
+				gestionEpreuves = new EpreuveXML();
 				break;
 		}
 
@@ -75,10 +101,15 @@ public abstract class Stock
 		organisateurs = gestionOrganisateurs.recupererStock();
 		
 		equipes = gestionEquipes.recupererStock();
-
+		
 		matchs = gestionMatchs.recupererStock();
+		
+		epreuves = gestionEpreuves.recupererStock();
 	}
 
+	/**
+	 * Enregistre avec tout les moyens possible le stock.
+	 */
 	public static void enregistrerStock()
 	{
 		new ArbitreXML().enregistrerStock(arbitres);
@@ -86,12 +117,14 @@ public abstract class Stock
 		new OrganisateurXML().enregistrerStock(organisateurs);
 		new EquipeXML().enregistrerStock(equipes);
 		new MatchXML().enregistrerStock(matchs);
+		new EpreuveXML().enregistrerStock(epreuves);
 		
-		/*new ArbitreSQL().enregistrerStock(arbitres);
+		new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
 		new EquipeSQL().enregistrerStock(equipes);
-		new MatchSQL().enregistrerStock(matchs);*/
+		new MatchSQL().enregistrerStock(matchs);
+		new EpreuveSQL().enregistrerStock(epreuves);
 	}
 
 	public static List<Arbitre> getArbitres()
@@ -136,6 +169,10 @@ public abstract class Stock
 	    }
 	}
 	
+	/**
+	 * Récupère une liste d'arbitres libres.
+	 * @return Liste d'arbitres libres.
+	 */
 	public static List<Arbitre> getArbitresLibres()
 	{
 		List<Arbitre> arbitresLibres = new ArrayList<Arbitre>();
@@ -151,6 +188,10 @@ public abstract class Stock
 		return arbitresLibres;
 	}
 	
+	/**
+	 * Récupérère un arbitre libre sélectionné aléatoirement.
+	 * @return Arbitre libre sélectionné aléatoirement.
+	 */
 	public static Arbitre getRandomArbitreLibre(){
 		List<Arbitre> arbitresLibres = getArbitresLibres();
 		int i = (int)Math.random()*(arbitresLibres.size()-1);
@@ -161,15 +202,15 @@ public abstract class Stock
 	{
 		return typesEpreuves;
 	}
+	
+	public static List<Equipe> getEquipe(){
+		return equipes;
+	}
+	
 
 	public static void setTypesEpreuves(List<TypeEpreuve> typesEpreuves)
 	{
 		Stock.typesEpreuves = typesEpreuves;
-	}
-	
-	public static List<Equipe> getEquipes()
-	{
-		return equipes;
 	}
 
 	public static void setEquipes(List<Equipe> equipes)
@@ -187,6 +228,16 @@ public abstract class Stock
 		Stock.matchs = matchs;
 	}
 
+	public static List<Epreuve> getEpreuves()
+	{
+		return epreuves;
+	}
+
+	public static void setEpreuves(List<Epreuve> epreuves)
+	{
+		Stock.epreuves = epreuves;
+	}
+
 	public static void addEquipe(Equipe e)
 	{
 		if (!equipes.contains(e))
@@ -195,6 +246,13 @@ public abstract class Stock
 		}
 	}
 
+	/**
+	 * Recherche dans une liste donnée, un TupleAvecID à partir de son ID.
+	 * @param <CLASS_TYPE>
+	 * @param liste Liste dans lequel cherché la référence du tuple.
+	 * @param id Identifiant du tuple recherché
+	 * @return Tuple correspondant à l'identifiant recherché
+	 */
 	protected static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste, int id)
 	{
 		if (liste != null)
@@ -210,23 +268,53 @@ public abstract class Stock
 		return null;
 	}
 
+	/**
+	 * Recherche le typeepreuve du stock correspondant à un identifiant.
+	 * @param id Identifiant de l'objet
+	 * @return TypeEpreuve
+	 */
 	public static TypeEpreuve getTypeEpreuveParId(int id)
 	{
 		return getById(typesEpreuves, id);
 	}
 	
+	/**
+	 * Recherche le joueur du stock correspondant à un identifiant.
+	 * @param id Identifiant de l'objet
+	 * @return Joueur
+	 */
 	public static Joueur getJoueurParId(int id)
 	{
 		return getById(joueurs, id);
 	}
 	
+	/**
+	 * Recherche l'équipe du stock correspondant à un identifiant.
+	 * @param id Identifiant de l'objet
+	 * @return Equipe
+	 */
 	public static Equipe getEquipeParId(int id)
 	{
 		return getById(equipes, id);
 	}
 	
+	/**
+	 * Recherche l'arbitre du stock correspondant à un identifiant.
+	 * @param id Identifiant de l'objet
+	 * @return Arbitre
+	 */
 	public static Arbitre getArbitreParId(int id)
 	{
 		return getById(arbitres, id);
+	}
+	
+	/**
+	 * Recherche le match du stock correspondant à un identifiant.
+	 * @param id Identifiant de l'objet
+	 * @return Match
+	 */
+	public static Match getMatchParId(int id)
+	{
+		return getById(matchs, id);
 	}
 }

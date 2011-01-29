@@ -2,27 +2,27 @@ package polytech.stock.SQL;
 
 /**
  * @author Antoine Pultier
- * Relation entre une équipes et son parcours d'épreuves (représenté par des TypeEpreuve).
+ * Relation entre une épreuve et les vainqueurs de cette épreuve.
  */
-public class EquipeEpreuvesREL extends GestionREL
+public class EpreuveVainqueursREL extends GestionREL
 {
 
 	@Override
 	protected String structureTable()
 	{
-		return "ID_EQUIPE, ID_TYPE_EPREUVE";
+		return "ID_EPREUVE, ID_EQUIPE";
 	}
 
 	@Override
 	protected String structureTableTypee()
 	{
-		return "ID_EQUIPE INTEGER, ID_TYPE_EPREUVE INTEGER";
+		return "ID_EPREUVE INTEGER, ID_EQUIPE INTEGER";
 	}
 
 	@Override
 	protected String nomTable()
 	{
-		return "equipe_epreuves";
+		return "epreuve_vainqueurs";
 	}
 
 	@Override
@@ -30,10 +30,10 @@ public class EquipeEpreuvesREL extends GestionREL
 	{
 		return 2;
 	}
-
+	
 	protected String clauseWhere()
 	{
-		return "WHERE ID_EQUIPE = ?";
+		return "WHERE ID_EPREUVE = ?";
 	}
 
 }

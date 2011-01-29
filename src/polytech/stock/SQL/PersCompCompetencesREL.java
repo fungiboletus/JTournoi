@@ -1,5 +1,9 @@
 package polytech.stock.SQL;
 
+/**
+ * @author Antoine Pultier
+ * Relation entre une personne compétente et ses compétences.
+ */
 public class PersCompCompetencesREL extends GestionREL
 {
 	@Override
@@ -21,7 +25,7 @@ public class PersCompCompetencesREL extends GestionREL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 2;
 	}

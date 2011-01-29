@@ -1,11 +1,8 @@
 package polytech.ihm;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import polytech.personnes.*;
 import polytech.stock.*;
-import polytech.tools.*;
 import polytech.jtournoi.*;
 
 
@@ -233,8 +230,6 @@ public class Test {
      * 
      */
     public static void creerTournoi() {
-        Scanner s;
-        String lue;
         System.out.println("Voici les épreuves disponibles :");
         while(true){
             ArrayList<TypeEpreuve> epreuves = new ArrayList<TypeEpreuve>();
@@ -255,7 +250,7 @@ public class Test {
             }
             catch(Exception e){
                 System.out.print("Vos équipes sont invalides !");
-                break;
+                return;
             }
             System.out.println(equipes);
             

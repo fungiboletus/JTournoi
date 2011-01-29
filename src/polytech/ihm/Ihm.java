@@ -104,19 +104,7 @@ class Ihm {
         System.out.print("Entrez le numéro des épreuves choisies séparés par des espaces :");
         s = new Scanner(System.in);
         String lue = s.nextLine();
-        while(!lue.equals("")){
-            int occurence = lue.indexOf(' ');
-            //Si il reste des espaces
-            if(occurence != -1) {
-                epreuvesId.add(Integer.parseInt(lue.substring(0,occurence)));
-                lue = lue.substring(occurence+1, lue.length());
-            }
-            //Si le String lue ne contient plus d'espaces, il n'y a qu'un mot
-            else{
-                epreuvesId.add(Integer.parseInt(lue.substring(0,lue.length())));
-                lue = "";
-            }
-        }
+        epreuvesId = cutStringBySpace(lue);
         //Phase de vérification des épreuves récoltées
         //On vérifie que la liste d'épreuve n'est pas vide
         if(epreuvesId.size() == 0) throw new Exception();
@@ -148,25 +136,13 @@ class Ihm {
         ArrayList<Equipe> equipes = new ArrayList<Equipe>();
         Scanner s;
         //On liste les équipes possibles
-        for (int i = 0; i < Stock.getTypesEpreuves().size(); i++)
-            System.out.println("\t " + Stock.getEquipes().get(i));
+        for (int i = 0; i < Stock.getEquipe().size(); i++)
+            System.out.println("\t " + Stock.getEquipe().get(i));
         // Phase de récolte des épreuves
         System.out.print("Entrez le numéro d'identifiant des équipes que vous incluez, séparés par des espaces :");
         s = new Scanner(System.in);
         String lue = s.nextLine();
-        while(!lue.equals("")){
-            int occurence = lue.indexOf(' ');
-            //Si il reste des espaces
-            if(occurence != -1) {
-                equipesId.add(Integer.parseInt(lue.substring(0,occurence)));
-                lue = lue.substring(occurence+1, lue.length());
-            }
-            //Si le String lue ne contient plus d'espaces, il n'y a qu'un mot
-            else{
-                equipesId.add(Integer.parseInt(lue.substring(0,lue.length())));
-                lue = "";
-            }
-        }
+        equipesId = cutStringBySpace(lue);
         //Phase de vérification des équipes récoltées
         //On vérifie que la liste d'épreuve n'est pas vide
         if(equipesId.size() == 0) throw new Exception();
@@ -174,18 +150,44 @@ class Ihm {
         //On vérifie que chacune des équipes existent
         for(int i=0; i<equipesId.size(); i++){
             boolean contient = false;
-            for(int j=0; j<Stock.getEquipes().size(); j++){
-                if(Stock.getEquipes().get(j).getId() == equipesId.get(i)) contient = true;
+            for(int j=0; j<Stock.getEquipe().size(); j++){
+                if(Stock.getEquipe().get(j).getId() == equipesId.get(i)) contient = true;
             }
             if(!contient) throw new Exception();
         }
         // On construit la liste des équipes à renvoyer
         for(int i=0; i<equipesId.size(); i++){
-            for(int j=0; j<Stock.getEquipes().size(); j++){
-                if(Stock.getEquipes().get(j).getId() == equipesId.get(i)) equipes.add(Stock.getEquipes().get(j));
+            for(int j=0; j<Stock.getEquipe().size(); j++){
+                if(Stock.getEquipe().get(j).getId() == equipesId.get(i)) equipes.add(Stock.getEquipe().get(j));
             }
         }
         return equipes;
+    }
+    
+    
+    /**
+     * Permet de découper une chaine selon les espaces et de renvoyer une liste d'entiers
+     * @return id
+     *                  Les entiers initialement séparés par des espaces dans la chaine
+     * @param lue
+     *                  La chaine initiale
+     */
+    public static ArrayList<Integer> cutStringBySpace(String lue){
+        ArrayList<Integer> id = new ArrayList<Integer>();
+        while(!lue.equals("")){
+            int occurence = lue.indexOf(' ');
+            //Si il reste des espaces
+            if(occurence != -1) {
+                id.add(Integer.parseInt(lue.substring(0,occurence)));
+                lue = lue.substring(occurence+1, lue.length());
+            }
+            //Si le String lue ne contient plus d'espaces, il n'y a qu'un mot
+            else{
+                id.add(Integer.parseInt(lue.substring(0,lue.length())));
+                lue = "";
+            }
+        }
+        return id;
     }
     
 }

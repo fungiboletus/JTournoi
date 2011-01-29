@@ -4,6 +4,10 @@ import org.jdom.Element;
 
 import polytech.personnes.Organisateur;
 
+/**
+ * @author Antoine Pultier
+ * Gestion XML d'un organisateur.
+ */
 public class OrganisateurXML extends GestionXML
 {
 	@Override

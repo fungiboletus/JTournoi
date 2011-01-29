@@ -28,7 +28,7 @@ public abstract class Moteur {
 		ArrayList<Epreuve> epreuves = t.getEpreuves();
 		HashMap<TypeEpreuve,ArrayList<Match>> map = new HashMap<TypeEpreuve,ArrayList<Match>>();
 		for(Epreuve e : epreuves){
-			map.put(e.getTypeEpreuve(), e.getCurentMatch());
+			map.put(e.getTypeEpreuve(), e.getCurrentMatch());
 		}
 		return map;
 	}
@@ -37,7 +37,7 @@ public abstract class Moteur {
 		ArrayList<Match> match = new ArrayList<Match>();
 		ArrayList<Epreuve> epreuves = t.getEpreuves();
 		for(Epreuve e : epreuves){
-			for(Match m : e.getCurentMatch()){
+			for(Match m : e.getCurrentMatch()){
 				match.add(m);
 			}
 		}
