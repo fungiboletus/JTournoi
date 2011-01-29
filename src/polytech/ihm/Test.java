@@ -240,7 +240,7 @@ public class Test {
             }
             catch(Exception e){
                 System.out.print("Vos épreuves sont invalides !");
-                return;
+                creerTournoi();
             }
             System.out.println(epreuves);
             
@@ -250,16 +250,18 @@ public class Test {
             }
             catch(Exception e){
                 System.out.print("Vos équipes sont invalides !");
-                return;
+                creerTournoi();
             }
             System.out.println(equipes);
             
             try {
-                Moteur.creerTournoi(equipes, epreuves);
+                System.out.println("Entrez le nom du tournoi :");
+                Scanner s = new Scanner(System.in);
+                Moteur.creerTournoi(s.nextLine(), equipes, epreuves);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.print("La création du tournoi a échoué.");
+                creerTournoi();
             }
-            
             
             System.out.println("Tournoi créé.\n");
             return;
