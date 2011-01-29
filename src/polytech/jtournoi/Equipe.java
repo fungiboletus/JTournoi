@@ -154,7 +154,7 @@ public class Equipe extends TupleAvecID
      *@param epreuves La nouvelle liste d'epreuve de l'equipe.
      */
 
-    public void setEpreuves(ArrayList<TypeEpreuve> epreuves)
+    public void setEpreuves2(ArrayList<TypeEpreuve> epreuves)
     {
     	if (epreuves.size() == NBCOMP || epreuves.isEmpty())
     	{
@@ -193,6 +193,38 @@ public class Equipe extends TupleAvecID
     		System.out.println("Veuillez donner une liste de "+NBCOMP+" epreuves uniques exactement.");
     		System.out.println("L'équipe a maintenant une liste de compétences vide.");
     	}
+    }
+    
+    public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
+    	if(epreuves.size()!=5){
+    		return false;
+    	}
+    	for(TypeEpreuve te : epreuves){
+    		if(!haveCompetence(te)){
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
+    private boolean haveCompetence(TypeEpreuve te){
+    	int nbrRequis;
+    	if(te.isIndivideul()){
+    		nbrRequis =1;
+    	}
+    	else{
+    		nbrRequis =5;
+    	}
+    	int joueur =0;
+    	for(Joueur j : membres){
+    		if(j.getCompetences().contains(te)){
+    			joueur++;
+    		}
+    	}
+    	if(joueur==nbrRequis){
+    		return true;
+    	}
+    	return false;
     }
     
     public ArrayList<Joueur> getMembres()
