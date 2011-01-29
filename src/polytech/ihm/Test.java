@@ -17,8 +17,8 @@ public class Test {
 	 */
     public static void main(String[] args) {
         ihm = new Ihm();
-        //Stock.chargerStock(TypeChargement.SQL);
-        GeneratePlayer.main();
+        Stock.chargerStock(TypeChargement.SQL);
+
         // On log la personne qui veut se logger
         while(true){
             while (ihm.loggedName.equals("")) {

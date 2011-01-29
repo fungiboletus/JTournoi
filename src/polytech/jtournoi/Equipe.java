@@ -13,6 +13,9 @@ import polytech.stock.TupleAvecID;
 
 public class Equipe extends TupleAvecID
 {
+	
+	int score;
+	
     /**
      * Le nom de l'equipe.
      */
@@ -96,6 +99,17 @@ public class Equipe extends TupleAvecID
     {
     	return nom;
     }
+    
+	/**
+	 * @param score the score to add
+	 */
+	public void incScore(int inc) {
+		score+=inc;
+	}
+
+	public int getScore(){
+		return score;
+	}
     
     /**
      *Mutateur.

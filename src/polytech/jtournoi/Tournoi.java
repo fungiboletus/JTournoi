@@ -28,7 +28,9 @@ public class Tournoi extends TupleAvecID {
 	}
 
 	public void lancerTournoi(){
-		
+		if(verificationTournoi()){
+			
+		}
 	}
 	
 	public boolean verificationTournoi(){

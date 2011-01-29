@@ -50,7 +50,6 @@ public class Epreuve extends TupleAvecID {
 		currentMatch.clear();
 		int indice = tableau.get(tableau.size()-1).size();
 		int indicePuissance = Tools.puissance(indice);
-		//on réalise autant de match qu'il faut pour ramener le nombre d'équipe a une puissance de deux
 		
 		//nombre d'équipe qui ne joue pas le premier tour
 		int indiceStandBy = indice-(indice-indicePuissance)*2;
@@ -59,6 +58,7 @@ public class Epreuve extends TupleAvecID {
 			System.out.println("ça boucle ? ");
 			vainqueurEquipe.add(current.get(i));
 		}
+		//on réalise autant de match qu'il faut pour ramener le nombre d'équipe a une puissance de deux
 		int j = indiceStandBy;
 		for(int i = indiceStandBy;i<indiceStandBy+(indice-indicePuissance);i++){
 			Arbitre a = Stock.getRandomArbitreLibre();
@@ -94,10 +94,10 @@ public class Epreuve extends TupleAvecID {
 		if(currentMatch.size()==0){
 			ArrayList<Equipe> tmp = new ArrayList<Equipe>();
 			tmp.addAll(vainqueurEquipe);
-			System.out.println("on ajoute une putain de liste d'équipe");
 			tableau.add(tmp);
 			if(vainqueurEquipe.size()==1){
 				vainqueur=vainqueurEquipe.get(0);
+				
 			}
 			else{
 				tour();
