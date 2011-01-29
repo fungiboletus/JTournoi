@@ -139,10 +139,16 @@ public class GeneratePlayer {
 	parcours.add(epreuves.get(3));
 	parcours.add(epreuves.get(4));
 	parcours.add(epreuves.get(5));
-	System.out.println(parcours.size());
 	// Ajout de cette liste à chaque équipe ;
-	
+	System.out.println("parcours");
+	for(TypeEpreuve te : parcours){
+		System.out.println(te.getNom());
+	}
+	System.out.println("##########################");
+	System.out.println("on setEpreuyve pour e1");
 	e1.setEpreuves(parcours);
+	
+	System.out.println("on setepreuve pour e2");
 	e2.setEpreuves(parcours);
 	e3.setEpreuves(parcours);
 	// Cas où aucun membre de l'équipe n'a pas un des sports de la liste :

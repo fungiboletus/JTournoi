@@ -11,7 +11,7 @@ public abstract class Moteur {
 	static Tournoi t;
 	
 	public static Tournoi creerTournoi(ArrayList<Equipe> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
-		if(Tools.epreuveSansEquipe(epreuves,equipes)){
+		if(Tools.epreuvesSansEquipes(epreuves,equipes)){
 			throw new EpreuveSansEquipeException();
 		}
 		else{

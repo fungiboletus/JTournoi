@@ -39,7 +39,6 @@ public abstract class Tools {
 		ArrayList<TypeEpreuve> epreuve = new ArrayList<TypeEpreuve>();
 		for(Equipe e : equipes){
 			for(TypeEpreuve te : e.getEpreuves()){
-				System.out.println("equipes epruve");
 				if(!containsTypeEpreuve(epreuve,te)){
 					epreuve.add(te);
 				}
@@ -49,7 +48,7 @@ public abstract class Tools {
 	}
 	
 
-	private static boolean containsTypeEpreuve(ArrayList<TypeEpreuve> epreuves, TypeEpreuve te){
+	public static boolean containsTypeEpreuve(ArrayList<TypeEpreuve> epreuves, TypeEpreuve te){
 		for(TypeEpreuve e : epreuves){
 			if (e.getId()==te.getId()){
 				return true;
@@ -58,10 +57,19 @@ public abstract class Tools {
 		return false;
 	}
 	
-	public static boolean epreuveSansEquipe(ArrayList<TypeEpreuve> epreuves, ArrayList<Equipe> equipes){
-		ArrayList<TypeEpreuve> tmp = getTypeEpreuve(equipes);
-		for(TypeEpreuve e : epreuves){
-			if(!containsTypeEpreuve(tmp,e)){
+	public static boolean epreuveSansEquipes(TypeEpreuve te, ArrayList<Equipe> equipes){
+		int inc =0;
+		for(Equipe e : equipes){
+			if(e.getEpreuves().contains(te)){
+				inc++;
+			}
+		}
+		return inc<2;
+	}
+	
+	public static boolean epreuvesSansEquipes(ArrayList<TypeEpreuve> epreuves,ArrayList<Equipe> equipes ){
+		for(TypeEpreuve te : epreuves){
+			if(epreuveSansEquipes(te,equipes)){
 				return true;
 			}
 		}
