@@ -10,12 +10,12 @@ public abstract class Moteur {
 
 	static Tournoi t;
 	
-	public static Tournoi creerTournoi(ArrayList<Equipe> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
+	public static Tournoi creerTournoi(String nom,ArrayList<Equipe> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
 		if(Tools.epreuvesSansEquipes(epreuves,equipes)){
 			throw new EpreuveSansEquipeException();
 		}
 		else{
-			t = new Tournoi(equipes,epreuves);
+			t = new Tournoi(nom, equipes,epreuves);
 		}
 		return t;
 	}
