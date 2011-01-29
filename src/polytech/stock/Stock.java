@@ -83,6 +83,8 @@ public abstract class Stock
 		organisateurs = gestionOrganisateurs.recupererStock();
 		
 		equipes = gestionEquipes.recupererStock();
+		// TODO FIAL equipes contient des épreuves
+		// DOUBLE REFERENCE DE MERDE
 		
 		matchs = gestionMatchs.recupererStock();
 		

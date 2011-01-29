@@ -4,8 +4,13 @@ import org.jdom.Element;
 
 import polytech.personnes.Arbitre;
 
+/**
+ * @author Antoine Pultier
+ * Gestion du XML d'un arbitre.
+ */
 public class ArbitreXML extends PersonneCompetenteXML
 {
+	@Override
 	protected String nomRelation()
 	{
 		return "arbitres";
