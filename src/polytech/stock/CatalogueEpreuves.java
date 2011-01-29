@@ -36,7 +36,7 @@ public abstract class CatalogueEpreuves
 			
 			// Lecture du fichier
 			while ((ligne = reader.readNext()) != null) {
-				if (ligne.length < 5)
+				if (ligne.length < 6)
 				{
 					System.out.println("Une ligne a été ignorée par manque d'informations");
 				}
@@ -47,7 +47,8 @@ public abstract class CatalogueEpreuves
 							ligne[1],
 							ligne[2],
 							Integer.parseInt(ligne[3]),
-							Integer.parseInt(ligne[4])
+							Integer.parseInt(ligne[4]),
+							Integer.parseInt(ligne[5]) == 0
 						));
 				}
 			}
