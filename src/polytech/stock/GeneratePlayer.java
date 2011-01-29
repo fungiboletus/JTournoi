@@ -176,8 +176,6 @@ public class GeneratePlayer {
 	// Création d'un organisateur
 	
 	Organisateur o1 = new Organisateur("Gold","Ari","f*ck");
-
-	System.out.println(e1);
 	
 	Stock.addEquipe(e1);
 	Stock.addEquipe(e2);
