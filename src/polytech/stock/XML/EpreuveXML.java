@@ -63,7 +63,7 @@ public class EpreuveXML extends GestionXML
 				}
 			}
 		}
-		a.setVainqueurEquipe(listeVainqueurEquipe);
+		a.setCurrentMatch(listeCurrentMatch);
 		
 		Element tableau = noeud.getChild("tableau");
 		ArrayList<ArrayList<Equipe>> listeTableau = new ArrayList<ArrayList<Equipe>>();

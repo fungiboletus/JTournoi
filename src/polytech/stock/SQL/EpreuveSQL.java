@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdom.Element;
+
 import polytech.jtournoi.Epreuve;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.Match;
@@ -62,7 +64,7 @@ public class EpreuveSQL extends GestionSQL
 		
 		if (currentMatch != null)
 		{
-			for (Integer[] e : vainqueurs)
+			for (Integer[] e : currentMatch)
 			{
 				if (e[1] == 0)
 				{
@@ -74,6 +76,47 @@ public class EpreuveSQL extends GestionSQL
 				}
 			}
 		}
+		a.setCurrentMatch(listeCurrentMatch);
+		
+		EpreuveTableauxREL etr = new EpreuveTableauxREL();
+		etr.setIdRelation(a.getId());
+		
+		List<Integer[]> tableau = etr.recupererStock();
+		ArrayList<ArrayList<Equipe>> listeTableau = new ArrayList<ArrayList<Equipe>>();
+		
+		if (tableau != null)
+		{
+			for (Integer[] e : tableau)
+			{
+				if (e[1] == 0)
+				{
+					listeTableau.add(null);
+				}
+				else
+				{
+					EpreuveSousTableauxREL estr = new EpreuveSousTableauxREL();
+					estr.setIdRelation(e[0]);
+					
+					List<Integer[]> sousTableau = estr.recupererStock();
+					ArrayList<Equipe> listeSousTableau = new ArrayList<Equipe>();
+					
+					for (Integer[] ee : sousTableau)
+					{
+						if (ee[1] == 0)
+						{
+							listeSousTableau.add(null);
+						}
+						else
+						{
+							listeSousTableau.add(Stock.getEquipeParId(ee[1]));
+						}
+					}
+					
+					listeTableau.add(listeSousTableau);
+				}
+			}
+		}
+		a.setTableau(listeTableau);
 		
 		return a;
 	}
@@ -103,8 +146,15 @@ public class EpreuveSQL extends GestionSQL
 			Integer[] couple = new Integer[2];
 
 			couple[0] = a.getId();
-			couple[1] = j.getId();
-
+			
+			if (j != null)
+			{
+				couple[1] = j.getId();
+			}
+			else
+			{
+				couple[1] = 0;
+			}
 			listeVainqueurEquipe.add(couple);
 		}
 
@@ -117,12 +167,56 @@ public class EpreuveSQL extends GestionSQL
 			Integer[] couple = new Integer[2];
 
 			couple[0] = a.getId();
-			couple[1] = m.getId();
+			
+			if (m != null)
+			{
+				couple[1] = m.getId();
+			}
+			else
+			{
+				couple[1] = 0;
+			}
 
 			listeCurrentMatch.add(couple);
 		}
 
 		new EpreuveMatchsREL().enregistrerStock(listeCurrentMatch);
+		
+		List<Integer[]> listeTableaux = new ArrayList<Integer[]>();
+		for (ArrayList<Equipe> t : a.getTableau())
+		{
+			Integer[] couple = new Integer[2];
+			couple[0] = a.getId();
+			
+			if (t != null)
+			{
+				couple[1] = a.getId() * 100000 + listeTableaux.size();
+				List<Integer[]> listeSousTableaux = new ArrayList<Integer[]>();
+				for (Equipe e : t)
+				{
+					Integer[] couple_bis = new Integer[2];
+
+					couple_bis[0] = couple[1];
+					
+					if (e != null)
+					{
+						couple_bis[1] = e.getId();
+					}
+					else
+					{
+						couple_bis[1] = 0;
+					}
+					listeSousTableaux.add(couple_bis);
+				}
+				new EpreuveSousTableauxREL().enregistrerStock(listeSousTableaux);
+			}
+			else
+			{
+				couple[1] = 0;
+			}
+			listeTableaux.add(couple);
+		}
+		new EpreuveTableauxREL().enregistrerStock(listeTableaux);
 		
 		return declarationPreparee;
 	}
