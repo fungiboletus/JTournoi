@@ -7,7 +7,6 @@ package polytech.personnes;
  * @version 1.0
  */
 public class Joueur extends PersonneCompetente
-
 {
 	/**
 	 * Constructeur d'un Joueur.

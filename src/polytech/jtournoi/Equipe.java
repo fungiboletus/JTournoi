@@ -17,7 +17,7 @@ public class Equipe extends TupleAvecID
 	/**
 	 * Score de l'équipe
 	 */
-	int score = 0;
+	private int score = 0;
 	
     /**
      * Le nom de l'equipe.
