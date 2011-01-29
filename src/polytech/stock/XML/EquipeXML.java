@@ -28,6 +28,7 @@ public class EquipeXML extends GestionXML
 		Equipe a = new Equipe(noeud.getChildText("nom"));
 		
 		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
+		a.setScore(Integer.parseInt(noeud.getAttributeValue("score")));
 
 		// Récupération de la liste des membres
 		Element membres = noeud.getChild("membres");
@@ -74,6 +75,7 @@ public class EquipeXML extends GestionXML
 		Element noeud = new Element("equipe");
 		
 		noeud.setAttribute("id", ""+a.getId());
+		noeud.setAttribute("score", ""+a.getScore());
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 
