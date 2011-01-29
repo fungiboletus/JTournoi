@@ -144,6 +144,7 @@ public abstract class Personne extends TupleAvecID
 		return result;
 	}
 
+	// Comparaison globalement sur le type d'instance, et sur le nom et prénom
 	@Override
 	public boolean equals(Object obj)
 	{
