@@ -341,6 +341,6 @@ public class Equipe extends TupleAvecID
 
     public String toString()
     {
-	return "nom de l'equipe : " +nom+ "\nnombre de participants : " +membres.size();
+	return "["+id+"] " +nom+ " : " +membres.size()+" participants.";
     }
 }

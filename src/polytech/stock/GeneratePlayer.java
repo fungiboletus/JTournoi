@@ -9,7 +9,7 @@ import polytech.personnes.*;
 
 public class GeneratePlayer {
 	
-	public static void main(String[] args){
+	public static void main(){
 		Stock.initialiserStockVide();
 		
 		//Création de 20 joueurs.
@@ -146,11 +146,11 @@ public class GeneratePlayer {
 	}
 	System.out.println("##########################");
 	System.out.println("on setEpreuyve pour e1");
-	e1.setEpreuves(parcours);
+	e1.setEpreuves2(parcours);
 	
 	System.out.println("on setepreuve pour e2");
-	e2.setEpreuves(parcours);
-	e3.setEpreuves(parcours);
+	e2.setEpreuves2(parcours);
+	e3.setEpreuves2(parcours);
 	// Cas où aucun membre de l'équipe n'a pas un des sports de la liste :
 
 	
@@ -187,6 +187,7 @@ public class GeneratePlayer {
 	Stock.addEquipe(e2);
 	Stock.addEquipe(e3);
 	Stock.addEquipe(e4);
+	Stock.addOrganisateur(o1);
 	Stock.enregistrerStock();
 	}
 }

@@ -161,6 +161,14 @@ public abstract class Stock
 		Stock.organisateurs = organisateurs;
 	}
 	
+	public static void addOrganisateur(Organisateur o)
+	{
+	    if (!organisateurs.contains(o))
+	    {
+	        organisateurs.add(o);
+	    }
+	}
+	
 	/**
 	 * Récupère une liste d'arbitres libres.
 	 * @return Liste d'arbitres libres.

@@ -1,11 +1,8 @@
 package polytech.ihm;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import polytech.personnes.*;
 import polytech.stock.*;
-import polytech.tools.*;
 import polytech.jtournoi.*;
 
 
@@ -76,7 +73,7 @@ public class Test {
                     System.out.println("lol");
                     break;
                 case 3:
-                    System.out.println("lol");
+                    creerTournoi();
                     break;
                 case 4:
                     System.out.println("lol");
@@ -224,6 +221,50 @@ public class Test {
             }
             //Si out est vrai, on revient à la fenêtre de connexion
             if(out) break;
+        }
+    }
+    
+    
+    /**
+     * Permet à l'organisateur de créer un tournoi
+     * 
+     */
+    public static void creerTournoi() {
+        System.out.println("Voici les épreuves disponibles :");
+        while(true){
+            ArrayList<TypeEpreuve> epreuves = new ArrayList<TypeEpreuve>();
+            ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+            // On récolte les épreuves
+            try{
+                epreuves = Ihm.recolterEpreuves();
+            }
+            catch(Exception e){
+                System.out.print("Vos épreuves sont invalides !");
+                creerTournoi();
+            }
+            System.out.println(epreuves);
+            
+            // On récolte les équipes
+            try{
+                equipes = Ihm.recolterEquipes();
+            }
+            catch(Exception e){
+                System.out.print("Vos équipes sont invalides !");
+                creerTournoi();
+            }
+            System.out.println(equipes);
+            
+            try {
+                System.out.println("Entrez le nom du tournoi :");
+                Scanner s = new Scanner(System.in);
+                Moteur.creerTournoi(s.nextLine(), equipes, epreuves);
+            } catch (Exception e) {
+                System.out.print("La création du tournoi a échoué.");
+                creerTournoi();
+            }
+            
+            System.out.println("Tournoi créé.\n");
+            return;
         }
     }
 
