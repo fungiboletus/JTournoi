@@ -197,8 +197,6 @@ public class Equipe extends TupleAvecID
     }
     
     public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
-    	//System.out.println("ok les gens on setEpreuve");
-    	//System.out.println(epreuves.size());
     	if(epreuves.size()!=5){
     		return false;
     	}
@@ -211,13 +209,13 @@ public class Equipe extends TupleAvecID
     	return true;
     }
     
-    private boolean haveCompetence(TypeEpreuve te){
+    public boolean haveCompetence(TypeEpreuve te){
     	int nbrRequis;
     	if(te.isIndivideul()){
     		nbrRequis =1;
     	}
     	else{
-    		nbrRequis =2;
+    		nbrRequis =5;
     	}
     	int joueur =0;
     	for(Joueur j : membres){
