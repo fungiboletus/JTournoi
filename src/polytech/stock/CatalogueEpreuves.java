@@ -47,7 +47,8 @@ public abstract class CatalogueEpreuves
 							ligne[1],
 							ligne[2],
 							Integer.parseInt(ligne[3]),
-							Integer.parseInt(ligne[4])
+							Integer.parseInt(ligne[4]),
+									true
 						));
 				}
 			}

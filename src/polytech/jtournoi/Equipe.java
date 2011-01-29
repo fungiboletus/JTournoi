@@ -125,6 +125,7 @@ public class Equipe extends TupleAvecID
     
     public boolean checkDoublons(ArrayList<TypeEpreuve> epreuves)
     {
+    	System.out.println("check doublons rofl"+epreuves.size());
     	if(epreuves.isEmpty()) 
     	{
     		return true;
