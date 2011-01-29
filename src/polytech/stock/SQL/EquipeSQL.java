@@ -20,13 +20,13 @@ public class EquipeSQL extends GestionSQL
 	@Override
 	protected String structureTable()
 	{
-		return "ID, NOM";
+		return "ID, NOM, SCORE";
 	}
 
 	@Override
 	protected String structureTableTypee()
 	{
-		return "ID INTEGER PRIMARY KEY, NOM TEXT";
+		return "ID INTEGER PRIMARY KEY, NOM TEXT, SCORE INTEGER";
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class EquipeSQL extends GestionSQL
 	@Override
 	protected int nbChamps()
 	{
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -52,6 +52,7 @@ public class EquipeSQL extends GestionSQL
 		{
 			a.setId(rs.getInt(1));
 			a.setNom(rs.getString(2));
+			a.setScore(rs.getInt(3));
 		} catch (SQLException e)
 		{
 			System.out.println("Impossible de charger un élément : " + e.getMessage());
@@ -108,7 +109,8 @@ public class EquipeSQL extends GestionSQL
 		try
 		{
 			declarationPreparee.setInt(1, a.getId());
-			declarationPreparee.setString(2, a.getNom()); 
+			declarationPreparee.setString(2, a.getNom());
+			declarationPreparee.setInt(3, a.getScore());
 		} catch (SQLException e)
 		{
 			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
