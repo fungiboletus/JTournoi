@@ -197,6 +197,8 @@ public class Equipe extends TupleAvecID
     }
     
     public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
+    	System.out.println("ok les gens on setEpreuve");
+    	System.out.println(epreuves.size());
     	if(epreuves.size()!=5){
     		return false;
     	}
@@ -205,6 +207,7 @@ public class Equipe extends TupleAvecID
     			return false;
     		}
     	}
+    	this.epreuves=epreuves;
     	return true;
     }
     

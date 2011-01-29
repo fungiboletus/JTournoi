@@ -15,8 +15,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Stock.chargerStock(TypeChargement.XML);
-		System.out.println(Stock.getEquipe().size());
-		System.out.println(Stock.getArbitres().size());
+		System.out.println("equipe"+Stock.getEquipe().size());
+		System.out.println("arbitres"+Stock.getArbitres().size());
 		for(Equipe e : Stock.getEquipe()){
 			System.out.println(e.getEpreuves().size());
 			for(TypeEpreuve te : e.getEpreuves()){
