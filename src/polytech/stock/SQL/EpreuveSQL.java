@@ -5,13 +5,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom.Element;
-
 import polytech.jtournoi.Epreuve;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.Match;
 import polytech.stock.Stock;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL d'une épreuve.
+ */
 public class EpreuveSQL extends GestionSQL
 {
 
@@ -33,6 +35,7 @@ public class EpreuveSQL extends GestionSQL
 			System.out.println("Impossible de charger un élément : " + e.getMessage());
 		}
 		
+		// Récupération de la liste des vainqueurs
 		EpreuveVainqueursREL evr = new EpreuveVainqueursREL();
 		evr.setIdRelation(a.getId());
 		
@@ -43,6 +46,7 @@ public class EpreuveSQL extends GestionSQL
 		{
 			for (Integer[] e : vainqueurs)
 			{
+				// Si l'id vaut 0, c'est que l'on a affaire à un null dans la liste
 				if (e[1] == 0)
 				{
 					listeVainqueurEquipe.add(null);
@@ -56,6 +60,8 @@ public class EpreuveSQL extends GestionSQL
 		
 		a.setVainqueurEquipe(listeVainqueurEquipe);
 		
+		
+		// Récupération de la liste des matchs courants
 		EpreuveMatchsREL epr = new EpreuveMatchsREL();
 		epr.setIdRelation(a.getId());
 		
@@ -78,6 +84,7 @@ public class EpreuveSQL extends GestionSQL
 		}
 		a.setCurrentMatch(listeCurrentMatch);
 		
+		// Récupération de la matrice des matchs
 		EpreuveTableauxREL etr = new EpreuveTableauxREL();
 		etr.setIdRelation(a.getId());
 		
@@ -139,6 +146,7 @@ public class EpreuveSQL extends GestionSQL
 			return null;
 		}
 		
+		// Création de la liste des vainqueurs
 		List<Integer[]> listeVainqueurEquipe = new ArrayList<Integer[]>();
 		
 		for (Equipe j : a.getVainqueurEquipe())
@@ -160,6 +168,7 @@ public class EpreuveSQL extends GestionSQL
 
 		new EpreuveVainqueursREL().enregistrerStock(listeVainqueurEquipe);
 		
+		// Création de la liste des matchs en cours
 		List<Integer[]> listeCurrentMatch = new ArrayList<Integer[]>();
 		
 		for (Match m : a.getCurrentMatch())
@@ -182,6 +191,7 @@ public class EpreuveSQL extends GestionSQL
 
 		new EpreuveMatchsREL().enregistrerStock(listeCurrentMatch);
 		
+		// Création de la matrice des matchs
 		List<Integer[]> listeTableaux = new ArrayList<Integer[]>();
 		for (ArrayList<Equipe> t : a.getTableau())
 		{
@@ -190,12 +200,15 @@ public class EpreuveSQL extends GestionSQL
 			
 			if (t != null)
 			{
+				// Création d'un identifiant supposé unique.
+				// Si on dépasse 100000 références, d'autres problèmes se feront sentir bien avant
 				couple[1] = a.getId() * 100000 + listeTableaux.size();
 				List<Integer[]> listeSousTableaux = new ArrayList<Integer[]>();
 				for (Equipe e : t)
 				{
 					Integer[] couple_bis = new Integer[2];
 
+					// Les tableaux de la matrice sont liés par un identifiant calculé plus haut
 					couple_bis[0] = couple[1];
 					
 					if (e != null)
@@ -240,7 +253,7 @@ public class EpreuveSQL extends GestionSQL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 4;
 	}

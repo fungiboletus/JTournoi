@@ -7,8 +7,16 @@ import polytech.stock.Stock;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * @author Antoine Pultier
+ * Gestion commune de toutes les personnes compétentes.
+ */
 public abstract class PersonneCompetenteSQL extends PersonneSQL
 {
+	/**
+	 * Enregistre les compétences d'une personne compétente.
+	 * @param p Personne compétente
+	 */
 	protected void genererCompetences(PersonneCompetente p)
 	{
 		List<Integer[]> competences = new ArrayList<Integer[]>();
@@ -26,6 +34,10 @@ public abstract class PersonneCompetenteSQL extends PersonneSQL
 		new PersCompCompetencesREL().enregistrerStock(competences);
 	}
 	
+	/**
+	 * Récupére les compétences d'une personne compétente.
+	 * @param p Personne compétente.
+	 */
 	protected void recupererCompetences(PersonneCompetente p)
 	{
 		PersCompCompetencesREL pcc = new PersCompCompetencesREL();

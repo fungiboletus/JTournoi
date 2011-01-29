@@ -5,8 +5,13 @@ import java.sql.SQLException;
 
 import polytech.personnes.Organisateur;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL d'un organisateur.
+ */
 public class OrganisateurSQL extends PersonneSQL
 {
+	@Override
 	protected String nomTable()
 	{
 		return "organisateurs";

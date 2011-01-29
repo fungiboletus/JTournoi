@@ -1,5 +1,9 @@
 package polytech.stock.SQL;
 
+/**
+ * @author Antoine Pultier
+ * Relation entre une épreuve et les vainqueurs de cette épreuve.
+ */
 public class EpreuveVainqueursREL extends GestionREL
 {
 
@@ -22,7 +26,7 @@ public class EpreuveVainqueursREL extends GestionREL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 2;
 	}

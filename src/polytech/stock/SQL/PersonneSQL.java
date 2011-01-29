@@ -1,5 +1,11 @@
 package polytech.stock.SQL;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL de la classe abstraite Personne.
+ * 
+ * La structure de la table est identique pour toutes les tables qui en héritent.
+ */
 public abstract class PersonneSQL extends GestionSQL
 {
 	protected String structureTable()
@@ -12,7 +18,7 @@ public abstract class PersonneSQL extends GestionSQL
 		return "ID INTEGER PRIMARY KEY, NOM TEXT, PRENOM TEXT, MOTDEPASSE TEXT";
 	}
 
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 4;
 	}

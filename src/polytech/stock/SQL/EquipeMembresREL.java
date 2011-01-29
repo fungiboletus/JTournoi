@@ -1,5 +1,9 @@
 package polytech.stock.SQL;
 
+/**
+ * @author Antoine Pultier
+ * Relation entre une équipe et ses membres.
+ */
 public class EquipeMembresREL extends GestionREL
 {
 	
@@ -22,7 +26,7 @@ public class EquipeMembresREL extends GestionREL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 2;
 	}

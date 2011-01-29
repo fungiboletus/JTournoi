@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import polytech.jtournoi.Match;
 import polytech.stock.Stock;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL d'un match.
+ */
 public class MatchSQL extends GestionSQL
 {
 
@@ -70,6 +74,7 @@ public class MatchSQL extends GestionSQL
 	@Override
 	protected String structureTableTypee()
 	{
+		// Match gagne le concours de la structure de table la plus longue du programme. Félicitation à match \o/
 		return "ID INTEGER PRIMARY KEY, ID_E1 INTEGER, ID_E2 INTEGER, SC_E1 INTEGER, SC_E2 INTEGER, ID_ARBITRE INTEGER, NUMERO INTEGER, TOUR INTEGER";
 	}
 
@@ -80,7 +85,7 @@ public class MatchSQL extends GestionSQL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 8;
 	}

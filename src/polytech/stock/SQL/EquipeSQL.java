@@ -10,6 +10,10 @@ import polytech.jtournoi.TypeEpreuve;
 import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 
+/**
+ * @author Antoine Pultier
+ * Gestion SQL d'une équipe.
+ */
 public class EquipeSQL extends GestionSQL
 {
 
@@ -32,7 +36,7 @@ public class EquipeSQL extends GestionSQL
 	}
 
 	@Override
-	protected int nbInfosTable()
+	protected int nbChamps()
 	{
 		return 2;
 	}
@@ -53,6 +57,7 @@ public class EquipeSQL extends GestionSQL
 			System.out.println("Impossible de charger un élément : " + e.getMessage());
 		}
 		
+		// Récupération de la liste des membres de l'équipe
 		EquipeMembresREL emr = new EquipeMembresREL();
 		emr.setIdRelation(a.getId());
 		
@@ -71,6 +76,7 @@ public class EquipeSQL extends GestionSQL
 			}
 		}
 		
+		// Récupération du parcours d'épreuves de l'équipe
 		EquipeEpreuvesREL eer = new EquipeEpreuvesREL();
 		eer.setIdRelation(a.getId());
 		List<Integer[]> epreuves =  eer.recupererStock();
@@ -109,6 +115,7 @@ public class EquipeSQL extends GestionSQL
 			return null;
 		}
 
+		// Création de la liste des membres de l'équipe
 		List<Integer[]> membres = new ArrayList<Integer[]>();
 		
 		for (Joueur j : a.getMembres())
@@ -123,6 +130,7 @@ public class EquipeSQL extends GestionSQL
 
 		new EquipeMembresREL().enregistrerStock(membres);
 		
+		// Création du parcours d'épreuve de l'équipe
 		List<Integer[]> epreuves = new ArrayList<Integer[]>();
 		
 		for (TypeEpreuve te : a.getEpreuves())
