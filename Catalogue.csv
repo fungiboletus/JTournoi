@@ -1,10 +1,10 @@
-1,"Lancer de nains","Rigolo",120,5
-2,"Curling","Rigolo",300,15
-3,"Dragster","Rigolo",100,10
-4,"Rugby","Ballon",120,5
-5,"PomPom Girls","Sexy",15,30
-6,"Capoeira","Sexy",10,10
-7,"Lutte dans la confiture","Sans commentaires",600,50
-8,"Tennis de table","Rigolo",15,5
-9,"Voltige en cercle","Rigolo",10,20
-10,"Speedcubing","Rigolo",1,1
+1,"Lancer de nains","Rigolo",120,5,0
+2,"Curling","Rigolo",300,15,1
+3,"Dragster","Rigolo",100,10,0
+4,"Rugby","Ballon",120,5,1
+5,"PomPom Girls","Sexy",15,30,1
+6,"Capoeira","Sexy",10,10,0
+7,"Lutte dans la confiture","Sans commentaires",600,50,0
+8,"Tennis de table","Rigolo",15,5,0
+9,"Voltige en cercle","Rigolo",10,20,0
+10,"Speedcubing","Rigolo",1,1,0
