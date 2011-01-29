@@ -75,26 +75,18 @@ public class TypeEpreuve extends TupleAvecID
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append("TypeEpreuve [id=");
-		builder.append(id);
-		builder.append(", ");
+		builder.append("["+id+"]");
+		builder.append(" ");
 		if (nom != null)
 		{
-			builder.append("nom=");
-			builder.append(nom);
-			builder.append(", ");
+			builder.append(nom+", ");
 		}
 		if (type != null)
 		{
-			builder.append("type=");
-			builder.append(type);
-			builder.append(", ");
+			builder.append("type : "+type+", ");
 		}
-		builder.append("duree=");
-		builder.append(duree);
-		builder.append(", points=");
-		builder.append(points);
-		builder.append("]");
+		builder.append(duree+" min, ");
+		builder.append(points+" points");
 		return builder.toString();
 	}
 

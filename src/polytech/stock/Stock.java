@@ -87,11 +87,11 @@ public abstract class Stock
 		new EquipeXML().enregistrerStock(equipes);
 		new MatchXML().enregistrerStock(matchs);
 		
-		new ArbitreSQL().enregistrerStock(arbitres);
+		/*new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
 		new EquipeSQL().enregistrerStock(equipes);
-		new MatchSQL().enregistrerStock(matchs);
+		new MatchSQL().enregistrerStock(matchs);*/
 	}
 
 	public static List<Arbitre> getArbitres()
@@ -126,6 +126,14 @@ public abstract class Stock
 	public static void setOrganisateurs(List<Organisateur> organisateurs)
 	{
 		Stock.organisateurs = organisateurs;
+	}
+	
+	public static void addOrganisateur(Organisateur o)
+	{
+	    if (!organisateurs.contains(o))
+	    {
+	        organisateurs.add(o);
+	    }
 	}
 	
 	public static List<Arbitre> getArbitresLibres()

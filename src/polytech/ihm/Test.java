@@ -76,7 +76,7 @@ public class Test {
                     System.out.println("lol");
                     break;
                 case 3:
-                    System.out.println("lol");
+                    creerTournoi();
                     break;
                 case 4:
                     System.out.println("lol");
@@ -224,6 +224,50 @@ public class Test {
             }
             //Si out est vrai, on revient à la fenêtre de connexion
             if(out) break;
+        }
+    }
+    
+    
+    /**
+     * Permet à l'organisateur de créer un tournoi
+     * 
+     */
+    public static void creerTournoi() {
+        Scanner s;
+        String lue;
+        System.out.println("Voici les épreuves disponibles :");
+        while(true){
+            ArrayList<TypeEpreuve> epreuves = new ArrayList<TypeEpreuve>();
+            ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+            // On récolte les épreuves
+            try{
+                epreuves = Ihm.recolterEpreuves();
+            }
+            catch(Exception e){
+                System.out.print("Vos épreuves sont invalides !");
+                return;
+            }
+            System.out.println(epreuves);
+            
+            // On récolte les équipes
+            try{
+                equipes = Ihm.recolterEquipes();
+            }
+            catch(Exception e){
+                System.out.print("Vos équipes sont invalides !");
+                break;
+            }
+            System.out.println(equipes);
+            
+            try {
+                Moteur.creerTournoi(equipes, epreuves);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            
+            System.out.println("Tournoi créé.\n");
+            return;
         }
     }
 

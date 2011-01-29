@@ -171,7 +171,7 @@ public class GeneratePlayer {
         // Création d'un organisateur
 
         Organisateur o1 = new Organisateur("Gold", "Ari", "f*ck");
-
+        Stock.addOrganisateur(o1);
         Stock.enregistrerStock();
     }
 }
