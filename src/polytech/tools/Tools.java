@@ -5,9 +5,17 @@ import java.util.ArrayList;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
 
+/**
+ * Classe contenant les outils qui servent à différents endroits du programme.
+ */
 public abstract class Tools
 {
 
+	/**
+	 * Calcule la puissance de deux inférieure à N
+	 * @param n N
+	 * @return Puissance de deux inférieure à N
+	 */
 	public static int puissance(int n)
 	{
 		int i = 1;
@@ -16,6 +24,24 @@ public abstract class Tools
 			i = i * 2;
 		}
 		return i / 2;
+	}
+
+	/**
+	 * Transforme un tableau de byte en chaîne de carractères avec une représentation en héxadécimal.
+	 * @param b Bytes à convertir
+	 * @return Chaîne de caractère
+	 */
+	public static String bytesToHex(byte[] b)
+	{
+		char hexDigit[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				'A', 'B', 'C', 'D', 'E', 'F' };
+		StringBuffer buf = new StringBuffer();
+		for (int j = 0; j < b.length; j++)
+		{
+			buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
+			buf.append(hexDigit[b[j] & 0x0f]);
+		}
+		return buf.toString();
 	}
 
 	public static ArrayList<Equipe> melangerEquipe(ArrayList<Equipe> list)
@@ -108,17 +134,5 @@ public abstract class Tools
 		return list;
 	}
 
-	public static String bytesToHex(byte[] b)
-	{
-		char hexDigit[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'A', 'B', 'C', 'D', 'E', 'F' };
-		StringBuffer buf = new StringBuffer();
-		for (int j = 0; j < b.length; j++)
-		{
-			buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
-			buf.append(hexDigit[b[j] & 0x0f]);
-		}
-		return buf.toString();
-	}
 
 }
