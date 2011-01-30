@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import polytech.personnes.Arbitre;
+import polytech.personnes.Joueur;
 import polytech.tools.Tools;
 
 public abstract class Moteur {
 
 	static Tournoi t;
 	
-	public static Tournoi creerTournoi(String nom, ArrayList<Equipe> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
+	public static Tournoi creerTournoi(String nom, HashMap<Equipe, Joueur> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
 		if(Tools.epreuvesSansEquipes(epreuves,equipes)){
 			throw new EpreuveSansEquipeException();
 		}

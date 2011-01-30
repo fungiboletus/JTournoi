@@ -140,15 +140,15 @@ public class GeneratePlayer {
 	parcours.add(epreuves.get(4));
 	parcours.add(epreuves.get(5));
 	// Ajout de cette liste à chaque équipe ;
-	System.out.println("parcours");
+	/*System.out.println("parcours");
 	for(TypeEpreuve te : parcours){
 		System.out.println(te.getNom());
 	}
 	System.out.println("##########################");
-	System.out.println("on setEpreuyve pour e1");
+	System.out.println("on setEpreuyve pour e1");*/
 	e1.setEpreuves2(parcours);
 	
-	System.out.println("on setepreuve pour e2");
+	//System.out.println("on setepreuve pour e2");
 	e2.setEpreuves2(parcours);
 	e3.setEpreuves2(parcours);
 	// Cas où aucun membre de l'équipe n'a pas un des sports de la liste :
@@ -161,7 +161,7 @@ public class GeneratePlayer {
 	parcours2.add(epreuves.get(3));
 	parcours2.add(epreuves.get(4));
 	parcours2.add(epreuves.get(5));
-	System.out.println(e2.setEpreuves(parcours2));
+	e2.setEpreuves(parcours2);
 	
 	// Création de 4 arbitres 
 	ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();

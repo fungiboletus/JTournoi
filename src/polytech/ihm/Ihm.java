@@ -1,10 +1,12 @@
 package polytech.ihm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
+import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 
 class Ihm {
@@ -23,8 +25,7 @@ class Ihm {
     /**
      * Permet de logger une personne, quelle qu'elle soit
      * 
-     * @param nom
-     *           Nom de log
+     * @param nom Nom de log
      */
     public void log(String nom){
         // On vérifie si c'est un organisateur
@@ -90,8 +91,7 @@ class Ihm {
     
     /**
      * Permet de récolter les épreuves et de les vérifier
-     * @return epreuves
-     *                  La liste des épreuves valide
+     * @return epreuves La liste des épreuves valide
      */
     public static ArrayList<TypeEpreuve> recolterEpreuves() throws Exception{
         ArrayList<Integer> epreuvesId = new ArrayList<Integer>();
@@ -128,12 +128,11 @@ class Ihm {
     
     /**
      * Permet de récolter les équipes et de les vérifier
-     * @return equipes
-     *                  La liste des équipes valides
+     * @return equipes La liste des équipes valides
      */
-    public static ArrayList<Equipe> recolterEquipes() throws Exception{
+    public static HashMap<Equipe,Joueur> recolterEquipes() throws Exception{
         ArrayList<Integer> equipesId = new ArrayList<Integer>();
-        ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+        HashMap<Equipe,Joueur> equipes = new HashMap<Equipe,Joueur>();
         Scanner s;
         //On liste les équipes possibles
         for (int i = 0; i < Stock.getEquipe().size(); i++)
@@ -158,7 +157,9 @@ class Ihm {
         // On construit la liste des équipes à renvoyer
         for(int i=0; i<equipesId.size(); i++){
             for(int j=0; j<Stock.getEquipe().size(); j++){
-                if(Stock.getEquipe().get(j).getId() == equipesId.get(i)) equipes.add(Stock.getEquipe().get(j));
+                if(Stock.getEquipe().get(j).getId() == equipesId.get(i)){
+                    equipes.put(Stock.getEquipe().get(j), new Joueur());
+                }
             }
         }
         return equipes;
@@ -167,10 +168,8 @@ class Ihm {
     
     /**
      * Permet de découper une chaine selon les espaces et de renvoyer une liste d'entiers
-     * @return id
-     *                  Les entiers initialement séparés par des espaces dans la chaine
-     * @param lue
-     *                  La chaine initiale
+     * @return id Les entiers initialement séparés par des espaces dans la chaine
+     * @param lue La chaine initiale
      */
     public static ArrayList<Integer> cutStringBySpace(String lue){
         ArrayList<Integer> id = new ArrayList<Integer>();
@@ -188,6 +187,36 @@ class Ihm {
             }
         }
         return id;
+    }
+
+    /**
+     * Permet d'avoir un objet joueur à partir de son nom et de son équipe
+     * @param nom Le nom du joueur
+     * @param equipe l'équipe du joueur
+     * @return new Joueur() le joueur
+     */
+    public Joueur getJoueurByName(String nom, Equipe equipe){
+        for(int i=0; i<equipe.getNombreDeJoueurs(); i++){
+            if(equipe.getJoueur(i).getNom().equals(nom)) return equipe.getJoueur(i);
+        }
+        return new Joueur();
+    }
+    
+    /**
+     * Permet d'avoir les joueurs d'une équipe qui ont une compétence donnée.
+     * 
+     * @param equipe l'équipe
+     * @param type la compétence recherchée
+     * @return joueurs Les joueurs
+     */
+    public ArrayList<Joueur> getJoueursCompetents(Equipe equipe, TypeEpreuve type){
+        ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+        for(Joueur j : equipe.getMembres()){
+            if(j.getCompetences().contains(type)){
+                joueurs.add(j);
+            }
+        }
+        return joueurs;
     }
     
 }

@@ -24,7 +24,7 @@ public class Main {
 			}
 		}
 		try {
-			Moteur.creerTournoi((ArrayList<Equipe>) Stock.getEquipe(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
+			Moteur.creerTournoi("",(ArrayList<Equipe>) Stock.getEquipe(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
 		} catch (Exception e) {
 			System.out.println("fail la création du tournoi");
 		}
