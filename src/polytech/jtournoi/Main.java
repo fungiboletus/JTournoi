@@ -15,11 +15,11 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Main m =new Main(2);
-		Stock.chargerStock(TypeChargement.XML);
 
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		map.put("a", 0);
 		map.put("b", 1);
+		System.out.println(map.size());
 		
 	}
 
