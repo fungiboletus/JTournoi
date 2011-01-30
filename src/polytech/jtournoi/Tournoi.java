@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
+import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Joueur;
 import polytech.stock.TupleAvecID;
 
@@ -99,8 +100,9 @@ public class Tournoi extends TupleAvecID {
 
 	/**
 	 * Méthode de lancement du tournoi
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	public void startTournoi() {
+	public void startTournoi() throws nbrArbitreInsufisantException {
 		if(!verificationTournoi()){
 			throw new RuntimeException("t'as pas lancé la vérification ...");
 		}

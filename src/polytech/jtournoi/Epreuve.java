@@ -7,6 +7,7 @@ import polytech.stock.Stock;
 import polytech.stock.TupleAvecID;
 import polytech.tools.Tools;
 
+import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.*;
 /**
  * 
@@ -33,8 +34,9 @@ public class Epreuve extends TupleAvecID {
 	 * Constructor dans le cas d'une équipe collective
 	 * @param Hashmap des équipes et des joueurs défini pour chaque équipe
 	 * @param te Type de l'épreuve
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	public Epreuve(HashMap<Equipe,Joueur> eqj, TypeEpreuve te){
+	public Epreuve(HashMap<Equipe,Joueur> eqj, TypeEpreuve te) throws nbrArbitreInsufisantException{
 		this(Tools.getEquipe(eqj),te);
 		map=eqj;
 	}
@@ -43,8 +45,9 @@ public class Epreuve extends TupleAvecID {
 	 * Constructeur dans le cas d'une épreuve collective
 	 * @param ArrayList d'équipe
 	 * @param Type de l'épreuve
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te){
+	public Epreuve(ArrayList<Equipe> equipe,TypeEpreuve te) throws nbrArbitreInsufisantException{
 		super();
 		map=null;
 		type=te;
@@ -64,10 +67,13 @@ public class Epreuve extends TupleAvecID {
 	}
 	/**
 	 * Méthode de réalisation d'un tour 
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	public void tour(){
+	public void tour() throws nbrArbitreInsufisantException{
+		
 		//on récupère la liste des équipes du tour précédent
 		ArrayList<Equipe> current = tableau.get(tableau.size()-1);
+		
 		//on vide les listes temporaires
 		vainqueurEquipe.clear();
 		currentMatch.clear();
@@ -77,6 +83,7 @@ public class Epreuve extends TupleAvecID {
 		
 		//nombre d'équipe qui ne joue pas le premier tour
 		int indiceStandBy = indice-(indice-indicePuissance)*2;
+		
 		//boucle uniquement pour le premier tour pour ramener le nombre d'équipe a une puissance de 2
 		for(int i=0;i<indiceStandBy;i++){
 			vainqueurEquipe.add(current.get(i));
@@ -84,6 +91,7 @@ public class Epreuve extends TupleAvecID {
 		//on réalise autant de match qu'il faut pour ramener le nombre d'équipe a une puissance de deux
 		int j = indiceStandBy;
 		//si le nombre est une puissance de deux alors tout les matchs sont réalisé
+		int inc=0;
 		for (int i = indiceStandBy; i < indiceStandBy
 				+ (indice - indicePuissance); i++) {
 			//on vérifie que l'on a un arbitre de disponible
@@ -96,11 +104,15 @@ public class Epreuve extends TupleAvecID {
 				vainqueurEquipe.add(null);
 			}
 			else{
-				System.out.println("arf on a plus d'arbitre !");
+				inc++;
 			}
+		}
+		if(inc!=0){
+			throw new nbrArbitreInsufisantException(inc,type);
 		}
 		tour ++;
 	}
+	
 	/**
 	 * Renvoie le match pour l'arbitre
 	 * @param un arbitre
@@ -131,8 +143,9 @@ public class Epreuve extends TupleAvecID {
 	/**
 	 * Enlève un match de la liste des match courant
 	 * @param m
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	private void remove(Match m){
+	private void remove(Match m) throws nbrArbitreInsufisantException{
 		currentMatch.remove(m);
 		//si la liste des match courant est nul alors tout les matchs du tour ont été réalisé
 		if(currentMatch.size()==0){
@@ -184,8 +197,9 @@ public class Epreuve extends TupleAvecID {
 	 * @param m
 	 * @param se1
 	 * @param se2
+	 * @throws nbrArbitreInsufisantException 
 	 */
-	public void setScore(Arbitre a,Match m, int se1, int se2){
+	public void setScore(Arbitre a,Match m, int se1, int se2) throws nbrArbitreInsufisantException{
 		if(isMatch(m)&&m.getArbitre().equals(a)){
 			m.setScore(se1,se2);
 			vainqueurEquipe.set(m.getNumero(),m.getVainqueur());
@@ -194,7 +208,7 @@ public class Epreuve extends TupleAvecID {
 	}
 	
 	public String toString(){
-		String s="Epreuve de type : "+type;
+		String s="Epreuve de type : "+type+"\n";
 		for (ArrayList<Equipe> list : tableau){
 			System.out.println(list.size());
 			for(Equipe e : list){
