@@ -9,7 +9,7 @@ import polytech.personnes.*;
 
 public class GeneratePlayer {
 	
-	public static void main(){
+	public static void main(String [] args){
 		Stock.initialiserStockVide();
 		
 		//Création de 20 joueurs.
