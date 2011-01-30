@@ -83,6 +83,15 @@ public abstract class PersonneCompetente extends Personne
 	return super.toString() + "\nCompétence(s) :"+c;
     }
 
+    /**
+     *Methode toString alternative.
+     *@return Nom, prenom de la personne.
+     */
+
+    public String toString2()
+    {
+        return super.toString();
+    }
 
     /**
      *Methode afficheCompetences.

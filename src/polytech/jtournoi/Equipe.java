@@ -349,6 +349,22 @@ public class Equipe extends TupleAvecID
     {
 	this.supprimerJoueur(getJoueur(getNumeroJoueur(nom, prenom)));
     }
+    
+    /**
+     *Suppression d'un joueur d'apres son id.
+     *@param id l'id du joueur.
+     *@return Réussite ou non.
+     */
+    public boolean supprimerJoueur(int id)
+    {
+        for(int i=0; i<membres.size(); i++){
+            if(membres.get(i).getId() == id){
+                supprimerJoueur(membres.get(i));
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     /**
@@ -380,6 +396,11 @@ public class Equipe extends TupleAvecID
 
     public String toString2()
     {
-    return "["+id+"] " +nom+ " : " +membres.size()+" participants.";
+        String s="";
+        s += "["+id+"] " +nom;
+        for(int i=0; i<membres.size(); i++){
+            s += "\n\t"+membres.get(i);
+        }
+        return s;
     }
 }

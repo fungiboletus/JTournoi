@@ -188,6 +188,29 @@ class Ihm {
         }
         return id;
     }
+    
+    /**
+     * Permet de découper une chaine selon les espaces et de renvoyer des chaines découpées
+     * @return id Les entiers initialement séparés par des espaces dans la chaine
+     * @param lue La chaine initiale
+     */
+    public ArrayList<String> cutStringBySpace2(String lue){
+        ArrayList<String> chaine = new ArrayList<String>();
+        while(!lue.equals("")){
+            int occurence = lue.indexOf(' ');
+            //Si il reste des espaces
+            if(occurence != -1) {
+                chaine.add(lue.substring(0,occurence));
+                lue = lue.substring(occurence+1, lue.length());
+            }
+            //Si le String lue ne contient plus d'espaces, il n'y a qu'un mot
+            else{
+                chaine.add(lue.substring(0,lue.length()));
+                lue = "";
+            }
+        }
+        return chaine;
+    }
 
     /**
      * Permet d'avoir un objet joueur à partir de son nom et de son équipe
