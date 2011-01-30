@@ -13,6 +13,12 @@ import polytech.stock.TupleAvecID;
 
 public class Equipe extends TupleAvecID
 {
+	
+	/**
+	 * Score de l'équipe
+	 */
+	private int score = 0;
+	
     /**
      * Le nom de l'equipe.
      */
@@ -97,7 +103,30 @@ public class Equipe extends TupleAvecID
     	return nom;
     }
     
-    /**
+	/**
+	 * @param score the score to add
+	 */
+	public void incScore(int inc) {
+		score+=inc;
+	}
+	
+	public void incAllScore(int inc){
+		incScore(inc);
+		for(Joueur j : membres){
+			j.incScore(inc);
+		}
+	}
+
+	public int getScore(){
+		return score;
+	}
+    
+    public void setScore(int score)
+	{
+		this.score = score;
+	}
+
+	/**
      *Mutateur.
      *Change le nom de l'equipe.
      *@param nouveauNom Le nouveau nom a donner a l'equipe.

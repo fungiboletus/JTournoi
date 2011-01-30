@@ -14,20 +14,21 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Main m =new Main(2);
 		Stock.chargerStock(TypeChargement.XML);
-		System.out.println("equipe"+Stock.getEquipe().size());
-		System.out.println("arbitres"+Stock.getArbitres().size());
-		for(Equipe e : Stock.getEquipe()){
-			System.out.println(e.getEpreuves().size());
-			for(TypeEpreuve te : e.getEpreuves()){
-				System.out.println(te.getNom());
-			}
-		}
-		try {
-			Moteur.creerTournoi("",(ArrayList<Equipe>) Stock.getEquipe(), (ArrayList<TypeEpreuve>)Stock.getTypesEpreuves());
-		} catch (Exception e) {
-			System.out.println("fail la création du tournoi");
-		}
+
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("a", 0);
+		map.put("b", 1);
+		
 	}
 
+	public Main(int i){
+		this();
+		System.out.println(i);
+	}
+	
+	public Main(){
+		System.out.println("graou");
+	}
 }

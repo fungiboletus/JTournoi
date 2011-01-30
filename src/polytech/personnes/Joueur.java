@@ -7,7 +7,6 @@ package polytech.personnes;
  * @version 1.0
  */
 public class Joueur extends PersonneCompetente
-
 {
 	/**
 	 * Constructeur d'un Joueur.
@@ -33,5 +32,26 @@ public class Joueur extends PersonneCompetente
 	public Joueur()
 	{
 		super();
+	}
+
+	/**
+	 * Score du joueur
+	 */
+	protected int score = 0;
+	
+	/**
+	 * @param score the score to add
+	 */
+	public void incScore(int inc) {
+		score+=inc;
+	}
+	
+	public int getScore(){
+		return score;
+	}
+
+	public void setScore(int score)
+	{
+		this.score = score;
 	}
 }

@@ -105,6 +105,8 @@ public abstract class Stock
 		matchs = gestionMatchs.recupererStock();
 		
 		epreuves = gestionEpreuves.recupererStock();
+		
+		gererOrganisateurRacine();
 	}
 
 	/**
@@ -125,6 +127,28 @@ public abstract class Stock
 		new EquipeSQL().enregistrerStock(equipes);
 		new MatchSQL().enregistrerStock(matchs);
 		new EpreuveSQL().enregistrerStock(epreuves);
+		
+		gererOrganisateurRacine();
+	}
+	
+	/**
+	 * Gestion de l'organisateur racine.
+	 * 
+	 * Il faut s'assurer qu'il y ai au moins un organisateur racine.
+	 * 
+	 * Cet utilisateur est enregistré dans la base de données,
+	 * ce qui permet de modifier ses informations comme son mot de passe.
+	 * 
+	 * Mais il doit être créé automatiquement lors du premier lancement.
+	 */
+	public static void gererOrganisateurRacine()
+	{
+		Organisateur racine = new Organisateur("root", "root", "password");
+	
+		if (!organisateurs.contains(racine))
+		{
+			addOrganisateur(racine);
+		}
 	}
 
 	public static List<Arbitre> getArbitres()

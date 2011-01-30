@@ -18,6 +18,21 @@ public class JoueurSQL extends PersonneCompetenteSQL
 		return "joueurs";
 	}
 	
+	protected String structureTable()
+	{
+		return "ID, NOM, PRENOM, MOTDEPASSE, SCORE";
+	}
+	
+	protected String structureTableTypee()
+	{
+		return "ID INTEGER PRIMARY KEY, NOM TEXT, PRENOM TEXT, MOTDEPASSE TEXT, SCORE INTEGER";
+	}
+
+	protected int nbChamps()
+	{
+		return 5;
+	}
+	
 	@Override
 	public Object construireDepuisStock(Object element)
 	{
@@ -31,6 +46,7 @@ public class JoueurSQL extends PersonneCompetenteSQL
 			a.setNom(rs.getString(2));
 			a.setPrenom(rs.getString(3));
 			a.setPassword(rs.getString(4));
+			a.setScore(rs.getInt(5));
 
 		} catch (SQLException e)
 		{
@@ -53,6 +69,7 @@ public class JoueurSQL extends PersonneCompetenteSQL
 			declarationPreparee.setString(2, a.getNom()); 
 			declarationPreparee.setString(3, a.getPrenom()); 
 			declarationPreparee.setString(4, a.getPassword()); 
+			declarationPreparee.setInt(5, a.getScore());
 		} catch (SQLException e)
 		{
 			System.out.println("Impossible de créer un élement du stock : "+e.getMessage());
