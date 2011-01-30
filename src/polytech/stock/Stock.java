@@ -143,8 +143,6 @@ public abstract class Stock
 		new EquipeSQL().enregistrerStock(equipes);
 		new MatchSQL().enregistrerStock(matchs);
 		new EpreuveSQL().enregistrerStock(epreuves);
-		
-		gererOrganisateurRacine();
 	}
 	
 	/**
@@ -159,11 +157,20 @@ public abstract class Stock
 	 */
 	public static void gererOrganisateurRacine()
 	{
-		Organisateur racine = new Organisateur("root", "root", "password");
-	
-		if (!organisateurs.contains(racine))
+		// no comment
+		boolean contains = false;
+		
+		for (Organisateur o : organisateurs)
 		{
-			addOrganisateur(racine);
+			if (o.getNom().equals("root"))
+			{
+				contains = true;
+			}
+		}
+		
+		if (!contains)
+		{
+			addOrganisateur(new Organisateur("root", "root", "password"));
 		}
 	}
 
