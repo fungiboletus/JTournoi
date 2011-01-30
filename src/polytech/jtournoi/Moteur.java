@@ -3,18 +3,36 @@ package polytech.jtournoi;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import polytech.exception.EpreuveDejaExistanteException;
+import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 
 public abstract class Moteur {
 
+	static ArrayList<Tournoi> listeTournoi;
 	
-
+	public static void init(){
+		listeTournoi = new ArrayList<Tournoi>();
+	}
+	
+	/**
+	 * Crée un tournoi avec son nom et l'ensemble des types d'épreuve
+	 * @param nom
+	 * @param epreuves
+	 * @return
+	 */
 	public static Tournoi creerTournoi(String nom, ArrayList<TypeEpreuve> epreuves) {
 		Tournoi t = new Tournoi(nom,epreuves);
+		listeTournoi.add(t);
 		return t;
 	}
 	
+	/**
+	 * Méthode permettant de lancer le tournoi
+	 * @param t
+	 * @throws Exception
+	 */
 	public static void startTournoi(Tournoi t) throws Exception{
 		if(t.verificationTournoi()){
 			t.startTournoi();
@@ -24,15 +42,28 @@ public abstract class Moteur {
 		}
 	}
 	
-	public static boolean setEpreuve(Tournoi t, TypeEpreuve te,HashMap<Equipe,Joueur> equipes){
-	    if(t.getTypeEpreuves().contains(te)){
-			if(t.setEpreuve(te,equipes)){
-				return true;
-			}
+	/**
+	 * Ajouter l'épreuve au tournoi
+	 * @param t
+	 * @param te
+	 * @param equipes
+	 * @throws NombreDeParticipantInsufisantException
+	 * @throws EpreuveDejaExistanteException
+	 */
+	public static void setEpreuve(Tournoi t, TypeEpreuve te,
+			HashMap<Equipe, Joueur> equipes)
+			throws NombreDeParticipantInsufisantException,
+			EpreuveDejaExistanteException {
+		if (t.getTypeEpreuves().contains(te)) {
+			t.setEpreuve(te, equipes);
 		}
-		return false;
 	}
 	
+	/**
+	 * Renvoie tout les matchs d'un tournoi
+	 * @param t
+	 * @return une hashmap de type d'épreuve et de match
+	 */
 	public HashMap<TypeEpreuve,ArrayList<Match>> getCurrentsMatchByEpreuve(Tournoi t){
 		ArrayList<Epreuve> epreuves = t.getEpreuves();
 		HashMap<TypeEpreuve,ArrayList<Match>> map = new HashMap<TypeEpreuve,ArrayList<Match>>();
@@ -42,6 +73,11 @@ public abstract class Moteur {
 		return map;
 	}
 	
+	/**
+	 * Renvoie l'ensemble des matchs d'un tournoi
+	 * @param t
+	 * @return
+	 */
 	public ArrayList<Match> getCurrentMatch(Tournoi t){
 		ArrayList<Match> match = new ArrayList<Match>();
 		ArrayList<Epreuve> epreuves = t.getEpreuves();
@@ -52,7 +88,12 @@ public abstract class Moteur {
 		}
 		return match;
 	}
-	
+	/**
+	 * Renvoie le match arbitré par l'arbitre dans le Tournoi en question
+	 * @param a
+	 * @param t
+	 * @return
+	 */
 	public Match getMatch(Arbitre a, Tournoi t){
 		for(Match m : getCurrentMatch(t)){
 			if(m.getArbitre()==a){
@@ -62,14 +103,10 @@ public abstract class Moteur {
 		}
 		return null;
 	}
-	
-	public void getAllMatch (Tournoi t){
-		HashMap<TypeEpreuve,ArrayList<Match>> map = getCurrentsMatchByEpreuve(t);
-		for(TypeEpreuve te : map.keySet()){
-			System.out.println(map.get(te+"\n"));
-		}
+
+	public static ArrayList<Tournoi> getTournois(){
+		return listeTournoi;
 	}
-	
 	
 	
 }

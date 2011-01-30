@@ -3,6 +3,8 @@ package polytech.jtournoi;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import polytech.exception.EpreuveDejaExistanteException;
+import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.personnes.Joueur;
 import polytech.stock.TupleAvecID;
 
@@ -20,13 +22,20 @@ public class Tournoi extends TupleAvecID {
 		this.nom=nom;
 	}
 	
-	public boolean setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes){
-	    //System.out.println(map);
-		if(!map.containsKey(te)){
-			map.put(te, equipes);
-			return true;
+	public void setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes) throws NombreDeParticipantInsufisantException, EpreuveDejaExistanteException{
+		int inc=0;
+		for(Equipe e : equipes.keySet()){
+			if(e.getEpreuves().contains(te)){
+				inc++;
+			}
 		}
-		return false;
+		if(inc<1){
+			throw new NombreDeParticipantInsufisantException();
+		}
+		if(map.containsKey(te)){
+			throw new EpreuveDejaExistanteException();
+		}
+		map.put(te, equipes);
 	}
 	
 	public boolean verificationTournoi() {
