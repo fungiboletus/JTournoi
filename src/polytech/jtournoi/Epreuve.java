@@ -67,13 +67,20 @@ public class Epreuve extends TupleAvecID {
 		}
 		//on réalise autant de match qu'il faut pour ramener le nombre d'équipe a une puissance de deux
 		int j = indiceStandBy;
-		for(int i = indiceStandBy;i<indiceStandBy+(indice-indicePuissance);i++){
-			Arbitre a = Stock.getRandomArbitreLibre();
-			System.out.println(j+" oo "+current.size());
-			Match m = new Match(current.get(j),current.get(j+1),a,i,tour);
-			j=j+2;
-			currentMatch.add(m);
-			vainqueurEquipe.add(null);
+
+		for (int i = indiceStandBy; i < indiceStandBy
+				+ (indice - indicePuissance); i++) {
+			if (Stock.getArbitresLibres(type).size() != 0) {
+				Arbitre a = Stock.getRandomArbitreLibre(type);
+				Match m = new Match(current.get(j), current.get(j + 1), a, i,
+						tour);
+				j = j + 2;
+				currentMatch.add(m);
+				vainqueurEquipe.add(null);
+			}
+			else{
+				System.out.println("arf on a plus d'arbitre !");
+			}
 		}
 		tour ++;
 	}

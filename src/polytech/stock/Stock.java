@@ -222,13 +222,13 @@ public abstract class Stock
 	 * Récupère une liste d'arbitres libres.
 	 * @return Liste d'arbitres libres.
 	 */
-	public static List<Arbitre> getArbitresLibres()
+	public static List<Arbitre> getArbitresLibres(TypeEpreuve te)
 	{
 		List<Arbitre> arbitresLibres = new ArrayList<Arbitre>();
 		
 		for (Arbitre a : arbitres)
 		{
-			if (a.getBusy())
+			if (!a.getBusy()&&a.getCompetences().contains(te))
 			{
 				arbitresLibres.add(a);
 			}
@@ -241,8 +241,8 @@ public abstract class Stock
 	 * Récupérère un arbitre libre sélectionné aléatoirement.
 	 * @return Arbitre libre sélectionné aléatoirement.
 	 */
-	public static Arbitre getRandomArbitreLibre(){
-		List<Arbitre> arbitresLibres = getArbitresLibres();
+	public static Arbitre getRandomArbitreLibre(TypeEpreuve te){
+		List<Arbitre> arbitresLibres = getArbitresLibres(te);
 		int i = (int)Math.random()*(arbitresLibres.size()-1);
 		return arbitresLibres.get(i);
 	}
