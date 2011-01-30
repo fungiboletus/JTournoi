@@ -194,7 +194,7 @@ public class Epreuve extends TupleAvecID {
 	}
 	
 	public String toString(){
-		String s="";
+		String s="Epreuve de type : "+type;
 		for (ArrayList<Equipe> list : tableau){
 			System.out.println(list.size());
 			for(Equipe e : list){

@@ -93,7 +93,9 @@ public class Tournoi extends TupleAvecID {
         return typeEpreuves;
     }
 
-
+	/**
+	 * Méthode de lancement du tournoi
+	 */
 	public void startTournoi() {
 		if(!verificationTournoi()){
 			throw new RuntimeException("t'as pas lancé la vérification ...");
@@ -102,7 +104,15 @@ public class Tournoi extends TupleAvecID {
 			Epreuve e = new Epreuve(map.get(te),te);
 			epreuves.add(e);
 		}
-		
+	}
+	
+	public String toString(){
+		String s ="Bienvenue dans le tournoi : "+nom+"\n";
+		for(Epreuve e : epreuves){
+			s+=e.toString();
+		}
+		s+="\n";
+		return s;
 	}
 	
 }
