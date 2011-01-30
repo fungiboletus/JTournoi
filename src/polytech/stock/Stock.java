@@ -15,6 +15,7 @@ import polytech.jtournoi.Match;
 
 import polytech.stock.SQL.ArbitreSQL;
 import polytech.stock.SQL.EpreuveSQL;
+import polytech.stock.SQL.GestionSQL;
 import polytech.stock.XML.ArbitreXML;
 import polytech.stock.XML.EpreuveXML;
 import polytech.stock.SQL.JoueurSQL;
@@ -136,6 +137,9 @@ public abstract class Stock
 		new EquipeXML().enregistrerStock(equipes);
 		new MatchXML().enregistrerStock(matchs);
 		new EpreuveXML().enregistrerStock(epreuves);
+		
+		// Pour les gens qui jugent utile de sauvegarder plusieurs fois par exécution
+		GestionSQL.resetSuppressionAutomatique();
 		
 		new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);

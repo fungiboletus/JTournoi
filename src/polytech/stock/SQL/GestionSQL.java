@@ -174,7 +174,15 @@ public abstract class GestionSQL implements GestionnaireDeStock
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Certaines personnes sauvegardent plusieurs fois par exécution, il faut permettre
+	 * cette possibilité.
+	 */
+	public static void resetSuppressionAutomatique()
+	{
+		semaphoresSuppressions = null;
+	}
 	
 	/**
 	 * Renvoit la clause where de la condition si il y en a une.
@@ -238,7 +246,7 @@ public abstract class GestionSQL implements GestionnaireDeStock
 
 		} catch (SQLException e)
 		{
-			System.out.println("Impossible de récupérer les données : "+e.getMessage());
+			System.out.println("Impossible de récupérer les données de "+nom+": "+e.getMessage());
 		}
 
 		return liste;
@@ -338,7 +346,7 @@ public abstract class GestionSQL implements GestionnaireDeStock
 
 		} catch (SQLException e)
 		{
-			System.out.println("Impossible de sauvegarder : "+e.getMessage());
+			System.out.println("Impossible de sauvegarder "+nom+": "+e.getMessage());
 		}
 	}
 }
