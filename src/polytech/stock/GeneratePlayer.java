@@ -9,7 +9,7 @@ import polytech.personnes.*;
 
 public class GeneratePlayer {
 	
-	public static void main(){
+	public static void main(String args[]){
 		Stock.initialiserStockVide();
 		
 		//Création de 20 joueurs.
@@ -30,8 +30,8 @@ public class GeneratePlayer {
 	Joueur j15 = new Joueur("Wheaton","Wil","l");
 	Joueur j16 = new Joueur("Who","Bernadette","m");
 	Joueur j17 = new Joueur("Harper","Charly","n");
-	Joueur j18 = new Joueur("Harper","Alan","o");
-	Joueur j19 = new Joueur("Harper","Jack","p");
+	Joueur j18 = new Joueur("Harpers","Alan","o");
+	Joueur j19 = new Joueur("Haper","Jack","p");
 	Joueur j20 = new Joueur("Housekeeper","Berta","q");
 		
 		//Ajout de compétences (sports) aux joueurs.

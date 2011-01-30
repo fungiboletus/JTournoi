@@ -130,9 +130,9 @@ class Ihm {
      * Permet de récolter les équipes et de les vérifier
      * @return equipes La liste des équipes valides
      */
-    public static HashMap<Equipe,Joueur> recolterEquipes() throws Exception{
+    public static ArrayList<Equipe> recolterEquipes() throws Exception{
         ArrayList<Integer> equipesId = new ArrayList<Integer>();
-        HashMap<Equipe,Joueur> equipes = new HashMap<Equipe,Joueur>();
+        ArrayList<Equipe> equipes = new ArrayList<Equipe>();
         Scanner s;
         //On liste les équipes possibles
         for (int i = 0; i < Stock.getEquipe().size(); i++)
@@ -158,7 +158,7 @@ class Ihm {
         for(int i=0; i<equipesId.size(); i++){
             for(int j=0; j<Stock.getEquipe().size(); j++){
                 if(Stock.getEquipe().get(j).getId() == equipesId.get(i)){
-                    equipes.put(Stock.getEquipe().get(j), new Joueur());
+                    equipes.add(Stock.getEquipe().get(j));
                 }
             }
         }
@@ -218,5 +218,6 @@ class Ihm {
         }
         return joueurs;
     }
+    
     
 }

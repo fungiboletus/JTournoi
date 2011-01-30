@@ -19,7 +19,8 @@ public class Test {
 	 */
     public static void main(String[] args) {
         ihm = new Ihm();
-        Stock.chargerStock(TypeChargement.SQL);
+        GeneratePlayer.main(null);
+        //Stock.chargerStock(TypeChargement.XML);
 
         // On log la personne qui veut se logger
         while(true){
@@ -235,7 +236,7 @@ public class Test {
         System.out.println("Voici les épreuves disponibles :");
         while(true){
             ArrayList<TypeEpreuve> epreuves = new ArrayList<TypeEpreuve>();
-            HashMap<Equipe,Joueur> equipes = new HashMap<Equipe,Joueur>();
+            ArrayList<Equipe> equipes = new ArrayList<Equipe>();
             // On récolte les épreuves
             try{
                 epreuves = Ihm.recolterEpreuves();
@@ -254,44 +255,61 @@ public class Test {
                 return;
             }
             
-            // On demande le joueur dans le cas des épreuves individuelles
-            for(int i=0; i<epreuves.size(); i++){
-                if(epreuves.get(i).isIndivideul()){
-                    for(Equipe eq : equipes.keySet()){
-                        ArrayList<Joueur> joueursCompetents = ihm.getJoueursCompetents(eq, epreuves.get(i));
-                        //Si un seul joueur convient, on le choisit directement
-                        if(joueursCompetents.size()==1){
-                            equipes.put(eq, joueursCompetents.get(0));
-                        }
-                        //Sinon on demandera un choix à l'organisateur
-                        else {
-                            Joueur j = new Joueur();
-                            // On vérifie que le joueur est bien compétent pour cette épreuve
-                            while(!j.getCompetences().contains(epreuves.get(i))){
-                                System.out.println("Entrez le nom du joueur de l'équipe "+eq.getNom()+" pour l'épreuve "+epreuves.get(i).getNom());
-                                System.out.println("Vous pouvez choisir parmi :");
-                                String sJ = "";
-                                for(int k=0; k<joueursCompetents.size(); k++){
-                                    sJ += joueursCompetents.get(i).getNom()+" ";
-                                }
-                                System.out.println(sJ);
-                                Scanner s = new Scanner(System.in);
-                                String lue = s.nextLine();
-                                j = ihm.getJoueurByName(lue, eq);
-                                equipes.put(eq, j);
-                            }
-                        }
-                    }
-                }
-            }
-            
             try {
                 System.out.println("Entrez le nom du tournoi :");
                 Scanner s = new Scanner(System.in);
                 String lue = s.nextLine();
-                //Moteur.creerTournoi(lue, equipes, epreuves);
+                Tournoi tournoi = Moteur.creerTournoi(lue, epreuves);
+            
+                // On demande le joueur dans le cas des épreuves individuelles
+                for(int i=0; i<epreuves.size(); i++){
+                    HashMap<Equipe, Joueur> map = new HashMap<Equipe, Joueur>();
+                    // Pour les épreuves individuelles
+                    if(epreuves.get(i).isIndivideul()){
+                        for(Equipe eq : equipes){
+                            //Si l'épreuve est aussi dans la liste des épreuves de l'équipe
+                            if(eq.getEpreuves().contains(epreuves.get(i))){
+                                ArrayList<Joueur> joueursCompetents = ihm.getJoueursCompetents(eq, epreuves.get(i));
+                                //Si un seul joueur convient, on le choisit directement
+                                if(joueursCompetents.size()==1){
+                                    map.put(eq, joueursCompetents.get(0));
+                                }
+                                //Sinon on demandera un choix à l'organisateur
+                                else {
+                                    Joueur j = new Joueur();
+                                    // On vérifie que le joueur est bien compétent pour cette épreuve
+                                    while(!j.getCompetences().contains(epreuves.get(i))){
+                                        System.out.println("Entrez le nom du joueur de l'équipe "+eq.getNom()+" pour l'épreuve "+epreuves.get(i).getNom());
+                                        System.out.println("Vous pouvez choisir parmi :");
+                                        String sJ = "";
+                                        for(int k=0; k<joueursCompetents.size(); k++){
+                                            sJ += joueursCompetents.get(i).getNom()+" ";
+                                        }
+                                        System.out.println(sJ);
+                                        s = new Scanner(System.in);
+                                        lue = s.nextLine();
+                                        j = ihm.getJoueurByName(lue, eq);
+                                        map.put(eq, j);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //Pour les épreuves collectives
+                    else{
+                        for(Equipe eq : equipes){
+                            if(eq.getEpreuves().contains(epreuves.get(i))){
+                                map.put(eq, null);
+                            }
+                        }
+                    }
+                    if(!Moteur.setEpreuve(tournoi, epreuves.get(i), map))System.out.println("lol");
+                }
+                Moteur.startTournoi(tournoi);
+            
             } catch (Exception e) {
                 System.out.print("La création du tournoi a échoué.");
+                System.out.print(e+"\n");
                 return;
             }
             

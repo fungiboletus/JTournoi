@@ -16,7 +16,7 @@ public abstract class Moteur {
 		return t;
 	}
 	
-	public void startTournoi(Tournoi t) throws Exception{
+	public static void startTournoi(Tournoi t) throws Exception{
 		if(t.verificationTournoi()){
 			t.startTournoi();
 		}
@@ -26,7 +26,7 @@ public abstract class Moteur {
 	}
 	
 	public static boolean setEpreuve(Tournoi t, TypeEpreuve te,HashMap<Equipe,Joueur> equipes){
-		if(t.getEpreuves().contains(te)){
+	    if(t.getTypeEpreuves().contains(te)){
 			if(t.setEpreuve(te,equipes)){
 				return true;
 			}
