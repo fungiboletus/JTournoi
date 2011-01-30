@@ -369,7 +369,7 @@ public class Test {
                                         System.out.println("Vous pouvez choisir parmi :");
                                         String sJ = "";
                                         for(int k=0; k<joueursCompetents.size(); k++){
-                                            sJ += joueursCompetents.get(i).getNom()+" ";
+                                            sJ += joueursCompetents.get(k).getNom()+" ";
                                         }
                                         System.out.println(sJ);
                                         s = new Scanner(System.in);
