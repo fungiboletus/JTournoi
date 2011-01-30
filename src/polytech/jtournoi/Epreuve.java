@@ -28,6 +28,7 @@ public class Epreuve extends TupleAvecID {
 	public Epreuve()
 	{
 	}
+	
 	public Epreuve(HashMap<Equipe,Joueur> eqj, TypeEpreuve te){
 		this((ArrayList<Equipe>) eqj.keySet(),te);
 		map=eqj;

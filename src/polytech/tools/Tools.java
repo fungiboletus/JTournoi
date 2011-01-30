@@ -39,7 +39,7 @@ public abstract class Tools {
 		ArrayList<TypeEpreuve> epreuve = new ArrayList<TypeEpreuve>();
 		for(Equipe e : equipes){
 			for(TypeEpreuve te : e.getEpreuves()){
-				if(!containsTypeEpreuve(epreuve,te)){
+				if(!epreuve.contains(te)){
 					epreuve.add(te);
 				}
 			}
@@ -48,15 +48,7 @@ public abstract class Tools {
 	}
 	
 
-	public static boolean containsTypeEpreuve(ArrayList<TypeEpreuve> epreuves, TypeEpreuve te){
-		for(TypeEpreuve e : epreuves){
-			if (e.getId()==te.getId()){
-				return true;
-			}
-		}
-		return false;
-	}
-	
+
 	public static boolean epreuveSansEquipes(TypeEpreuve te, ArrayList<Equipe> equipes){
 		int inc =0;
 		for(Equipe e : equipes){
@@ -79,7 +71,7 @@ public abstract class Tools {
 	public static ArrayList<Equipe> equipeParEpreuve(TypeEpreuve te, ArrayList<Equipe> equipes){
 		ArrayList<Equipe> list = new ArrayList<Equipe>();
 		for(Equipe e : equipes){
-			if(containsTypeEpreuve(e.getEpreuves(),te)){
+			if(e.getEpreuves().contains(te)){
 				list.add(e);
 			}
 		}

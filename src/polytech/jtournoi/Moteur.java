@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
-import polytech.tools.Tools;
 
 public abstract class Moteur {
 

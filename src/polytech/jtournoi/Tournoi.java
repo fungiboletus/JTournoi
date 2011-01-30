@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import polytech.personnes.Joueur;
 import polytech.stock.TupleAvecID;
-import polytech.tools.Tools;
 
 public class Tournoi extends TupleAvecID {
 

@@ -56,8 +56,7 @@ public abstract class Stock
 		organisateurs = new ArrayList<Organisateur>();
 		equipes = new ArrayList<Equipe>();
 		matchs = new ArrayList<Match>();
-		epreuves = new ArrayList<Epreuve>();
-		
+		epreuves = new ArrayList<Epreuve>();		
 		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
 	}
 
