@@ -47,7 +47,7 @@ public class JoueurXML extends PersonneCompetenteXML
 		
 		noeud.addContent(new Element("nom").setText(j.getNom()));
 		noeud.addContent(new Element("prenom").setText(j.getPrenom()));
-		noeud.addContent(new Element("motdepasse").setText(j.getPassword()));
+		noeud.addContent(new Element("motdepasse").setText(j.getPasswordHash()));
 
 		noeud.addContent(genererCompetences(j));
 

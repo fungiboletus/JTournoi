@@ -36,7 +36,7 @@ class Ihm {
                 Scanner s = new Scanner(System.in);
                 String lue = s.nextLine();
                 // Si tout est bon, l'utilisateur est loggé
-                if (lue.equals(Stock.getOrganisateurs().get(i).getPassword())) {
+                if (Stock.getOrganisateurs().get(i).identicalPassword(lue)) {
                     loggedName = Stock.getOrganisateurs().get(i).getNom();
                     loggedType = "organisateur";
                 }
@@ -52,7 +52,7 @@ class Ihm {
                     Scanner s = new Scanner(System.in);
                     String lue = s.nextLine();
                     // Si tout est bon, l'utilisateur est loggé
-                    if (lue.equals(Stock.getArbitres().get(i).getPassword())) {
+                    if (Stock.getArbitres().get(i).identicalPassword(lue)) {
                         loggedName = Stock.getArbitres().get(i).getNom();
                         loggedType = "arbitre";
                     }
@@ -69,7 +69,7 @@ class Ihm {
                     Scanner s = new Scanner(System.in);
                     String lue = s.nextLine();
                     // Si tout est bon, l'utilisateur est loggé
-                    if (lue.equals(Stock.getJoueurs().get(i).getPassword())) {
+                    if (Stock.getJoueurs().get(i).identicalPassword(lue)) {
                         loggedName = Stock.getJoueurs().get(i).getNom();
                         loggedType = "joueur";
                     }

@@ -43,7 +43,7 @@ public class OrganisateurXML extends GestionXML
 		
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));
-		noeud.addContent(new Element("motdepasse").setText(a.getPassword()));
+		noeud.addContent(new Element("motdepasse").setText(a.getPasswordHash()));
 
 		return noeud;
 	}

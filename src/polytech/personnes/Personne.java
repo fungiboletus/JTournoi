@@ -1,6 +1,10 @@
 package polytech.personnes;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import polytech.stock.TupleAvecID;
+import polytech.tools.Tools;
 
 /**
  * Gestion d'une personne dans le cadre d'un tournoi sportif.
@@ -22,9 +26,13 @@ public abstract class Personne extends TupleAvecID
 	protected String prenom;
 
 	/**
-	 * Le mot de passe de la personne.
+	 * Somme de contrôle du mot de passe de la personne.
+	 * 
+	 * La somme de contrôle est de type SHA1, et il est effectué 
+	 * un salage, pour éviter le cassage avec les tables d'arcs en ciel,
+	 * ou par un dictionnaire de SHA1.
 	 */
-	protected String password;
+	protected String passwordHash;
 
 	/**
 	 * Constructeur d'une personne.
@@ -41,7 +49,7 @@ public abstract class Personne extends TupleAvecID
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.password = password;
+		setPassword(password);
 	}
 
 	/**
@@ -78,9 +86,9 @@ public abstract class Personne extends TupleAvecID
 	 * 
 	 * @return Le mot de passe de la personne.
 	 */
-	public String getPassword()
+	public String getPasswordHash()
 	{
-		return password;
+		return passwordHash;
 	}
 
 	/**
@@ -113,9 +121,43 @@ public abstract class Personne extends TupleAvecID
 	 */
 	public void setPassword(String password)
 	{
-		this.password = password;
+		this.passwordHash = sommePassword(password);
 	}
 
+	/**
+	 * Calcule la somme de contrôle d'un mot de passe
+	 * @param password Mot de passe
+	 */
+	private String sommePassword(String password)
+	{
+		try
+		{
+			// Sallage du mot de passe
+			password = "JTournoi"+password+"JTournoi"+password.length();
+			
+			// Calcul de la somme de contrôle
+			return Tools.bytesToHex(MessageDigest.getInstance("SHA1").digest(password.getBytes()));
+			
+		} catch (NoSuchAlgorithmException e)
+		{
+			System.out.println("Impossible de calculer la somme de contrôle du mot de passe : "+e.getMessage());
+			return "";
+		}	
+	}
+	
+	/**
+	 * Est-ce que le mot de passe est identique celui de la personne ?
+	 * 
+	 * Cela permet de vérifier le mot de passe, pour se connecter par exemple.
+	 * 
+	 * @param password Mot de passe à vérifier
+	 * @return Vrai si les mots de passes sont identiques
+	 */
+	public boolean identicalPassword(String password)
+	{
+		return passwordHash.equals(sommePassword(password));
+	}
+	
 	/**
 	 * Methode toString.
 	 * 

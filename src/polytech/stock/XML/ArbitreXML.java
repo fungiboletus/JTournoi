@@ -45,7 +45,7 @@ public class ArbitreXML extends PersonneCompetenteXML
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));
-		noeud.addContent(new Element("motdepasse").setText(a.getPassword()));
+		noeud.addContent(new Element("motdepasse").setText(a.getPasswordHash()));
 
 		noeud.addContent(genererCompetences(a));
 

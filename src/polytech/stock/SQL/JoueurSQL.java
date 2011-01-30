@@ -68,7 +68,7 @@ public class JoueurSQL extends PersonneCompetenteSQL
 			declarationPreparee.setInt(1, a.getId());
 			declarationPreparee.setString(2, a.getNom()); 
 			declarationPreparee.setString(3, a.getPrenom()); 
-			declarationPreparee.setString(4, a.getPassword()); 
+			declarationPreparee.setString(4, a.getPasswordHash()); 
 			declarationPreparee.setInt(5, a.getScore());
 		} catch (SQLException e)
 		{
