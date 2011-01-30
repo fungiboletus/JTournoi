@@ -6,4 +6,14 @@ S'occupe de toute la création des épreuves des match et de la réalisation des
 
 Création des principaux tests ...
 Envoie de multiple mail et passa son temps a courrir après le code de Roman et a corriger le code de Sylvestre
-}
+
+
+Syl :
+
+Création des classes equipes, et des classes du package personne (arbitre, joueur, organisateur, personne et personneCompetente)
+avec parfois de l'aide pour les notions nouvelles (comme l'héritage) ou certains bugs
+
+Il faudrait aussi rajouter que la première journée du projet (lundi donc), on a taffé plusieurs
+heures ensemble afin de bien délimiter les tâches et pour efficacement mettre en place l'architecture 
+du projet (c'est tj bien de mettre un peu de blabla et en meme tempss on s'est vraiment posé des questions
+existentielles pour pas mal de détail donc autant le dire!).
