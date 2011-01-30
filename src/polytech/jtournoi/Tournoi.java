@@ -21,6 +21,7 @@ public class Tournoi extends TupleAvecID {
 	}
 	
 	public boolean setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes){
+	    //System.out.println(map);
 		if(!map.containsKey(te)){
 			map.put(te, equipes);
 			return true;
@@ -30,6 +31,7 @@ public class Tournoi extends TupleAvecID {
 	
 	public boolean verificationTournoi() {
 		if (typeEpreuves.size() != 0) {
+		    //System.out.println(map);
 			for (TypeEpreuve te : typeEpreuves) {
 				// on vérifie que pour chaque type d'épreuve on ait au moins
 				// deux équipes pour la joueur
@@ -76,7 +78,11 @@ public class Tournoi extends TupleAvecID {
 	public ArrayList<Epreuve> getEpreuves(){
 		return epreuves;
 	}
-
+	
+	
+	public ArrayList<TypeEpreuve> getTypeEpreuves(){
+        return typeEpreuves;
+    }
 
 
 
