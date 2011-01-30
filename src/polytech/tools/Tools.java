@@ -70,14 +70,11 @@ public abstract class Tools
 		return false;
 	}
 
-	public static boolean epreuveSansEquipes(TypeEpreuve te,
-			ArrayList<Equipe> equipes)
-	{
-		int inc = 0;
-		for (Equipe e : equipes)
-		{
-			if (e.getEpreuves().contains(te))
-			{
+
+	public static boolean epreuveSansEquipes(TypeEpreuve te, ArrayList<Equipe> equipes){
+		int inc =0;
+		for(Equipe e : equipes){
+			if(e.getEpreuves().contains(te)){
 				inc++;
 			}
 		}

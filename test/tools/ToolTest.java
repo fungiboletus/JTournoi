@@ -64,12 +64,6 @@ public class ToolTest {
 	
 	
 	@Test
-	public void getContainsTypeEpreuve(){
-		ArrayList<TypeEpreuve> liste = (ArrayList<TypeEpreuve>) Stock.getTypesEpreuves();
-		assertTrue(Tools.containsTypeEpreuve(liste,liste.get(0)));
-	}
-	
-	@Test
 	public void epreuveSansEquipe(){
 		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 		equipes.add(creerEquipe(0));
