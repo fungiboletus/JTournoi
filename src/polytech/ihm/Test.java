@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.stock.*;
 import polytech.exception.EpreuveDejaExistanteException;
@@ -23,7 +24,7 @@ public class Test {
         ihm = new Ihm();
         GeneratePlayer.generer();
         //Stock.chargerStock(TypeChargement.SQL);
-
+        Moteur.init();
         // On log la personne qui veut se logger
         while(true){
             while (ihm.loggedName.equals("")) {
@@ -83,7 +84,7 @@ public class Test {
                     creerTournoi();
                     break;
                 case 4:
-                    System.out.println("lol");
+                    gererTournoi();
                     break;
                 case 5:
                     System.out.println("lol");
@@ -99,7 +100,7 @@ public class Test {
                     break;
                 case 9:
                     ihm.unlog();
-                    break;
+                    return;
                 case 0:
                     Stock.enregistrerStock();
                     System.exit(0);
@@ -134,11 +135,11 @@ public class Test {
                 int lue = s.nextInt();
                 switch (lue) {
                 case 1:
-                    System.out.println("lol");
+                    entrerResultat();
                     break;
                 case 9:
                     ihm.unlog();
-                    break;
+                    return;
                 case 0:
                     Stock.enregistrerStock();
                     System.exit(0);
@@ -157,7 +158,6 @@ public class Test {
      * Interface joueur
      */
     public static void joueur() {
-        boolean out = false;
         while (true) {
             System.out.println("****************************************");
             System.out.println("*              TOURNOI                 *");
@@ -181,8 +181,7 @@ public class Test {
                     break;
                 case 9:
                     ihm.unlog();
-                    out = true;
-                    break;
+                    return;
                 case 0:
                     Stock.enregistrerStock();
                     System.exit(0);
@@ -192,13 +191,69 @@ public class Test {
                 System.out.println("Ce que vous avez rentré n'est pas valide.");
                 e.printStackTrace();
             }
-            //Si out est vrai, on revient à la fenêtre de connexion
-            if(out) break;
         }
     }
     
+    /**
+     * Permet à l'arbitre d'entrer le résultat de son match en cours.
+     */
+    public static void entrerResultat(){
+        Arbitre a = new Arbitre();
+        // On cherche l'objet arbitre de l'arbitre connecté
+        for(int i=0; i<Stock.getArbitres().size(); i++){
+            if(Stock.getArbitres().get(i).getNom().equals(ihm.loggedName))
+                a = Stock.getArbitres().get(i);
+        }
+        if(ihm.getTournoi(a).size()>0){
+            Tournoi t = ihm.getTournoi(a).get(0);
+            Match m = Moteur.getMatch(a, t);
+            //Résultat équipe 1
+            System.out.println("Veuillez entrer le score de l'équipe "+m.getE1().getNom());
+            Scanner s;
+            int lue=0;
+            int place=0;
+            while(true){
+                try{
+                    s = new Scanner(System.in);
+                    lue = s.nextInt();
+                }
+                catch(Exception e){
+                    System.out.println("La syntaxe que vous avez entrée est incorrecte.");
+                    continue;
+                }
+                break;
+            }
+            for(int i=0; i<Stock.getMatchs().size(); i++){
+                if(Stock.getMatchs().get(i).equals(m)){
+                    Stock.getMatchs().get(i).setScE1(lue);
+                    place = i;
+                    break;
+                }
+            }
+            //Résultat équipe 2
+            System.out.println("Veuillez entrer le score de l'équipe "+m.getE2().getNom());
+            while(true){
+                try{
+                    s = new Scanner(System.in);
+                    lue = s.nextInt();
+                }
+                catch(Exception e){
+                    System.out.println("La syntaxe que vous avez entrée est incorrecte.");
+                    continue;
+                }
+                break;
+            }
+            Stock.getMatchs().get(place).setScE2(lue);
+            System.out.println("Vous avez bien entré les résultats de ce match");
+        }
+        else{
+            System.out.println("Vous n'arbitrez aucun match actuellement...");
+        }
+    }
     
-    // Permet de créer une équipe
+    /**
+     * Permet de créer une équipe
+     */
     public static void creerEquipe() {
         Scanner s;
         String lue = "";
@@ -587,17 +642,19 @@ public class Test {
                 System.out.println("L'épreuve existe déjà.");
             }
             catch (Exception e) {
+                System.out.println("La création du tournoi a échoué.");
                 System.out.println(e);
                 //e.printStackTrace();
                 return;
-            }
-            finally{
-                System.out.println("La création du tournoi a échoué.");
             }
             
             System.out.println("Tournoi créé.\n");
             return;
         }
+    }
+    
+    public static void gererTournoi() {
+        System.out.println(Moteur.listeTournoi.get(0));
     }
     
     

@@ -88,6 +88,10 @@ public class Tournoi extends TupleAvecID {
 		return epreuves;
 	}
 	
+	public ArrayList<Equipe> getEquipes(){
+	    return equipes;
+	}
+	
 	
 	public ArrayList<TypeEpreuve> getTypeEpreuves(){
         return typeEpreuves;
