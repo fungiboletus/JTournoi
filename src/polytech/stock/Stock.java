@@ -60,6 +60,8 @@ public abstract class Stock
 		epreuves = new ArrayList<Epreuve>();
 		
 		typesEpreuves = CatalogueEpreuves.recupererTypesEpreuves();
+		
+		gererOrganisateurRacine();
 	}
 
 	/**
