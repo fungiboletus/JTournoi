@@ -372,4 +372,14 @@ public class Equipe extends TupleAvecID
     {
 	return "["+id+"] " +nom+ " : " +membres.size()+" participants.";
     }
+    
+    /**
+     *Methode toString alternative.
+     *@return L'équipe..
+     */
+
+    public String toString2()
+    {
+    return "["+id+"] " +nom+ " : " +membres.size()+" participants.";
+    }
 }

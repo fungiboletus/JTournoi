@@ -63,13 +63,13 @@ public class Epreuve extends TupleAvecID {
 		int indiceStandBy = indice-(indice-indicePuissance)*2;
 		//boucle uniquement pour le premier tour pour ramener le nombre d'équipe a une puissance de 2
 		for(int i=0;i<indiceStandBy;i++){
-			System.out.println("ça boucle ? ");
 			vainqueurEquipe.add(current.get(i));
 		}
 		//on réalise autant de match qu'il faut pour ramener le nombre d'équipe a une puissance de deux
 		int j = indiceStandBy;
 		for(int i = indiceStandBy;i<indiceStandBy+(indice-indicePuissance);i++){
 			Arbitre a = Stock.getRandomArbitreLibre();
+			System.out.println(j+" oo "+current.size());
 			Match m = new Match(current.get(j),current.get(j+1),a,i,tour);
 			j=j+2;
 			currentMatch.add(m);

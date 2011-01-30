@@ -73,7 +73,7 @@ public class Test {
                     System.out.println("lol");
                     break;
                 case 2:
-                    System.out.println("lol");
+                    gererEquipe();
                     break;
                 case 3:
                     creerTournoi();
@@ -228,6 +228,92 @@ public class Test {
     }
     
     
+    // Permet de gérer une équipe
+    public static void gererEquipe() {
+        boolean verif = false; // Indique si on quitte ce menu
+        while (true) {
+            if (verif)
+                break;
+            if (Stock.getEquipe().size() > 0)
+                System.out.println("Voici les équipes :");
+            for (int i = 0; i < Stock.getEquipe().size(); i++) {
+                System.out.println("\t" + Stock.getEquipe().get(i));
+            }
+            System.out
+                    .print("Le nom de l'équipe que vous voulez gérer (-1 pour revenir au menu précédent): ");
+            Scanner s = new Scanner(System.in);
+            String lue = s.nextLine();
+            int a = -1;
+            if (lue.equals("-1"))
+                break;
+            for (int i = 0; i < Stock.getEquipe().size(); i++) {
+                if (Stock.getEquipe().get(i).getNom().equals(lue)) {
+                    a = i;
+                    break;
+                }
+            }
+            if (a != -1) {
+                if (!lue.equals("-1")) {
+                    while (true) {
+                        System.out
+                                .println("****************************************");
+                        System.out
+                                .println("*           GERER UNE EQUIPE           *");
+                        System.out
+                                .println("****************************************");
+                        System.out
+                                .println("*  1. Ajouter des joueurs              *");
+                        System.out
+                                .println("*  2. Supprimer des joueurs            *");
+                        System.out
+                                .println("*  3. Supprimer l'équipe               *");
+                        System.out
+                                .println("*  4. Afficher l'équipe                *");
+                        System.out
+                                .println("*                                      *");
+                        System.out
+                                .println("*  0. Revenir au menu précédent        *");
+                        System.out
+                                .println("****************************************");
+                        System.out.print("Votre choix: ");
+                        try {
+                            s = new Scanner(System.in);
+                            int lue1 = s.nextInt();
+                            switch (lue1) {
+                            case 0:
+                                verif = true;
+                                break;
+                            case 1:
+                                //ajouteJoueurs(lue);
+                                break;
+                            case 2:
+                                //supprimeJoueurs(lue);
+                                break;
+                            case 3:
+                                //if (supprimeEquipe(lue))
+                                //    verif = true;
+                                break;
+                            case 4:
+                                System.out.println(Stock.getEquipe().get(a));
+                                break;
+                            }
+                            if (verif)
+                                break;
+
+                        } catch (Exception e) {
+                            System.out
+                                    .println("Ce que vous avez rentré n'est pas valide.");
+                        }
+                    }
+                }
+            } else
+                System.out.println("Cette équipe n'existe pas.");
+        }
+    }
+    
+    
+    
+    
     /**
      * Permet à l'organisateur de créer un tournoi
      * 
@@ -308,8 +394,9 @@ public class Test {
                 Moteur.startTournoi(tournoi);
             
             } catch (Exception e) {
-                System.out.print("La création du tournoi a échoué.");
-                System.out.print(e+"\n");
+                System.out.println("La création du tournoi a échoué.");
+                System.out.println(e);
+                e.printStackTrace();
                 return;
             }
             
@@ -319,6 +406,75 @@ public class Test {
     }
     
     
+    /*// Permet de choisir un tournoi et de le gérer
+    public static void gererTournoi() {
+        if (tournois.size() == 0) {
+            System.out.println("Il n'existe aucun tournoi actuellement.");
+            return;
+        }
+        Scanner s;
+        int lue;
+        System.out.println("Tournois : ");
+        int index;
+        while (true) {
+            for (int i = 0; i < tournois.size(); i++)
+                System.out.println("\t Tournoi " + (i + 1) + ", discipline : "
+                        + tournois.get(i).getSport().getNom()
+                        + ", nombre d'équipes initial : "
+                        + tournois.get(i).getNombreEquipes());
+            System.out
+                    .print("Entrez le numéro du tournoi que vous voulez continuer ? (-1 pour revenir) ");
+            s = new Scanner(System.in);
+            lue = s.nextInt();
+            if (lue == -1)
+                return;
+            index = lue - 1;
+            // Un numéro de tournoi doit être entre 1 et l'ensemble des tournois
+            if (index > tournois.size() || index < 0) {
+                System.out
+                        .println("Ce tournoi n'existe pas, veuillez recommencer : ");
+                continue;
+            }
+            else break;
+        }
+        gererLastTournoi(index);
+    }
+    
+    // permet de gérer le dernier tournoi entré par défaut ou celui qu'on veut
+    public static void gererTournoi(int id) {
+        if(id==-1) id = tournois.size()-1;
+        Scanner s;
+        while (true) {
+            System.out.println("****************************************");
+            System.out.println("*           GERER LE TOURNOI           *");
+            System.out.println("****************************************");
+            System.out.println("*  1. Jouer un match                   *");
+            System.out.println("*  2. Jouer tous les matchs            *");
+            System.out.println("*  3. Afficher les matchs joués        *");
+            System.out.println("*                                      *");
+            System.out.println("*  0. Revenir au menu précédent        *");
+            System.out.println("****************************************");
+            System.out.print("Votre choix: ");
+            try {
+                s = new Scanner(System.in);
+                int lue1 = s.nextInt();
+                switch (lue1) {
+                case 0:
+                    return;
+                case 1:
+                    tournois.get(index).run();System.out.println(tournois.get(index));
+                    break;
+                case 2:
+                    tournois.get(index).runAll();System.out.println(tournois.get(index));
+                    break;
+                case 3:
+                    System.out.println(tournois.get(index));
+                }
 
+            } catch (Exception e) {
+                System.out.println("Ce que vous avez rentré n'est pas valide.");
+            }
+        }
+    }*/
 
 }
