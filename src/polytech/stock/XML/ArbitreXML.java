@@ -21,11 +21,11 @@ public class ArbitreXML extends PersonneCompetenteXML
 	{
 		Element noeud = (Element) element;
 
-		Arbitre a = new Arbitre(
-				noeud.getChildText("nom"),
-				noeud.getChildText("prenom"),
-				noeud.getChildText("motdepasse")
-			);
+		Arbitre a = new Arbitre();
+		
+		a.setNom(noeud.getChildText("nom"));
+		a.setPrenom(noeud.getChildText("prenom"));
+		a.setPasswordHash(noeud.getChildText("motdepasse"));
 
 		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
 		
@@ -45,7 +45,7 @@ public class ArbitreXML extends PersonneCompetenteXML
 
 		noeud.addContent(new Element("nom").setText(a.getNom()));
 		noeud.addContent(new Element("prenom").setText(a.getPrenom()));
-		noeud.addContent(new Element("motdepasse").setText(a.getPassword()));
+		noeud.addContent(new Element("motdepasse").setText(a.getPasswordHash()));
 
 		noeud.addContent(genererCompetences(a));
 

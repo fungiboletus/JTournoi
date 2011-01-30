@@ -19,7 +19,7 @@ public class Test {
 	 */
     public static void main(String[] args) {
         ihm = new Ihm();
-        GeneratePlayer.main(null);
+        GeneratePlayer.generer();
         //Stock.chargerStock(TypeChargement.XML);
 
         // On log la personne qui veut se logger
