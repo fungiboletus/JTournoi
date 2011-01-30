@@ -1,33 +1,27 @@
+JTournoi.
 
-Stéphane : 
-Création des class épreuves Match Moteur tournoi 
-Correction des class equipes et joueur
-S'occupe de toute la création des épreuves des match et de la réalisation des tournois
+JTournoi est un programme de gestion de tournois en console.
 
-Création des principaux tests ...
-Envoie de multiple mail et passa son temps a courrir après le code de Roman
+Il permet de gérer des tournois sportifs de différents types d'épreuves. Les joueurs, arbitres, et organisateurs disposent d'une interface console, après connexion.  
 
-Syl :
+Les données traités sont sauvegardées au format XML et Sqlite.
 
-Création des classes equipes, et des classes du package personne (arbitre, joueur, organisateur, personne et personneCompetente)
-avec parfois de l'aide pour les notions nouvelles (comme l'héritage) ou certains bugs
+# Dépendances
+Il est programmé en Java, et il nécessite les libraires junit, jdom, sqlite, et opencsv.
 
-Il faudrait aussi rajouter que la première journée du projet (lundi donc), on a taffé plusieurs
-heures ensemble afin de bien délimiter les tâches et pour efficacement mettre en place l'architecture 
-du projet (c'est tj bien de mettre un peu de blabla et en meme tempss on s'est vraiment posé des questions
-existentielles pour pas mal de détail donc autant le dire!).
+Les librairies sqlite et opencsv sont fournies. Les autres doivent se trouver dans votre système.
 
-Roman :
+# Catalogue
+Un fichier Catalogue.csv est fourni. Vous pouvez le modifier, mais prêtez attention aux identifiants de la première colonne. Les types d'épreuves sont reliés à ces identifiants.
 
-Création de l'interface utilisateur, des classes du package polytech.ihm : Test qui est la classe main, Ihm qui est une classe outil pour Test.
+Comme ce catalogue est au format CSV, vous pouvez le modifier avec un tableur.
 
+# Administrateur
+Un compte administrateur est automatiquement créé lors du premier lancement. Il a pour identifiant root, et pour mot de passe password.
 
-Conclusion :
+# Sécurité
+Les mots de passes des différents utilisateurs ne sont pas stockés. Il est stocké à la place une somme de contrôle SHA1 après une opération de salage du mot de passe.
 
-Le projet, même si le cahier des charges, c'est de la grosse merde qui coule par tout les pores de la peau, et un super projet. Nous avons tous gagnés en expérience, même si j'en ai ma claque de faire des trucs qui ne serviront jamais. D'un point de vue technique, ce projet pédagogique n'a rien apporté du tout. C'est de la pure merde, qui sert à faire gaspiller le temps si précieux des étudiants.
-Le seul bénéfice de ce projet, c'est que si je rate ma vie et qu'il me vient un jour à faire des bases de données en java sans ORM, je n'aurais qu'à faire des copier collés.
-D'un point de vue gestion d'équipe, autant sur le point tactique que technique, tout s'est passé comme prévu. Tout le monde semble motivé, mais quand on regarde qui bosse, c'est pas vraiment la même histoire.
-
-Bref, si vous voulez dégoûter des étudiants de faire ce métier, le meilleur moyen de s'y prendre, c'est de leur faire faire trois fois le même projet au cours de l'année.
-
-MERCI
+# Service après vente
+L'équipe treize, qui développe ce programme n'est en aucun cas responsable de tout dommage que pourrait engendrer l'utilisation de JTournoi.
+Cependant, si vous rencontrez un problème, ou que vous souhaitez une fonctionnalité supplémentaire, n'hésitez pas à contacter l'équipe. Un devis sera réalisé.
