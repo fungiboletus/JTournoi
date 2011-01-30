@@ -16,3 +16,7 @@ Il faudrait aussi rajouter que la première journée du projet (lundi donc), on 
 heures ensemble afin de bien délimiter les tâches et pour efficacement mettre en place l'architecture 
 du projet (c'est tj bien de mettre un peu de blabla et en meme tempss on s'est vraiment posé des questions
 existentielles pour pas mal de détail donc autant le dire!).
+
+Roman :
+
+Création de l'interface utilisateur, des classes du package polytech.ihm : Test qui est la classe main, Ihm qui est une classe outil pour Test.
