@@ -1,5 +1,6 @@
 package polytech.stock;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,13 @@ public abstract class Stock
 		switch (mode)
 		{
 			case SQL:
+				// Vérification anti noobs
+				if (!(new File("canard.db").exists()))
+				{
+					System.out.println("La base de données n'existe pas…\nLe stock est donc vide.");
+					initialiserStockVide();
+					return;
+				}
 				gestionArbitres = new ArbitreSQL(); 
 				gestionJoueurs = new JoueurSQL(); 
 				gestionOrganisateurs = new OrganisateurSQL(); 
@@ -85,6 +93,13 @@ public abstract class Stock
 				gestionEpreuves = new EpreuveSQL();
 				break;
 			case XML:
+				// Vérification anti noobs
+				if (!(new File("organisateurs.xml").exists()))
+				{
+					System.out.println("Un fichier xml de base est introuvable…\nLe stock est donc vide.");
+					initialiserStockVide();
+					return;
+				}
 				gestionArbitres = new ArbitreXML(); 
 				gestionJoueurs = new JoueurXML(); 
 				gestionOrganisateurs = new OrganisateurXML(); 
