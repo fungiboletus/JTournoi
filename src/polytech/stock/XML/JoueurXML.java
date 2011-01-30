@@ -21,11 +21,11 @@ public class JoueurXML extends PersonneCompetenteXML
 	{
 		Element noeud = (Element) element;
 
-		Joueur j = new Joueur(
-				noeud.getChildText("nom"),
-				noeud.getChildText("prenom"),
-				noeud.getChildText("motdepasse")
-			);
+		Joueur j = new Joueur();
+		
+		j.setNom(noeud.getChildText("nom"));
+		j.setPrenom(noeud.getChildText("prenom"));
+		j.setPasswordHash(noeud.getChildText("motdepasse"));
 		
 		j.setId(Integer.parseInt(noeud.getAttributeValue("id")));
 		j.setScore(Integer.parseInt(noeud.getAttributeValue("score")));

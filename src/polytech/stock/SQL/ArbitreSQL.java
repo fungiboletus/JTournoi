@@ -29,7 +29,7 @@ public class ArbitreSQL extends PersonneCompetenteSQL
 			a.setId(rs.getInt(1));
 			a.setNom(rs.getString(2));
 			a.setPrenom(rs.getString(3));
-			a.setPassword(rs.getString(4));
+			a.setPasswordHash(rs.getString(4));
 
 		} catch (SQLException e)
 		{

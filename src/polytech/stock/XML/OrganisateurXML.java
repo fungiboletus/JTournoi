@@ -21,11 +21,11 @@ public class OrganisateurXML extends GestionXML
 	{
 		Element noeud = (Element) element;
 
-		Organisateur a = new Organisateur(
-				noeud.getChildText("nom"),
-				noeud.getChildText("prenom"),
-				noeud.getChildText("motdepasse")
-			);
+		Organisateur a = new Organisateur();
+				
+		a.setNom(noeud.getChildText("nom"));
+		a.setPrenom(noeud.getChildText("prenom"));
+		a.setPasswordHash(noeud.getChildText("motdepasse"));
 
 		a.setId(Integer.parseInt(noeud.getAttributeValue("id")));
 		

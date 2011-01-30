@@ -121,7 +121,19 @@ public abstract class Personne extends TupleAvecID
 	 */
 	public void setPassword(String password)
 	{
+		System.out.println(password);
 		this.passwordHash = sommePassword(password);
+		System.out.println(passwordHash);
+		System.out.println("canard");
+	}
+
+	/**
+	 * Spécifie la somme de contrôle du mot de passe de la personne.
+	 * @param passwordHash Hash
+	 */
+	public void setPasswordHash(String passwordHash)
+	{
+		this.passwordHash = passwordHash.toUpperCase();
 	}
 
 	/**
