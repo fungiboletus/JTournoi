@@ -9,7 +9,7 @@ Les données traités sont sauvegardées au format XML et Sqlite.
 # Dépendances
 Il est programmé en Java, et il nécessite les libraires junit, jdom, sqlite, et opencsv.
 
-Les librairies sqlite et opencsv sont fournies. Les autres doivent se trouver dans votre système.
+Les librairies jdom, sqlite et opencsv sont fournies. Junit n'est pas nécessaire au fonctionnement du programme.
 
 # Catalogue
 Un fichier Catalogue.csv est fourni. Vous pouvez le modifier, mais prêtez attention aux identifiants de la première colonne. Les types d'épreuves sont reliés à ces identifiants.
