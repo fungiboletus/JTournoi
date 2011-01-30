@@ -1,9 +1,11 @@
 package polytech.tools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
+import polytech.personnes.Joueur;
 
 /**
  * Classe contenant les outils qui servent à différents endroits du programme.
@@ -24,6 +26,14 @@ public abstract class Tools
 			i = i * 2;
 		}
 		return i / 2;
+	}
+	
+	public static ArrayList<Equipe> getEquipe(HashMap<Equipe,Joueur> eqj){
+		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+		for(Equipe e : eqj.keySet()){
+			equipes.add(e);
+		}
+		return equipes;
 	}
 
 	/**

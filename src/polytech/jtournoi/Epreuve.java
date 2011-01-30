@@ -30,7 +30,7 @@ public class Epreuve extends TupleAvecID {
 	}
 	
 	public Epreuve(HashMap<Equipe,Joueur> eqj, TypeEpreuve te){
-		this((ArrayList<Equipe>) eqj.keySet(),te);
+		this(Tools.getEquipe(eqj),te);
 		map=eqj;
 	}
 	
