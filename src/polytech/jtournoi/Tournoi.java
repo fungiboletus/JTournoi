@@ -85,7 +85,6 @@ public class Tournoi extends TupleAvecID {
     }
 
 
-
 	public void startTournoi() {
 		if(!verificationTournoi()){
 			throw new RuntimeException("t'as pas lancé la vérification ...");

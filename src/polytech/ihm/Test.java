@@ -20,7 +20,7 @@ public class Test {
     public static void main(String[] args) {
         ihm = new Ihm();
         GeneratePlayer.generer();
-        //Stock.chargerStock(TypeChargement.XML);
+        //Stock.chargerStock(TypeChargement.SQL);
 
         // On log la personne qui veut se logger
         while(true){
@@ -232,7 +232,7 @@ public class Test {
      * Permet à l'organisateur de créer un tournoi
      * 
      */
-    public static void creerTournoi() {
+    private static void creerTournoi() {
         System.out.println("Voici les épreuves disponibles :");
         while(true){
             ArrayList<TypeEpreuve> epreuves = new ArrayList<TypeEpreuve>();
@@ -317,5 +317,7 @@ public class Test {
             return;
         }
     }
+    
+    
 
 }

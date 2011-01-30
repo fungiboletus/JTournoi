@@ -137,12 +137,12 @@ public abstract class Stock
 		new MatchXML().enregistrerStock(matchs);
 		new EpreuveXML().enregistrerStock(epreuves);
 		
-		/*new ArbitreSQL().enregistrerStock(arbitres);
+		new ArbitreSQL().enregistrerStock(arbitres);
 		new JoueurSQL().enregistrerStock(joueurs);
 		new OrganisateurSQL().enregistrerStock(organisateurs);
 		new EquipeSQL().enregistrerStock(equipes);
 		new MatchSQL().enregistrerStock(matchs);
-		new EpreuveSQL().enregistrerStock(epreuves);*/
+		new EpreuveSQL().enregistrerStock(epreuves);
 		
 		gererOrganisateurRacine();
 	}
