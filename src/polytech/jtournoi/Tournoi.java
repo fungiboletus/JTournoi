@@ -1,7 +1,9 @@
 package polytech.jtournoi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import polytech.personnes.Joueur;
 import polytech.stock.TupleAvecID;
 import polytech.tools.Tools;
 
@@ -9,62 +11,68 @@ public class Tournoi extends TupleAvecID {
 
 	String nom;
 	ArrayList<Equipe> equipes = new ArrayList<Equipe>();
-	ArrayList<TypeEpreuve> typeEpreuvesIndi = new ArrayList<TypeEpreuve>();
-	ArrayList<TypeEpreuve> typeEpreuveCollec = new ArrayList<TypeEpreuve>();
+	ArrayList<TypeEpreuve> typeEpreuves = new ArrayList<TypeEpreuve>();
+	HashMap<TypeEpreuve,HashMap<Equipe,Joueur>> map = new HashMap<TypeEpreuve,HashMap<Equipe,Joueur>>();
 	ArrayList<Epreuve> epreuves = new ArrayList<Epreuve>();
 	
 	
-	public Tournoi(String nom){
+	public Tournoi(String nom, ArrayList<TypeEpreuve> te){
+		typeEpreuves =te;
 		this.nom=nom;
 	}
-
-	public void lancerTournoi(){
-
+	
+	public boolean setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes){
+		if(!map.containsKey(te)){
+			map.put(te, equipes);
+			return true;
+		}
+		return false;
 	}
 	
+	public boolean verificationTournoi() {
+		if (typeEpreuves.size() != 0) {
+			for (TypeEpreuve te : typeEpreuves) {
+				// on vérifie que pour chaque type d'épreuve on ait au moins
+				// deux équipes pour la joueur
+				if (!map.containsKey(te) || map.get(te).size() < 2) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
+	public boolean addEquipe(Equipe e, Joueur j, TypeEpreuve te){
+		if(map.containsKey(te)){
+			if(!map.get(te).containsKey(e)){
+				map.get(te).put(e, j);
+				return true;
+			}
+		}
+		return false;
+	}
 	
-//	public boolean verificationTournoi(){
-//		if(equipes.size()<2 || Tools.epreuvesSansEquipes(typeEpreuves, equipes)){
-//			return false;
-//		}
-//		return true;
-//	}
+	public boolean supprimerEpreuve(TypeEpreuve te){
+		if(typeEpreuves.contains(te)){
+			for(Epreuve e : epreuves){
+				if(e.getTypeEpreuve().equals(e)){
+					epreuves.remove(e);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
-	public boolean addEquipe(Equipe e){
-		if(!equipes.contains(e)){
-			equipes.add(e);
+	public boolean addTypeEpreuve(TypeEpreuve te){
+		if(!typeEpreuves.contains(te)){
+			typeEpreuves.add(te);
 			return true;
 		}
 		else{
 			return false;
 		}
 	}
-	
-//	public boolean supprimerEpreuve(TypeEpreuve te){
-//		if(typeEpreuves.contains(te)){
-//			for(Epreuve e : epreuves){
-//				if(e.getTypeEpreuve().equals(e)){
-//					epreuves.remove(e);
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
-	
-//	public boolean addTypeEpreuve(TypeEpreuve te) throws EpreuveSansEquipeException{
-//		if(!typeEpreuves.contains(te)){
-//			typeEpreuves.add(te);
-//			if(Tools.epreuveSansEquipes(te, equipes)){
-//				throw new EpreuveSansEquipeException();
-//			}
-//			return true;
-//		}
-//		else{
-//			return false;
-//		}
-//	}
 	
 	public ArrayList<Epreuve> getEpreuves(){
 		return epreuves;
@@ -74,7 +82,13 @@ public class Tournoi extends TupleAvecID {
 
 
 	public void startTournoi() {
-		System.out.println("on start o/");
+		if(!verificationTournoi()){
+			throw new RuntimeException("t'as pas lancé la vérification ...");
+		}
+		for(TypeEpreuve te : typeEpreuves){
+			Epreuve e = new Epreuve(map.get(te),te);
+			epreuves.add(e);
+		}
 		
 	}
 	

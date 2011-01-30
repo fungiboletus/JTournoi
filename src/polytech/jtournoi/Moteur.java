@@ -9,22 +9,29 @@ import polytech.tools.Tools;
 
 public abstract class Moteur {
 
-	static Tournoi t;
 	
 
-	public static Tournoi creerTournoi(String nom, HashMap<Equipe, Joueur> equipes, ArrayList<TypeEpreuve> epreuves) throws Exception{
-
-		if(Tools.epreuvesSansEquipes(epreuves,equipes)){
-			throw new EpreuveSansEquipeException();
-		}
-		else{
-			t = new Tournoi(nom);
-		}
+	public static Tournoi creerTournoi(String nom, ArrayList<TypeEpreuve> epreuves) {
+		Tournoi t = new Tournoi(nom,epreuves);
 		return t;
 	}
 	
-	public void startTournoi(Tournoi t){
-		t.startTournoi();
+	public void startTournoi(Tournoi t) throws Exception{
+		if(t.verificationTournoi()){
+			t.startTournoi();
+		}
+		else{
+			throw new Exception("Echec de la vérification du tournoi");
+		}
+	}
+	
+	public static boolean setEpreuve(Tournoi t, TypeEpreuve te,HashMap<Equipe,Joueur> equipes){
+		if(t.getEpreuves().contains(te)){
+			if(t.setEpreuve(te,equipes)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public HashMap<TypeEpreuve,ArrayList<Match>> getCurrentsMatchByEpreuve(Tournoi t){
@@ -57,7 +64,7 @@ public abstract class Moteur {
 		return null;
 	}
 	
-	public void getAllMatch (){
+	public void getAllMatch (Tournoi t){
 		HashMap<TypeEpreuve,ArrayList<Match>> map = getCurrentsMatchByEpreuve(t);
 		for(TypeEpreuve te : map.keySet()){
 			System.out.println(map.get(te+"\n"));
