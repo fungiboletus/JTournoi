@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import polytech.personnes.Joueur;
 import polytech.stock.*;
+import polytech.exception.EpreuveDejaExistanteException;
+import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.jtournoi.*;
 
 
@@ -573,15 +575,24 @@ public class Test {
                             }
                         }
                     }
-                    if(!Moteur.setEpreuve(tournoi, epreuves.get(i), map))System.out.println("lol");
+                    Moteur.setEpreuve(tournoi, epreuves.get(i), map);
                 }
                 Moteur.startTournoi(tournoi);
             
-            } catch (Exception e) {
-                System.out.println("La création du tournoi a échoué.");
+            } 
+            catch(NombreDeParticipantInsufisantException e){
+                System.out.println("Le nombre de participants est insuffisant.");
+            }
+            catch(EpreuveDejaExistanteException e){
+                System.out.println("L'épreuve existe déjà.");
+            }
+            catch (Exception e) {
                 System.out.println(e);
                 //e.printStackTrace();
                 return;
+            }
+            finally{
+                System.out.println("La création du tournoi a échoué.");
             }
             
             System.out.println("Tournoi créé.\n");
