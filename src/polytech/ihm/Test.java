@@ -477,7 +477,7 @@ public class Test {
                         }
                         if (lue.equals(""))
                             continue;
-                        if (!lue.equals("-1")) {
+                        if (!(lu == -1)) {
                             if (verif) {
                                 j.addCompetence(epreuve);
                             } else {
