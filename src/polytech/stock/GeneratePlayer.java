@@ -172,8 +172,15 @@ public class GeneratePlayer {
 	parcours2.add(epreuves.get(5));
 	e2.setEpreuves(parcours2);
 	
-	// Création de 4 arbitres 
+	
 	ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();
+	//Création massive d'arbitres
+	for(int i=0;i<100;i++){
+		Arbitre a = new Arbitre("nom arbitre"+i,"prenom arbitre"+i,"password "+i);
+		a.setCompetences((ArrayList<TypeEpreuve>) Stock.getTypesEpreuves());
+		arbitres.add(a);
+	}
+	
 	Arbitre a1 = new Arbitre("House","Gregory","everybody lies");
 	Arbitre a2 = new Arbitre("Morgan","Dexter","dark passenger");
 	Arbitre a3 = new Arbitre("Bauer","Jack","24");

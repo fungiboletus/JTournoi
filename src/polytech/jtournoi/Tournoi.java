@@ -85,6 +85,15 @@ public class Tournoi extends TupleAvecID {
 		}
 	}
 	
+	public Epreuve getEpreuve(TypeEpreuve te){
+		for(Epreuve e : epreuves){
+			if(e.getTypeEpreuve().equals(te)){
+				return e;
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<Epreuve> getEpreuves(){
 		return epreuves;
 	}

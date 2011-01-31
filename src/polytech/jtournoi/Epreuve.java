@@ -126,6 +126,7 @@ public class Epreuve extends TupleAvecID {
 		}
 		return null;
 	}
+	
 	/**
 	 * Vérifie si le match est bien dans la liste des match courant
 	 * @param m
@@ -140,6 +141,7 @@ public class Epreuve extends TupleAvecID {
 		}
 		return i==0;
 	}
+	
 	/**
 	 * Enlève un match de la liste des match courant
 	 * @param m
@@ -206,7 +208,9 @@ public class Epreuve extends TupleAvecID {
 			remove(m);
 		}
 	}
-	
+	/**
+	 * Méthode d'affiche de l'épreuve (non optimise)
+	 */
 	public String toString(){
 		String s="Epreuve de type : "+type+"\n";
 		for (ArrayList<Equipe> list : tableau){
@@ -219,9 +223,14 @@ public class Epreuve extends TupleAvecID {
 		return s;
 	}
 
+	/**
+	 * Retourne le type de l'épreuve
+	 * @return
+	 */
 	public TypeEpreuve getTypeEpreuve() {
 		return type;
 	}
+	
 
 	public void setTypeEpreuve(TypeEpreuve type)
 	{

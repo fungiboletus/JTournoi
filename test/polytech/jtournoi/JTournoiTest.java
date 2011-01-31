@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import polytech.exception.nbrArbitreInsufisantException;
+import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 import polytech.stock.TypeChargement;
@@ -24,8 +26,8 @@ public class JTournoiTest {
 		return j; 
 	}
 	
-	public Equipe creerEquipe(int d){
-		Equipe e = new Equipe("equipe 1");
+	public Equipe creerEquipe(int d,int k){
+		Equipe e = new Equipe("equipe "+k);
 		for(int i =0;i<5;i++){
 			e.ajouterParticipant(creerJoueurCompetent(d));
 		}
@@ -40,6 +42,14 @@ public class JTournoiTest {
 		return epreuves;
 	}
 	
+	public ArrayList<Equipe> creeEquipe(int k){
+		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+		for(int i=0;i<k;i++){
+			equipes.add(creerEquipe(0,i));
+		}
+		return equipes;
+	}
+	
 	@Test
 	public void test1(){
 		Joueur j = creerJoueurCompetent(0);
@@ -49,7 +59,7 @@ public class JTournoiTest {
 	@Test
 	public void haveCompetenceTest(){
 		boolean b = true;
-		Equipe e = creerEquipe(0);
+		Equipe e = creerEquipe(0,0);
 		for(TypeEpreuve te : getCompetence(0)){
 			if(!e.haveCompetence(te)){
 				b=false;
@@ -60,14 +70,14 @@ public class JTournoiTest {
 		
 	@Test
 	public void setEpreuveTest(){
-		Equipe e = creerEquipe(0);
+		Equipe e = creerEquipe(0,0);
 		e.setEpreuves(getCompetence(0));
 		assertTrue(e.getEpreuves().size()==5);
 	}
 	
 	@Test
 	public void setEpreuveTest2(){
-		Equipe e = creerEquipe(0);
+		Equipe e = creerEquipe(0,0);
 		e.setEpreuves(getCompetence(5));
 		assertTrue(e.getEpreuves().size()==0);
 	}
@@ -78,12 +88,31 @@ public class JTournoiTest {
 		assertFalse(t.verificationTournoi());
 	}
 	
-//	@Test
-//	public void tourTest(){
-//		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
-//		for(int i=0;i<5;i++){
-//			equipes.add(creerEquipe(0));
-//		}
-//		Epreuve e = new Epreuve(equipes, getCompetence(0).get(0));
-//	}
+	@Test
+	public void tourTest(){
+		try {
+			Epreuve e = new Epreuve(creeEquipe(4), getCompetence(0).get(0));
+			assertTrue(e.getCurrentMatch().size()==2);
+		} catch (nbrArbitreInsufisantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void isMatchTest(){
+		try {
+			ArrayList<Equipe> equipes = new ArrayList<Equipe>(); 
+			equipes=creeEquipe(4);
+			Epreuve e = new Epreuve(equipes,getCompetence(0).get(0));
+			Match m = e.getCurrentMatch().get(0);
+			Arbitre a = m.getArbitre();
+			e.setScore(a, m, 0, 10);
+			assertEquals(m.getE2(),m.getVainqueur());
+		} catch (nbrArbitreInsufisantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
