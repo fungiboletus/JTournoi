@@ -8,8 +8,10 @@ import polytech.personnes.Joueur;
 import polytech.stock.*;
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
+import polytech.exception.TournoiNonLanceException;
 import polytech.exception.nbrArbitreInsufisantException;
 import polytech.jtournoi.*;
+import tournoi.Sport;
 
 
 public class Test {
@@ -53,7 +55,6 @@ public class Test {
      * Interface organisateur
      */
     public static void organisateur() {
-        boolean out = false;
         while (true) {
             System.out.println("****************************************");
             System.out.println("*              TOURNOI                 *");
@@ -212,7 +213,12 @@ public class Test {
         }
         if(ihm.getTournoi(a).size()>0){
             Tournoi t = ihm.getTournoi(a).get(0);
-            Match m = Moteur.getMatch(a, t);
+            Match m = new Match();
+            try {
+                m = Moteur.getMatch(a, t);
+            } catch (TournoiNonLanceException e1) {
+                System.out.println("Le tournoi n'est aps encore lancé.");
+            }
             //Résultat équipe 1
             System.out.println("Veuillez entrer le score de l'équipe "+m.getE1().getNom());
             Scanner s;
@@ -242,20 +248,25 @@ public class Test {
                 }
                 break;
             }
-            //Pour chaque épreuve
-            for(int i=0; i<t.getEpreuves().size(); i++){
-                //Pour chaque match
-                for(int j=0; j<t.getEpreuves().get(j).getCurrentMatch().size(); j++){
-                    if(t.getEpreuves().get(i).getCurrentMatch().get(j).equals(m)){
-                        place = i;
-                        break;
+            try {
+                //Pour chaque épreuve
+                for(int i=0; i<t.getEpreuves().size(); i++){
+                    //Pour chaque match
+                    for(int j=0; j<t.getEpreuves().get(j).getCurrentMatch().size(); j++){
+                        if(t.getEpreuves().get(i).getCurrentMatch().get(j).equals(m)){
+                            place = i;
+                            break;
+                        }
                     }
                 }
-            }
-            try {
+            
                 t.getEpreuves().get(place).setScore(a, m, score1, score2);
-            } catch (nbrArbitreInsufisantException e) {
+            } 
+            catch (nbrArbitreInsufisantException e) {
                 System.out.println("Nombre d'arbitres insuffisant.");
+            }
+            catch (TournoiNonLanceException e) {
+                System.out.println("Tournoi pas encore lancé.");
             }
             System.out.println("Vous avez bien entré les résultats de ce match");
         }
@@ -676,6 +687,139 @@ public class Test {
         System.out.println(Moteur.listeTournoi.get(0));
     }
     
+    /**
+     * Permet de créer un type d'épreuve
+     */
+    public static void creerEpreuve() {
+        Scanner s;
+        String nom;
+        int duree = 0, points = 0;
+        boolean v = true, v2 = true;
+        while (true) {
+            System.out.print("Nom de l'épreuve (-1 pour revenir au menu précédent): ");
+            s = new Scanner(System.in);
+            nom = s.nextLine();
+            if (nom.equals("-1")) return;
+            System.out.print("Nom de l'épreuve (-1 pour revenir au menu précédent): ");
+            s = new Scanner(System.in);
+            nom = s.nextLine();
+            if (nom.equals("-1")) return;
+            duree = Ihm.demanderInt("Durée de l'épreuve (-1 pour changer le nom du sport): ");
+            if (duree == -1) return;
+            points = Ihm.demanderInt("Nombre de points de l'épreuve (-1 pour changer le nom du sport): ");
+            if (nb == -1) return;
+            
+        }
+        sports.add(new Sport(nom, nb));
+        System.out.println("Sport " + nom + " ajouté  la liste des sports.");
+    }
+    
+
+/*
+    // Permet de supprimer un sport
+    public static void supprimerSport() {
+        Scanner s;
+        s = new Scanner(System.in);
+        while (true) {
+            System.out
+                    .print("Le sport que vous voulez supprimer (-1 pour revenir au menu précédent): ");
+            String sport = s.nextLine();
+            if (sport.equals("-1"))
+                return;
+            int index = -1;
+            for (int i = 0; i < equipes.size(); i++) {
+                if (sports.get(i).getNom().equals(sport)) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1) {
+                while (true) {
+                    System.out.print("Vous êtes sûr ? (y/n) ");
+                    String lue = s.nextLine();
+                    if (lue.equals("y")) {
+                        sports.remove(index);
+                        System.out.println("Sport " + sport + " supprimé.");
+                        return;
+                    } else if (lue.equals("n")) {
+                        System.out.println("Suppression annulée.");
+                        return;
+                    }
+                    System.out.println("Veuillez rentrer y ou n.");
+                }
+            } else {
+                System.out.println("Ce sport n'existe pas.");
+            }
+        }
+    }
+
+    // Permet de créer un arbitre
+    public static void creerArbitre() {
+        Scanner s;
+        String nom;
+        while (true) {
+            System.out.print("Nom de l'arbitre (-1 pour arrêter): ");
+            s = new Scanner(System.in);
+            nom = s.nextLine();
+            if (nom.equals("-1"))
+                return;
+            else {
+                int index = -1;
+                for (int i = 0; i < arbitres.size(); i++) {
+                    if (arbitres.get(i).getNom().equals(nom)) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index == -1) {
+                    arbitres.add(new Arbitre(nom));
+                    System.out.println("Arbitre " + nom
+                            + " ajouté à la liste des arbitres.");
+                    return;
+                } else {
+                    System.out.println("Cet arbitre existe déjà.");
+                }
+            }
+        }
+    }
+
+    // Permet de supprimer un arbitre
+    public static void supprimerArbitre() {
+        Scanner s;
+        s = new Scanner(System.in);
+        while (true) {
+            System.out
+                    .print("L'arbitre que vous voulez supprimer (-1 pour revenir au menu précédent): ");
+            String arbitre = s.nextLine();
+            if (arbitre.equals("-1"))
+                return;
+            int index = -1;
+            for (int i = 0; i < arbitres.size(); i++) {
+                if (arbitres.get(i).getNom().equals(arbitre)) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1) {
+                while (true) {
+                    System.out.print("Vous êtes sûr ? (y/n) ");
+                    String lue = s.nextLine();
+                    if (lue.equals("y")) {
+                        arbitres.remove(index);
+                        System.out.println("Arbitre " + arbitre + " supprimé.");
+                        return;
+                    } else if (lue.equals("n")) {
+                        System.out.println("Suppression annulée.");
+                        return;
+                    }
+                    System.out.println("Veuillez rentrer y ou n.");
+                }
+            } else {
+                System.out.println("Cet arbitre n'existe pas.");
+            }
+        }
+    }*/
+    
     
     /*// Permet de choisir un tournoi et de le gérer
     public static void gererTournoi() {
@@ -711,41 +855,6 @@ public class Test {
         gererLastTournoi(index);
     }
     
-    // permet de gérer le dernier tournoi entré par défaut ou celui qu'on veut
-    public static void gererTournoi(int id) {
-        if(id==-1) id = tournois.size()-1;
-        Scanner s;
-        while (true) {
-            System.out.println("****************************************");
-            System.out.println("*           GERER LE TOURNOI           *");
-            System.out.println("****************************************");
-            System.out.println("*  1. Jouer un match                   *");
-            System.out.println("*  2. Jouer tous les matchs            *");
-            System.out.println("*  3. Afficher les matchs joués        *");
-            System.out.println("*                                      *");
-            System.out.println("*  0. Revenir au menu précédent        *");
-            System.out.println("****************************************");
-            System.out.print("Votre choix: ");
-            try {
-                s = new Scanner(System.in);
-                int lue1 = s.nextInt();
-                switch (lue1) {
-                case 0:
-                    return;
-                case 1:
-                    tournois.get(index).run();System.out.println(tournois.get(index));
-                    break;
-                case 2:
-                    tournois.get(index).runAll();System.out.println(tournois.get(index));
-                    break;
-                case 3:
-                    System.out.println(tournois.get(index));
-                }
-
-            } catch (Exception e) {
-                System.out.println("Ce que vous avez rentré n'est pas valide.");
-            }
-        }
     }*/
 
 }

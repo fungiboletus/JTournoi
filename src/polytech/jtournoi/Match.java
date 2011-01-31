@@ -27,7 +27,11 @@ public class Match extends TupleAvecID implements Comparable<Match>{
 		this.tour=tour;
 	}
 	
-	public void setScore(int sc1, int sc2){
+	public Match() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public void setScore(int sc1, int sc2){
 		scE1=sc1;
 		scE2=sc2;
 	}

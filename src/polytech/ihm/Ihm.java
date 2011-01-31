@@ -1,9 +1,9 @@
 package polytech.ihm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
+import polytech.exception.TournoiNonLanceException;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.Moteur;
 import polytech.jtournoi.Tournoi;
@@ -255,16 +255,40 @@ class Ihm {
         //Pour chaque tournoi
         for(int i=0; i<Moteur.listeTournoi.size(); i++){
             //Pour chaque match
-            for (int j=0; j<Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).size(); j++){
-                if(Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).get(j).getArbitre().equals(a)){
-                    tournois.add(Moteur.listeTournoi.get(i));
-                    break;
+            try {
+                for (int j=0; j<Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).size(); j++){
+                    if(Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).get(j).getArbitre().equals(a)){
+                        tournois.add(Moteur.listeTournoi.get(i));
+                        break;
+                    }
                 }
+            } catch (TournoiNonLanceException e) {
+                System.out.println("Tournoi pas encore lancé.");
             }
         }
         return tournois;
     }
     
+    /**
+     * Permet de demander un entier à l'utilisateur.
+     * @param message le message à afficher avant la demande.
+     * @return nb le nombre entré par l'utilisateur.
+     */
+    public static int demanderInt(String message){
+        int nb;
+        while (true) {
+            try {
+                System.out.print(message);
+                Scanner s = new Scanner(System.in);
+                nb = s.nextInt();
+                if (nb == -1) return -1;
+                break;
+            } catch (Exception e) {
+                System.out.println("Veuillez rentrer un entier.");
+            }
+        }
+        return nb;
+    }
     
     
 }
