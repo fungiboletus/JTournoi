@@ -1,0 +1,32 @@
+
+Stéphane : 
+Création des class épreuves Match Moteur tournoi 
+Correction des class equipes et joueur
+S'occupe de toute la création des épreuves des match et de la réalisation des tournois
+
+Création des principaux tests ...
+Envoie de multiple mail et passa son temps a courrir après le code de Roman
+
+Syl :
+
+Création des classes equipes, et des classes du package personne (arbitre, joueur, organisateur, personne et personneCompetente)
+avec parfois de l'aide pour les notions nouvelles (comme l'héritage) ou certains bugs
+
+Il faudrait aussi rajouter que la première journée du projet (lundi donc), on a taffé plusieurs
+heures ensemble afin de bien délimiter les tâches et pour efficacement mettre en place l'architecture 
+du projet (c'est tj bien de mettre un peu de blabla et en meme tempss on s'est vraiment posé des questions
+existentielles pour pas mal de détail donc autant le dire!).
+
+<<<<<<< HEAD
+Roman :
+
+Création de l'interface utilisateur, des classes du package polytech.ihm : Test qui est la classe main, Ihm qui est une classe outil pour Test.
+=======
+Conclusion :
+
+Le projet, même si c'est de la grosse merde qui coule par tout les pores de la peau, et un super projet. Nous avons tous gagnés en expérience, même si j'en ai ma claque de faire des trucs de merde qui ne serviront jamais. D'un point de vue technique, ce projet n'a rien apporté du tout. C'est de la pure merde, qui sert à faire gaspiller le temps si précieux des étudiants.
+Le seul bénéfice de ce projet, c'est que si je rate ma vie et qu'il me vient un jour à faire des bases de données en java sans ORM, je n'aurais qu'à faire des copier collés.
+D'un point de vue gestion d'équipe, autant sur le point tactique que technique, tout s'est passé comme prévu. Tout le monde semble motivé, mais quand on regarde qui bosse, c'est pas vraiment la même histoire.
+
+Bref, si vous voulez dégoûter des étudiants de faire ce métier, le meilleur moyen de s'y prendre, c'est de leur faire faire trois fois le même projet au cours de l'année.
+>>>>>>> 960ac33b662df032636c094d6dc2cc703ac0c976

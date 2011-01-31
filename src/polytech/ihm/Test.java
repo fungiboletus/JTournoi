@@ -111,8 +111,6 @@ public class Test {
                 System.out.println("Ce que vous avez rentré n'est pas valide.");
                 e.printStackTrace();
             }
-            //Si out est vrai, on revient à la fenêtre de connexion
-            if(out) break;
         }
     }
     
@@ -196,6 +194,13 @@ public class Test {
     }
     
     /**
+     * Permet d'afficher le tournoi en cours
+     */
+    public static void tournoiEnCours() {
+        System.out.println(Moteur.listeTournoi.get(0));
+    }
+    
+    /**
      * Permet à l'arbitre d'entrer le résultat de son match en cours.
      */
     public static void entrerResultat(){
@@ -240,7 +245,7 @@ public class Test {
             //Pour chaque épreuve
             for(int i=0; i<t.getEpreuves().size(); i++){
                 //Pour chaque match
-                for(int j=0; j<t.getEpreuves().get(i).getCurrentMatch().size(); i++){
+                for(int j=0; j<t.getEpreuves().get(j).getCurrentMatch().size(); j++){
                     if(t.getEpreuves().get(i).getCurrentMatch().get(j).equals(m)){
                         place = i;
                         break;
