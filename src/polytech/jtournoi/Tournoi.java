@@ -5,12 +5,15 @@ import java.util.HashMap;
 
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
+import polytech.exception.TournoiDejaLanceException;
+import polytech.exception.TournoiNonLanceException;
 import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Joueur;
 import polytech.stock.TupleAvecID;
 
 public class Tournoi extends TupleAvecID {
 
+	Boolean tournoilance=false;
 	String nom;
 	ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 	ArrayList<TypeEpreuve> typeEpreuves = new ArrayList<TypeEpreuve>();
@@ -23,8 +26,11 @@ public class Tournoi extends TupleAvecID {
 		this.nom=nom;
 	}
 	
-	public void setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes) throws NombreDeParticipantInsufisantException, EpreuveDejaExistanteException{
+	public void setEpreuve(TypeEpreuve te, HashMap<Equipe,Joueur> equipes) throws NombreDeParticipantInsufisantException, EpreuveDejaExistanteException, TournoiDejaLanceException{
 		int inc=0;
+		if(tournoilance==true){
+			throw new TournoiDejaLanceException();
+		}
 		for(Equipe e : equipes.keySet()){
 			if(e.getEpreuves().contains(te)){
 				inc++;
@@ -53,7 +59,20 @@ public class Tournoi extends TupleAvecID {
 		return true;
 	}
 	
-	public boolean addEquipe(Equipe e, Joueur j, TypeEpreuve te){
+	/**
+	 * Ajoute une équipe pour le type d'épreuve donné
+	 * Si le type est individuel alors on spécifie aussi le nom du joueur
+	 * Sinon on passe null 
+	 * @param e
+	 * @param j
+	 * @param te
+	 * @return
+	 * @throws TournoiDejaLanceException 
+	 */
+	public boolean addEquipe(Equipe e, Joueur j, TypeEpreuve te) throws TournoiDejaLanceException{
+		if(tournoilance==true){
+			throw new TournoiDejaLanceException();
+		}
 		if(map.containsKey(te)){
 			if(!map.get(te).containsKey(e)){
 				map.get(te).put(e, j);
@@ -63,7 +82,17 @@ public class Tournoi extends TupleAvecID {
 		return false;
 	}
 	
-	public boolean supprimerEpreuve(TypeEpreuve te){
+	/**
+	 * On supprime l'equipe dans l'epreuve du type d'epreuve donne
+	 * @param te
+	 * @return
+	 * @throws TournoiNonLanceException 
+	 * @throws TournoiDejaLanceException 
+	 */
+	public boolean supprimerEpreuve(TypeEpreuve te) throws TournoiNonLanceException, TournoiDejaLanceException{
+		if(tournoilance==true){
+			throw new TournoiDejaLanceException();
+		}
 		if(typeEpreuves.contains(te)){
 			for(Epreuve e : epreuves){
 				if(e.getTypeEpreuve().equals(e)){
@@ -75,7 +104,17 @@ public class Tournoi extends TupleAvecID {
 		return false;
 	}
 	
-	public boolean addTypeEpreuve(TypeEpreuve te){
+	/**
+	 * Ajoute un type d'epreuve dans la liste du tournoi
+	 * @param te
+	 * @return
+	 * @throws TournoiNonLanceException 
+	 * @throws TournoiDejaLanceException 
+	 */
+	public boolean addTypeEpreuve(TypeEpreuve te) throws TournoiNonLanceException, TournoiDejaLanceException{
+		if(tournoilance==true){
+			throw new TournoiDejaLanceException();
+		}
 		if(!typeEpreuves.contains(te)){
 			typeEpreuves.add(te);
 			return true;
@@ -85,7 +124,16 @@ public class Tournoi extends TupleAvecID {
 		}
 	}
 	
-	public Epreuve getEpreuve(TypeEpreuve te){
+	/**
+	 * Renvoie l'epreuve par rapport au au type d'epreuve donne
+	 * @param te
+	 * @return
+	 * @throws TournoiNonLanceException 
+	 */
+	public Epreuve getEpreuve(TypeEpreuve te) throws TournoiNonLanceException{
+		if(tournoilance==false){
+			throw new TournoiNonLanceException();
+		}
 		for(Epreuve e : epreuves){
 			if(e.getTypeEpreuve().equals(te)){
 				return e;
@@ -94,7 +142,10 @@ public class Tournoi extends TupleAvecID {
 		return null;
 	}
 	
-	public ArrayList<Epreuve> getEpreuves(){
+	public ArrayList<Epreuve> getEpreuves() throws TournoiNonLanceException{
+		if(tournoilance==false){
+			throw new TournoiNonLanceException();
+		}
 		return epreuves;
 	}
 	
@@ -115,6 +166,7 @@ public class Tournoi extends TupleAvecID {
 		if(!verificationTournoi()){
 			throw new RuntimeException("t'as pas lancé la vérification ...");
 		}
+		tournoilance=true;
 		for(TypeEpreuve te : typeEpreuves){
 			Epreuve e = new Epreuve(map.get(te),te);
 			epreuves.add(e);
@@ -122,11 +174,17 @@ public class Tournoi extends TupleAvecID {
 	}
 	
 	public String toString(){
-		String s ="Bienvenue dans le tournoi : "+nom+"\n";
+		String s ="";
+		if(tournoilance==true){
+		s ="Bienvenue dans le tournoi : "+nom+"\n";
 		for(Epreuve e : epreuves){
 			s+=e.toString();
 		}
 		s+="\n";
+		}
+		else{
+			s+="µLe tournoi n'a pas encore été lancé";
+		}
 		return s;
 	}
 	

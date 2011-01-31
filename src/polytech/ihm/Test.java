@@ -176,7 +176,7 @@ public class Test {
                     System.out.println("lol");
                     break;
                 case 2:
-                    System.out.println("lol");
+                    tournoiEnCours();
                     break;
                 case 9:
                     ihm.unlog();
