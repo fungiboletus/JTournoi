@@ -10,6 +10,7 @@ import polytech.exception.TournoiNonLanceException;
 import polytech.exception.TournoiNonValideExcetion;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
+import polytech.stock.Stock;
 
 /**
  * Class de gestion des différents tournoi
@@ -134,5 +135,8 @@ public abstract class Moteur {
 	public static ArrayList<Tournoi> getTournois() {
 		return listeTournoi;
 	}
-
+	
+	public static Tournoi getTournoisById(int id) {
+        return Stock.getById(listeTournoi, id);
+    }
 }

@@ -42,11 +42,8 @@ public class Tournoi extends TupleAvecID {
 	 */
 	public void setEpreuve(TypeEpreuve te, HashMap<Equipe, Joueur> equipes)
 			throws NombreDeParticipantInsufisantException,
-			EpreuveDejaExistanteException, TournoiNonLanceException {
+			EpreuveDejaExistanteException{
 		int inc = 0;
-		if (tournoilance == false) {
-			throw new TournoiNonLanceException();
-		}
 		for (Equipe e : equipes.keySet()) {
 			if (e.getEpreuves().contains(te)) {
 				inc++;
@@ -179,6 +176,16 @@ public class Tournoi extends TupleAvecID {
 		}
 		return epreuves;
 	}
+	
+	public int getTailleEpreuves(){
+	    int i;
+	    try {
+            i = getEpreuves().size();
+        } catch (TournoiNonLanceException e) {
+            i=0;
+        }
+        return i;
+	}
 
 	public ArrayList<Equipe> getEquipes() {
 		return equipes;
@@ -209,18 +216,28 @@ public class Tournoi extends TupleAvecID {
 	 * Méthode d'affichage
 	 */
 	public String toString() {
-		String s = "";
+		String s = "["+id+"] ";
 		if (tournoilance == true) {
-			s = "Bienvenue dans le tournoi : " + nom + "\n";
+			s += "Bienvenue dans le tournoi : " + nom + "\n";
 			for (Epreuve e : epreuves) {
 				s += e.toString();
 			}
 			s += "\n";
 		} else {
-			s += "µLe tournoi n'a pas encore été lancé";
+			s += "Le tournoi n'a pas encore été lancé";
 		}
 		return s;
 	}
+	
+	public String toString2() {
+        String s = "["+id+"] ";
+        if (tournoilance == true) {
+            s += nom + "\n";
+        } else {
+            s += "Le tournoi n'a pas encore été lancé";
+        }
+        return s;
+    }
 
 	public boolean isLance() {
 		return tournoilance;

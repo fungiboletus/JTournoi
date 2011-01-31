@@ -304,7 +304,7 @@ public abstract class Stock {
 	 *            Identifiant du tuple recherché
 	 * @return Tuple correspondant à l'identifiant recherché
 	 */
-	protected static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste,
+	public static <CLASS_TYPE> CLASS_TYPE getById(List<CLASS_TYPE> liste,
 			int id) {
 		if (liste != null) {
 			for (CLASS_TYPE t : liste) {

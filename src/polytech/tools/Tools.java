@@ -91,7 +91,8 @@ public abstract class Tools {
 	 * @param list
 	 * @return
 	 */
-	public ArrayList<TypeEpreuve> supprimerDouble(ArrayList<TypeEpreuve> list) {
+
+	public static ArrayList<TypeEpreuve> supprimerDouble(ArrayList<TypeEpreuve> list) {
 		ArrayList<TypeEpreuve> tmp = new ArrayList<TypeEpreuve>();
 		for (TypeEpreuve te : list) {
 			if (!tmp.contains(te)) {
