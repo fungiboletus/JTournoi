@@ -709,7 +709,6 @@ public class Test {
             } catch (Exception e) {
                 System.out.println("La création du tournoi a échoué.");
                 //System.out.println(e);
-                e.printStackTrace();
                 return;
             }
 
