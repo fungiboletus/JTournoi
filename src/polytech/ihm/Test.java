@@ -7,6 +7,7 @@ import java.util.Scanner;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.stock.*;
+import polytech.tools.Tools;
 import polytech.exception.ArbitreDejaExistant;
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.EpreuveInexistante;
@@ -213,7 +214,7 @@ public class Test {
             try {
                 m = Moteur.getMatch(a, t);
             } catch (TournoiNonLanceException e1) {
-                System.out.println("Le tournoi n'est aps encore lancé.");
+                System.out.println("Le tournoi n'est pas encore lancé.");
             }
             // Résultat équipe 1
             System.out.println("Veuillez entrer le score de l'équipe "
@@ -491,6 +492,8 @@ public class Test {
                         } else
                             break;
                     }
+                    //On supprime les doublons
+                    j.setCompetences(Tools.supprimerDouble(j.getCompetences()));
                     Stock.getEquipe().get(index).ajouterParticipant(j);
                     System.out.println("Le joueur " + j.getNom() + " "
                             + j.getPrenom() + " a bien été ajouté.");
@@ -722,21 +725,18 @@ public class Test {
             for (int i = 0; i < Moteur.getTournois().size(); i++) {
                 System.out.println("\t" + Moteur.getTournois().get(i));
             }
-            System.out
-                    .print("L'id de l'équipe que vous voulez gérer (-1 pour revenir au menu précédent): ");
-            Scanner s = new Scanner(System.in);
-            String lue = s.nextLine();
+            int lue = Ihm.demanderInt("L'id du tournoi que vous voulez gérer (-1 pour revenir au menu précédent): ");
             int a = -1;
-            if (lue.equals("-1"))
+            if (lue == -1)
                 break;
-            for (int i = 0; i < Stock.getEquipe().size(); i++) {
-                if (Stock.getEquipe().get(i).getId() == Integer.parseInt(lue)) {
+            for (int i = 0; i < Moteur.getTournois().size(); i++) {
+                if (Moteur.getTournois().get(i).getId() == lue) {
                     a = i;
                     break;
                 }
             }
             if (a != -1) {
-                if (!lue.equals("-1")) {
+                if (!(lue == -1)) {
                     while (true) {
                         System.out
                                 .println("****************************************");
@@ -756,16 +756,16 @@ public class Test {
                                 .println("****************************************");
                         System.out.print("Votre choix: ");
                         try {
-                            s = new Scanner(System.in);
+                            Scanner s = new Scanner(System.in);
                             int lue1 = s.nextInt();
                             switch (lue1) {
                             case 0:
                                 return;
                             case 1:
-                                ajouteJoueurs(Integer.parseInt(lue));
+                                //ajouteJoueurs(lue);
                                 break;
                             case 2:
-                                System.out.println(Moteur.listeTournoi.get(Integer.parseInt(lue)-1));
+                                System.out.println(Moteur.listeTournoi.get(lue));
                                 break;
                             }
 
@@ -930,6 +930,8 @@ public class Test {
                         break;
                 }
                 try {
+                    //On supprime les doublons
+                    a.setCompetences(Tools.supprimerDouble(a.getCompetences()));
                     Stock.addArbitre(a);
                     System.out.println("Arbitre " + nom
                             + " ajouté à la liste des arbitres.");
