@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import polytech.jtournoi.Equipe;
+import polytech.jtournoi.Moteur;
+import polytech.jtournoi.Tournoi;
 import polytech.jtournoi.TypeEpreuve;
+import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 
@@ -241,6 +244,27 @@ class Ihm {
         }
         return joueurs;
     }
+    
+    /**
+     * Permet d'avoir les tournois dans lequels est impliqué un arbitre.
+     * @param a l'arbitre
+     * @return tournois la liste des tournois
+     */
+    public ArrayList<Tournoi> getTournoi(Arbitre a){
+        ArrayList<Tournoi> tournois = new ArrayList<Tournoi>();
+        //Pour chaque tournoi
+        for(int i=0; i<Moteur.listeTournoi.size(); i++){
+            //Pour chaque match
+            for (int j=0; j<Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).size(); j++){
+                if(Moteur.getCurrentMatch(Moteur.listeTournoi.get(i)).get(j).getArbitre().equals(a)){
+                    tournois.add(Moteur.listeTournoi.get(i));
+                    break;
+                }
+            }
+        }
+        return tournois;
+    }
+    
     
     
 }

@@ -10,7 +10,7 @@ import polytech.personnes.Joueur;
 
 public abstract class Moteur {
 
-	static ArrayList<Tournoi> listeTournoi;
+	public static ArrayList<Tournoi> listeTournoi;
 	
 	public static void init(){
 		listeTournoi = new ArrayList<Tournoi>();
@@ -78,7 +78,7 @@ public abstract class Moteur {
 	 * @param t
 	 * @return
 	 */
-	public ArrayList<Match> getCurrentMatch(Tournoi t){
+	public static ArrayList<Match> getCurrentMatch(Tournoi t){
 		ArrayList<Match> match = new ArrayList<Match>();
 		ArrayList<Epreuve> epreuves = t.getEpreuves();
 		for(Epreuve e : epreuves){
@@ -94,7 +94,7 @@ public abstract class Moteur {
 	 * @param t
 	 * @return
 	 */
-	public Match getMatch(Arbitre a, Tournoi t){
+	public static Match getMatch(Arbitre a, Tournoi t){
 		for(Match m : getCurrentMatch(t)){
 			if(m.getArbitre()==a){
 				int i = getCurrentMatch(t).indexOf(m);
