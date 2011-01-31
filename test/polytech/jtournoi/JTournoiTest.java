@@ -144,7 +144,9 @@ public class JTournoiTest {
 			Match m = e.getCurrentMatch().get(0);
 			Arbitre a = m.getArbitre();
 			e.setScore(a, m, 0, 10);
-			assertTrue(e.getVainqueur().getId()==m.getVainqueur().getId());
+			System.out.println(e.getVainqueur().getId());
+			System.out.println(m.getVainqueur().getId());
+			assertSame(e.getVainqueur().getId(),m.getVainqueur().getId());
 		} catch (nbrArbitreInsufisantException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

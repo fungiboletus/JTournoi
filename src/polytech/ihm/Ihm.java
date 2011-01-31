@@ -15,6 +15,12 @@ import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.stock.Stock;
 
+/**
+ * 
+ * @author Roman Mkrtchian
+ * Annuaire de fonctions utilisé dans le main
+ */
+
 class Ihm {
 
     // Le nom de la personne loggée

@@ -6,6 +6,12 @@ Il permet de gérer des tournois sportifs de différents types d'épreuves. Les 
 
 Les données traités sont sauvegardées au format XML et Sqlite.
 
+# Execution du programme
+
+Sous un environnement GNU/Linux il suffit d'executer le script lancement.sh fournit
+
+Sous un environnement Windows il faut executer le script lancement.bat fournit
+
 # Dépendances
 Il est programmé en Java, et il nécessite les libraires junit, jdom, sqlite, et opencsv.
 

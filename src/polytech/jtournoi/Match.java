@@ -44,8 +44,8 @@ public class Match extends TupleAvecID implements Comparable<Match> {
 	}
 
 	public Match() {
-		this.e1=null;
-		this.e2=null;
+		this.e1 = null;
+		this.e2 = null;
 	}
 
 	/**
@@ -58,7 +58,6 @@ public class Match extends TupleAvecID implements Comparable<Match> {
 		scE1 = sc1;
 		scE2 = sc2;
 	}
-
 
 	/**
 	 * Recupere le vainqueur du match

@@ -31,9 +31,10 @@ public class Tournoi extends TupleAvecID {
 		typeEpreuves = te;
 		this.nom = nom;
 	}
-	
+
 	/**
 	 * Méthode associant la liste des equipes au type d'epreuve
+	 * 
 	 * @param te
 	 * @param equipes
 	 * @throws NombreDeParticipantInsufisantException
@@ -42,7 +43,7 @@ public class Tournoi extends TupleAvecID {
 	 */
 	public void setEpreuve(TypeEpreuve te, HashMap<Equipe, Joueur> equipes)
 			throws NombreDeParticipantInsufisantException,
-			EpreuveDejaExistanteException{
+			EpreuveDejaExistanteException {
 		int inc = 0;
 		for (Equipe e : equipes.keySet()) {
 			if (e.getEpreuves().contains(te)) {
@@ -60,6 +61,7 @@ public class Tournoi extends TupleAvecID {
 
 	/**
 	 * Méthode permettant de verifier si on peut lancer le tournoi
+	 * 
 	 * @throws NombreDeParticipantInsufisantException
 	 */
 	public void verificationTournoi()
@@ -166,25 +168,27 @@ public class Tournoi extends TupleAvecID {
 
 	/**
 	 * Methode renvoyant les epreuves
+	 * 
 	 * @return
 	 * @throws TournoiNonLanceException
 	 */
 	public ArrayList<Epreuve> getEpreuves() throws TournoiNonLanceException {
-		//on vérifie que le tournoi a été lancé pour pouvoir recuperer les epreuves
+		// on vérifie que le tournoi a été lancé pour pouvoir recuperer les
+		// epreuves
 		if (tournoilance == false) {
 			throw new TournoiNonLanceException();
 		}
 		return epreuves;
 	}
-	
-	public int getTailleEpreuves(){
-	    int i;
-	    try {
-            i = getEpreuves().size();
-        } catch (TournoiNonLanceException e) {
-            i=0;
-        }
-        return i;
+
+	public int getTailleEpreuves() {
+		int i;
+		try {
+			i = getEpreuves().size();
+		} catch (TournoiNonLanceException e) {
+			i = 0;
+		}
+		return i;
 	}
 
 	public ArrayList<Equipe> getEquipes() {
@@ -212,11 +216,12 @@ public class Tournoi extends TupleAvecID {
 			epreuves.add(e);
 		}
 	}
+
 	/**
 	 * Méthode d'affichage
 	 */
 	public String toString() {
-		String s = "["+id+"] ";
+		String s = "[" + id + "] ";
 		if (tournoilance == true) {
 			s += "Bienvenue dans le tournoi : " + nom + "\n";
 			for (Epreuve e : epreuves) {
@@ -228,16 +233,16 @@ public class Tournoi extends TupleAvecID {
 		}
 		return s;
 	}
-	
+
 	public String toString2() {
-        String s = "["+id+"] ";
-        if (tournoilance == true) {
-            s += nom + "\n";
-        } else {
-            s += "Le tournoi n'a pas encore été lancé";
-        }
-        return s;
-    }
+		String s = "[" + id + "] ";
+		if (tournoilance == true) {
+			s += nom + "\n";
+		} else {
+			s += "Le tournoi n'a pas encore été lancé";
+		}
+		return s;
+	}
 
 	public boolean isLance() {
 		return tournoilance;

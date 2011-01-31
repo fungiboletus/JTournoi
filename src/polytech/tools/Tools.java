@@ -88,11 +88,13 @@ public abstract class Tools {
 
 	/**
 	 * Méthode qui renvoie la liste sans les doublons
+	 * 
 	 * @param list
 	 * @return
 	 */
 
-	public static ArrayList<TypeEpreuve> supprimerDouble(ArrayList<TypeEpreuve> list) {
+	public static ArrayList<TypeEpreuve> supprimerDouble(
+			ArrayList<TypeEpreuve> list) {
 		ArrayList<TypeEpreuve> tmp = new ArrayList<TypeEpreuve>();
 		for (TypeEpreuve te : list) {
 			if (!tmp.contains(te)) {
