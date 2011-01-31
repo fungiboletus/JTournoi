@@ -198,6 +198,16 @@ public class Tournoi extends TupleAvecID {
 		}
 		return s;
 	}
+	
+	public String toString2() {
+        String s = "["+id+"] ";
+        if (tournoilance == true) {
+            s += nom + "\n";
+        } else {
+            s += "Le tournoi n'a pas encore été lancé";
+        }
+        return s;
+    }
 
 	public boolean isLance() {
 		return tournoilance;

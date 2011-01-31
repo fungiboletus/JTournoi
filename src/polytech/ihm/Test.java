@@ -727,7 +727,7 @@ public class Test {
             }
             System.out.println("Voici les tournois :");
             for (int i = 0; i < Moteur.getTournois().size(); i++) {
-                System.out.println("\t" + Moteur.getTournois().get(i));
+                System.out.println("\t" + Moteur.getTournois().get(i).toString2());
             }
             int lue = Ihm.demanderInt("L'id du tournoi que vous voulez gérer (-1 pour revenir au menu précédent): ");
             int a = -1;
@@ -769,7 +769,7 @@ public class Test {
                                 //ajouteJoueurs(lue);
                                 break;
                             case 2:
-                                System.out.println(Moteur.listeTournoi.get(lue));
+                                System.out.println(Moteur.getTournoisById(lue));
                                 break;
                             }
 
@@ -782,6 +782,10 @@ public class Test {
             } else
                 System.out.println("Cette équipe n'existe pas.");
         }
+        
+    }
+    
+    public static void afficherGagnants(Tournoi t){
         
     }
 
