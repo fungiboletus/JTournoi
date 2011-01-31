@@ -709,6 +709,7 @@ public class Test {
             } catch (Exception e) {
                 System.out.println("La création du tournoi a échoué.");
                 //System.out.println(e);
+                e.printStackTrace();
                 return;
             }
 
@@ -720,8 +721,11 @@ public class Test {
     public static void gererTournoi() {
         
         while (true) {
-            if (Stock.getEquipe().size() > 0)
-                System.out.println("Voici les tournois :");
+            if (!(Moteur.getTournois().size() > 0)){
+                System.out.println("Il n'y a aucun tournoi.");
+                return;
+            }
+            System.out.println("Voici les tournois :");
             for (int i = 0; i < Moteur.getTournois().size(); i++) {
                 System.out.println("\t" + Moteur.getTournois().get(i));
             }
