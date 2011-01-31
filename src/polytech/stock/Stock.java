@@ -256,6 +256,11 @@ public abstract class Stock
 		return typesEpreuves;
 	}
 	
+	public static void addTypesEpreuve(TypeEpreuve type)
+    {
+        typesEpreuves.add(type);
+    }
+	
 	public static List<Equipe> getEquipe(){
 		return equipes;
 	}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
@@ -82,11 +83,6 @@ public class JTournoiTest {
 		assertTrue(e.getEpreuves().size()==0);
 	}
 	
-	@Test
-	public void cstrTournoiTest(){
-		Tournoi t= new Tournoi("test",getCompetence(0));
-		assertFalse(t.verificationTournoi());
-	}
 	
 	@Test
 	public void tourTest(){
@@ -113,6 +109,12 @@ public class JTournoiTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test(expected=NombreDeParticipantInsufisantException.class)
+	public void tournoiTest() throws NombreDeParticipantInsufisantException{
+		Tournoi t = new Tournoi("test",getCompetence(5));
+		t.verificationTournoi();
 	}
 	
 }

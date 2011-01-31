@@ -9,8 +9,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-
+		ArrayList<String> liste = null;
+		System.out.println(liste);
 	}
 
 }
