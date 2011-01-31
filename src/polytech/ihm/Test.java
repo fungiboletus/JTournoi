@@ -9,6 +9,9 @@ import polytech.personnes.Joueur;
 import polytech.stock.*;
 import polytech.exception.ArbitreDejaExistant;
 import polytech.exception.EpreuveDejaExistanteException;
+import polytech.exception.EpreuveInexistante;
+import polytech.exception.EquipeInexistante;
+import polytech.exception.ListeVideException;
 import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.exception.TournoiNonLanceException;
 import polytech.exception.nbrArbitreInsufisantException;
@@ -606,7 +609,16 @@ public class Test {
             // On récolte les épreuves
             try {
                 epreuves = Ihm.recolterEpreuves();
-            } catch (Exception e) {
+            } 
+            catch (EpreuveInexistante e) {
+                System.out.print("Ces équipes n'existent pas toutes.");
+                return;
+            }
+            catch (ListeVideException e) {
+                System.out.print("La liste d'épreuves est vide...");
+                return;
+            }
+            catch (Exception e) {
                 System.out.print("Vos épreuves sont invalides !");
                 return;
             }
@@ -614,7 +626,16 @@ public class Test {
             // On récolte les équipes
             try {
                 equipes = Ihm.recolterEquipes();
-            } catch (Exception e) {
+            } 
+            catch (EquipeInexistante e) {
+                System.out.print("Ces équipes n'existent aps toutes !");
+                return;
+            }
+            catch (ListeVideException e) {
+                System.out.print("La liste d'équipes est vide...");
+                return;
+            }
+            catch (Exception e) {
                 System.out.print("Vos équipes sont invalides !");
                 return;
             }
@@ -695,7 +716,7 @@ public class Test {
                 return;
             } catch (Exception e) {
                 System.out.println("La création du tournoi a échoué.");
-                System.out.println(e);
+                //System.out.println(e);
                 // e.printStackTrace();
                 return;
             }

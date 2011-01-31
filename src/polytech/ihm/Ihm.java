@@ -3,6 +3,9 @@ package polytech.ihm;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import polytech.exception.EpreuveInexistante;
+import polytech.exception.EquipeInexistante;
+import polytech.exception.ListeVideException;
 import polytech.exception.TournoiNonLanceException;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.Moteur;
@@ -112,7 +115,7 @@ class Ihm {
         // Phase de vérification des épreuves récoltées
         // On vérifie que la liste d'épreuve n'est pas vide
         if (epreuvesId.size() == 0)
-            throw new Exception();
+            throw new ListeVideException();
 
         // On vérifie que chacune des épreuves existent
         for (int i = 0; i < epreuvesId.size(); i++) {
@@ -123,7 +126,7 @@ class Ihm {
                     contient = true;
             }
             if (!contient)
-                throw new Exception();
+                throw new EpreuveInexistante();
         }
         // On construit la liste de Type d'Epreuves
         for (int i = 0; i < epreuvesId.size(); i++) {
@@ -157,7 +160,7 @@ class Ihm {
         // Phase de vérification des équipes récoltées
         // On vérifie que la liste d'épreuve n'est pas vide
         if (equipesId.size() == 0)
-            throw new Exception();
+            throw new ListeVideException();
 
         // On vérifie que chacune des équipes existent
         for (int i = 0; i < equipesId.size(); i++) {
@@ -167,7 +170,7 @@ class Ihm {
                     contient = true;
             }
             if (!contient)
-                throw new Exception();
+                throw new EquipeInexistante();
         }
         // On construit la liste des équipes à renvoyer
         for (int i = 0; i < equipesId.size(); i++) {
