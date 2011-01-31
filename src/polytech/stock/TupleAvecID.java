@@ -6,8 +6,7 @@ package polytech.stock;
  *         Un tuple est un élément qui peut être insérer en stock. Il contient
  *         un identificateur unique qui est toujours identique.
  */
-public abstract class TupleAvecID
-{
+public abstract class TupleAvecID {
 	/**
 	 * L'identificateur du tuple.
 	 */
@@ -22,8 +21,7 @@ public abstract class TupleAvecID
 	/**
 	 * Constructeur qui se charge de trouver un identificateur unique.
 	 */
-	public TupleAvecID()
-	{
+	public TupleAvecID() {
 		this.id = nbInstances++;
 	}
 
@@ -32,8 +30,7 @@ public abstract class TupleAvecID
 	 * 
 	 * @return L'ID du tuple.
 	 */
-	public int getId()
-	{
+	public int getId() {
 		return id;
 	}
 
@@ -44,14 +41,12 @@ public abstract class TupleAvecID
 	 *            Nouvel ID du tuple.
 	 */
 
-	public void setId(int id)
-	{
+	public void setId(int id) {
 		this.id = id;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
@@ -59,8 +54,7 @@ public abstract class TupleAvecID
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
