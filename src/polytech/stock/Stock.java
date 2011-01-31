@@ -8,6 +8,7 @@ import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 import polytech.personnes.Organisateur;
 
+import polytech.exception.ArbitreDejaExistant;
 import polytech.jtournoi.Epreuve;
 import polytech.jtournoi.Equipe;
 import polytech.jtournoi.TypeEpreuve;
@@ -245,8 +246,18 @@ public abstract class Stock {
 	public static List<TypeEpreuve> getTypesEpreuves() {
 		return typesEpreuves;
 	}
+<<<<<<< HEAD
 
 	public static List<Equipe> getEquipe() {
+=======
+	
+	public static void addTypesEpreuve(TypeEpreuve type)
+    {
+        typesEpreuves.add(type);
+    }
+	
+	public static List<Equipe> getEquipe(){
+>>>>>>> 74139faa0acd9b2aec41b0a7825f40e3a2a9ec0b
 		return equipes;
 	}
 
@@ -279,6 +290,16 @@ public abstract class Stock {
 			equipes.add(e);
 		}
 	}
+	
+	public static void addArbitre(Arbitre a) throws ArbitreDejaExistant{
+        if (!arbitres.contains(a))
+        {
+            arbitres.add(a);
+        }
+        else{
+            throw new ArbitreDejaExistant();
+        }
+    }
 
 	/**
 	 * Recherche dans une liste donnée, un TupleAvecID à partir de son ID.
