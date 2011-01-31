@@ -158,6 +158,16 @@ public class Tournoi extends TupleAvecID {
 		}
 		return epreuves;
 	}
+	
+	public int getTailleEpreuves(){
+	    int i;
+	    try {
+            i = getEpreuves().size();
+        } catch (TournoiNonLanceException e) {
+            i=0;
+        }
+        return i;
+	}
 
 	public ArrayList<Equipe> getEquipes() {
 		return equipes;

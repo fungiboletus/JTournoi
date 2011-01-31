@@ -172,7 +172,7 @@ public class GeneratePlayer {
 			Arbitre a = new Arbitre("nom arbitre" + i, "prenom arbitre" + i,
 					"password " + i);
 			a.setCompetences((ArrayList<TypeEpreuve>) Stock.getTypesEpreuves());
-			arbitres.add(a);
+			//arbitres.add(a);
 		}
 
 		Arbitre a1 = new Arbitre("House", "Gregory", "everybody lies");

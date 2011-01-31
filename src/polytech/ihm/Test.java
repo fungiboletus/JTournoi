@@ -766,7 +766,7 @@ public class Test {
                             case 0:
                                 return;
                             case 1:
-                                //ajouteJoueurs(lue);
+                                afficherGagnants(Moteur.getTournoisById(lue));
                                 break;
                             case 2:
                                 System.out.println(Moteur.getTournoisById(lue));
@@ -785,8 +785,18 @@ public class Test {
         
     }
     
-    public static void afficherGagnants(Tournoi t){
-        
+    public static void afficherGagnants(Tournoi t) {
+        for (int i = 0; i < t.getTailleEpreuves(); i++) {
+            try {
+                if (t.getEpreuves().get(i).getVainqueur() != null) {
+                    System.out.println(t.getEpreuves().get(i).getVainqueur());
+                }
+            } catch (TournoiNonLanceException e) {
+                // Si le tournoi n'est pas lancé, rien n'est affiché
+                // Cette exception n'est pas juste étouffée, mais traitée par
+                // étouffement
+            }
+        }
     }
 
     /**
