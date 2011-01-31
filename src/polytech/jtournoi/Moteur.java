@@ -7,6 +7,8 @@ import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.exception.TournoiDejaLanceException;
 import polytech.exception.TournoiNonLanceException;
+import polytech.exception.TournoiNonValideExcetion;
+import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 
@@ -33,14 +35,15 @@ public abstract class Moteur {
 	/**
 	 * Méthode permettant de lancer le tournoi
 	 * @param t
+	 * @throws TournoiNonValideExcetion 
 	 * @throws Exception
 	 */
-	public static void startTournoi(Tournoi t) throws Exception{
-		if(t.verificationTournoi()){
+	public static void startTournoi(Tournoi t) throws TournoiNonValideExcetion {
+		try {
+			t.verificationTournoi();
 			t.startTournoi();
-		}
-		else{
-			throw new Exception("Echec de la vérification du tournoi");
+		} catch (Exception e) {
+			throw new TournoiNonValideExcetion();
 		}
 	}
 	

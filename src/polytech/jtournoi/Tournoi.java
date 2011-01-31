@@ -45,18 +45,17 @@ public class Tournoi extends TupleAvecID {
 		map.put(te, equipes);
 	}
 	
-	public boolean verificationTournoi() {
+	public void verificationTournoi() throws NombreDeParticipantInsufisantException {
 		if (typeEpreuves.size() != 0) {
 		    //System.out.println(map);
 			for (TypeEpreuve te : typeEpreuves) {
 				// on vérifie que pour chaque type d'épreuve on ait au moins
 				// deux équipes pour la joueur
 				if (!map.containsKey(te) || map.get(te).size() < 2) {
-					return false;
+					throw new NombreDeParticipantInsufisantException();
 				}
 			}
 		}
-		return true;
 	}
 	
 	/**
@@ -163,7 +162,9 @@ public class Tournoi extends TupleAvecID {
 	 * @throws nbrArbitreInsufisantException 
 	 */
 	public void startTournoi() throws nbrArbitreInsufisantException {
-		if(!verificationTournoi()){
+		try {
+			verificationTournoi();
+		} catch (NombreDeParticipantInsufisantException e1) {
 			throw new RuntimeException("t'as pas lancé la vérification ...");
 		}
 		tournoilance=true;
