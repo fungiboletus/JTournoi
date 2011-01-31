@@ -86,6 +86,11 @@ public abstract class Tools {
 		return liste;
 	}
 
+	/**
+	 * Méthode qui renvoie la liste sans les doublons
+	 * @param list
+	 * @return
+	 */
 	public ArrayList<TypeEpreuve> supprimerDouble(ArrayList<TypeEpreuve> list) {
 		ArrayList<TypeEpreuve> tmp = new ArrayList<TypeEpreuve>();
 		for (TypeEpreuve te : list) {

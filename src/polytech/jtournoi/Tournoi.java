@@ -31,7 +31,15 @@ public class Tournoi extends TupleAvecID {
 		typeEpreuves = te;
 		this.nom = nom;
 	}
-
+	
+	/**
+	 * Méthode associant la liste des equipes au type d'epreuve
+	 * @param te
+	 * @param equipes
+	 * @throws NombreDeParticipantInsufisantException
+	 * @throws EpreuveDejaExistanteException
+	 * @throws TournoiNonLanceException
+	 */
 	public void setEpreuve(TypeEpreuve te, HashMap<Equipe, Joueur> equipes)
 			throws NombreDeParticipantInsufisantException,
 			EpreuveDejaExistanteException, TournoiNonLanceException {
@@ -53,6 +61,10 @@ public class Tournoi extends TupleAvecID {
 		map.put(te, equipes);
 	}
 
+	/**
+	 * Méthode permettant de verifier si on peut lancer le tournoi
+	 * @throws NombreDeParticipantInsufisantException
+	 */
 	public void verificationTournoi()
 			throws NombreDeParticipantInsufisantException {
 		if (typeEpreuves.size() != 0) {
@@ -155,7 +167,13 @@ public class Tournoi extends TupleAvecID {
 		return null;
 	}
 
+	/**
+	 * Methode renvoyant les epreuves
+	 * @return
+	 * @throws TournoiNonLanceException
+	 */
 	public ArrayList<Epreuve> getEpreuves() throws TournoiNonLanceException {
+		//on vérifie que le tournoi a été lancé pour pouvoir recuperer les epreuves
 		if (tournoilance == false) {
 			throw new TournoiNonLanceException();
 		}
@@ -187,7 +205,9 @@ public class Tournoi extends TupleAvecID {
 			epreuves.add(e);
 		}
 	}
-
+	/**
+	 * Méthode d'affichage
+	 */
 	public String toString() {
 		String s = "";
 		if (tournoilance == true) {

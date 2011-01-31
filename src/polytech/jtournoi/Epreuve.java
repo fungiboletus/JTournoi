@@ -169,15 +169,16 @@ public class Epreuve extends TupleAvecID {
 	 * Incrémente le score de l'équipe et du joueur dans le cadre d'une équipe individuelle
 	 * @param vainqueur
 	 */
-	private void setScore(Equipe vainqueur){
+	private void setScore(Equipe vainq){
+			this.vainqueur=vainq;
 			//on est dans une épreuve individuelle
 			int inc =type.getPoints();
 			if(map!=null){
-				map.get(vainqueur).incScore(inc);
-				vainqueur.incScore(inc);
+				map.get(vainq).incScore(inc);
+				vainq.incScore(inc);
 			}
 			else{
-				vainqueur.incAllScore(inc);
+				vainq.incAllScore(inc);
 			}
 	}
 	

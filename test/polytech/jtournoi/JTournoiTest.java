@@ -134,5 +134,21 @@ public class JTournoiTest {
 			}
 		}
 	}
+	
+	@Test
+	public void isMatchTest2() {
+		try {
+			ArrayList<Equipe> equipes = new ArrayList<Equipe>();
+			equipes = creeEquipe(2);
+			Epreuve e = new Epreuve(equipes, getCompetence(0).get(0));
+			Match m = e.getCurrentMatch().get(0);
+			Arbitre a = m.getArbitre();
+			e.setScore(a, m, 0, 10);
+			assertTrue(e.getVainqueur().getId()==m.getVainqueur().getId());
+		} catch (nbrArbitreInsufisantException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

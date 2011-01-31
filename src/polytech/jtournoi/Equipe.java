@@ -7,7 +7,8 @@ import polytech.stock.TupleAvecID;
 /**
  *Gestion d'une equipe dans un tournoi sportif.
  * 
- * @author Sylvestre Genevier
+ * @author Sylvestre Genevier 
+ * @author Muller Stéphane
  *@version 1.0
  */
 
@@ -72,8 +73,9 @@ public class Equipe extends TupleAvecID
     	this.setEpreuves(epreuves);
     }
 
-    /**Constructeur d'une equipe. 
-    *@param nom Le nom de l'equipe.
+    /**
+    * Constructeur d'une equipe. 
+    * @param nom Le nom de l'equipe.
     */
 
    public Equipe(String nom)

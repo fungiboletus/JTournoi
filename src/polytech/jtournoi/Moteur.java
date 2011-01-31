@@ -8,7 +8,6 @@ import polytech.exception.NombreDeParticipantInsufisantException;
 import polytech.exception.TournoiDejaLanceException;
 import polytech.exception.TournoiNonLanceException;
 import polytech.exception.TournoiNonValideExcetion;
-import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
 
