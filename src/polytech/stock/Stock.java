@@ -246,12 +246,13 @@ public abstract class Stock {
 	public static List<TypeEpreuve> getTypesEpreuves() {
 		return typesEpreuves;
 	}
-
-	public static void addTypesEpreuve(TypeEpreuve type) {
-		typesEpreuves.add(type);
-	}
-
-	public static List<Equipe> getEquipe() {
+	
+	public static void addTypesEpreuve(TypeEpreuve type)
+    {
+        typesEpreuves.add(type);
+    }
+	
+	public static List<Equipe> getEquipe(){
 		return equipes;
 	}
 
