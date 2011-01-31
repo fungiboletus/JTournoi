@@ -8,6 +8,7 @@ import polytech.personnes.Joueur;
 import polytech.stock.*;
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
+import polytech.exception.nbrArbitreInsufisantException;
 import polytech.jtournoi.*;
 
 
@@ -210,32 +211,25 @@ public class Test {
             //Résultat équipe 1
             System.out.println("Veuillez entrer le score de l'équipe "+m.getE1().getNom());
             Scanner s;
-            int lue=0;
+            int score1=0, score2=0;
             int place=0;
             while(true){
                 try{
                     s = new Scanner(System.in);
-                    lue = s.nextInt();
+                    score1 = s.nextInt();
                 }
                 catch(Exception e){
                     System.out.println("La syntaxe que vous avez entrée est incorrecte.");
                     continue;
                 }
                 break;
-            }
-            for(int i=0; i<Stock.getMatchs().size(); i++){
-                if(Stock.getMatchs().get(i).equals(m)){
-                    Stock.getMatchs().get(i).setScE1(lue);
-                    place = i;
-                    break;
-                }
             }
             //Résultat équipe 2
             System.out.println("Veuillez entrer le score de l'équipe "+m.getE2().getNom());
             while(true){
                 try{
                     s = new Scanner(System.in);
-                    lue = s.nextInt();
+                    score2 = s.nextInt();
                 }
                 catch(Exception e){
                     System.out.println("La syntaxe que vous avez entrée est incorrecte.");
@@ -243,7 +237,21 @@ public class Test {
                 }
                 break;
             }
-            Stock.getMatchs().get(place).setScE2(lue);
+            //Pour chaque épreuve
+            for(int i=0; i<t.getEpreuves().size(); i++){
+                //Pour chaque match
+                for(int j=0; j<t.getEpreuves().get(i).getCurrentMatch().size(); i++){
+                    if(t.getEpreuves().get(i).getCurrentMatch().get(j).equals(m)){
+                        place = i;
+                        break;
+                    }
+                }
+            }
+            try {
+                t.getEpreuves().get(place).setScore(a, m, score1, score2);
+            } catch (nbrArbitreInsufisantException e) {
+                System.out.println("Nombre d'arbitres insuffisant.");
+            }
             System.out.println("Vous avez bien entré les résultats de ce match");
         }
         else{
@@ -637,9 +645,15 @@ public class Test {
             } 
             catch(NombreDeParticipantInsufisantException e){
                 System.out.println("Le nombre de participants est insuffisant.");
+                return;
             }
             catch(EpreuveDejaExistanteException e){
                 System.out.println("L'épreuve existe déjà.");
+                return;
+            }
+            catch(nbrArbitreInsufisantException e){
+                System.out.println("Il n'y a pas assez d'arbitres pour planifier ce tournoi.");
+                return;
             }
             catch (Exception e) {
                 System.out.println("La création du tournoi a échoué.");
