@@ -146,11 +146,16 @@ public class JTournoiTest {
 			e.setScore(a, m, 0, 10);
 			System.out.println(e.getVainqueur().getId());
 			System.out.println(m.getVainqueur().getId());
-			assertSame(e.getVainqueur().getId(),m.getVainqueur().getId());
+			assertFalse(e.getVainqueur().getId()!=m.getVainqueur().getId());
 		} catch (nbrArbitreInsufisantException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void assertTrue(int id, int id2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
