@@ -246,7 +246,7 @@ public class Equipe extends TupleAvecID
     		nbrRequis =1;
     	}
     	else{
-    		nbrRequis =NBCOMP;
+    		nbrRequis =5;
     	}
     	int joueur =0;
     	for(Joueur j : membres){
