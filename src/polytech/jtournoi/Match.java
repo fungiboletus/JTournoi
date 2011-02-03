@@ -86,7 +86,7 @@ public class Match extends TupleAvecID implements Comparable<Match> {
 	public String toString() {
 		String s = "";
 		s += "Bienvenue dans le match numéro : " + numero + " ou s'affronte "
-				+ e1.getNom() + " et " + e2.getNom();
+				+ e1.getNom() + " et " + e2.getNom()+" arbitré par : "+a.getNom();
 		return s;
 	}
 
