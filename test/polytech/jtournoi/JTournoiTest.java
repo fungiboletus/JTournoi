@@ -114,13 +114,22 @@ public class JTournoiTest {
 		t.verificationTournoi();
 	}
 
-	@Test(expected = TournoiNonLanceException.class)
-	public void supprimerepreuveTest() throws TournoiNonLanceException {
+	@Test(expected = EpreuveDejaExistanteException.class)
+	public void supprimerepreuveTest() throws EpreuveDejaExistanteException {
 		Tournoi t = new Tournoi("test", getCompetence(5));
 		ArrayList<Equipe> equipes = creeEquipe(5);
 		HashMap<Equipe, Joueur> map = new HashMap<Equipe, Joueur>();
 		for (Equipe e : equipes) {
 			map.put(e, null);
+		}
+		try {
+			t.setEpreuve(getCompetence(0).get(0),map);
+		} catch (NombreDeParticipantInsufisantException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (EpreuveDejaExistanteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
 		for (TypeEpreuve te : getCompetence(0)) {
 			try {
@@ -128,11 +137,9 @@ public class JTournoiTest {
 			} catch (NombreDeParticipantInsufisantException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (EpreuveDejaExistanteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 		}
+		
 	}
 	
 	@Test
@@ -144,9 +151,7 @@ public class JTournoiTest {
 			Match m = e.getCurrentMatch().get(0);
 			Arbitre a = m.getArbitre();
 			e.setScore(a, m, 0, 10);
-			System.out.println(e.getVainqueur().getId());
-			System.out.println(m.getVainqueur().getId());
-			assertSame(e.getVainqueur().getId(),m.getVainqueur().getId());
+			assertEquals(e.getVainqueur().getId(),m.getVainqueur().getId());
 		} catch (nbrArbitreInsufisantException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
