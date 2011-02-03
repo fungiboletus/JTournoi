@@ -228,7 +228,7 @@ public class Equipe extends TupleAvecID
     }
     
     public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
-    	if(epreuves.size()!=5){
+    	if(epreuves.size()!=MAX){
     		return false;
     	}
     	for(TypeEpreuve te : epreuves){
@@ -246,7 +246,7 @@ public class Equipe extends TupleAvecID
     		nbrRequis =1;
     	}
     	else{
-    		nbrRequis =5;
+    		nbrRequis =NBCOMP;
     	}
     	int joueur =0;
     	for(Joueur j : membres){
