@@ -228,7 +228,7 @@ public class Equipe extends TupleAvecID
     }
     
     public boolean setEpreuves(ArrayList<TypeEpreuve> epreuves){
-    	if(epreuves.size()!=5){
+    	if(epreuves.size()!=MAX){
     		return false;
     	}
     	for(TypeEpreuve te : epreuves){
