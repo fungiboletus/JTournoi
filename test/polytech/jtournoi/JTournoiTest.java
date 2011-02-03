@@ -1,17 +1,17 @@
 package polytech.jtournoi;
 
-import java.util.HashMap;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import polytech.exception.EpreuveDejaExistanteException;
 import polytech.exception.NombreDeParticipantInsufisantException;
-import polytech.exception.TournoiDejaLanceException;
-import polytech.exception.TournoiNonLanceException;
 import polytech.exception.nbrArbitreInsufisantException;
 import polytech.personnes.Arbitre;
 import polytech.personnes.Joueur;
@@ -152,6 +152,9 @@ public class JTournoiTest {
 			Arbitre a = m.getArbitre();
 			e.setScore(a, m, 0, 10);
 			assertEquals(e.getVainqueur().getId(),m.getVainqueur().getId());
+			System.out.println(e.getVainqueur().getId());
+			System.out.println(m.getVainqueur().getId());
+			assertFalse(e.getVainqueur().getId()!=m.getVainqueur().getId());
 		} catch (nbrArbitreInsufisantException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
